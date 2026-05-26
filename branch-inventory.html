@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RetailOS - Branch Inventory</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
+      <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">
+          R
+        </div>
+        <div>
+          <h1 class="font-semibold">RetailOS</h1>
+          <p class="text-xs text-slate-400">Enterprise Commerce</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
+        <a href="dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Dashboard</a>
+        <a href="inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Main Inventory</a>
+
+        <a href="branch-inventory.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
+          <span>Branch Inventory</span>
+          <span class="text-xs">Live</span>
+        </a>
+
+        <a href="product-create.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Products</a>
+        <a href="pos.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">POS</a>
+        <a href="orders.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Orders</a>
+        <a href="crm.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Customers</a>
+        <a href="crm.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">CRM</a>
+        <a href="campaigns.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Campaigns</a>
+        <a href="returns.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Returns & Refunds</a>
+        <a href="analytics.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Analytics</a>
+        <a href="reports.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Reports</a>
+        <a href="staff.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Staff Management</a>
+        <a href="settings.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Settings</a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <div class="rounded-2xl bg-slate-900 border border-slate-800 p-4">
+          <p class="text-xs text-slate-400">Branch Inventory Layer</p>
+          <p class="mt-2 text-sm font-medium text-cyan-300">
+            Branch stock feeds POS billing, website availability, CRM activity and analytics.
+          </p>
+
+          <div class="mt-4 space-y-2 text-xs text-slate-400">
+            <div class="flex items-center justify-between">
+              <span>Branch Sync</span>
+              <span class="text-emerald-300">Live</span>
+            </div>
+            <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+              <div class="h-full w-[91%] bg-emerald-400"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Area -->
+    <div class="flex-1 min-w-0">
+
+      <!-- Topbar -->
+      <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
+          <div class="flex items-center gap-3">
+            <button class="lg:hidden rounded-xl border border-slate-800 px-3 py-2 text-sm">
+              Menu
+            </button>
+
+            <div>
+              <h2 class="text-lg font-semibold">Branch Inventory Management</h2>
+              <p class="text-xs text-slate-400">
+                Main Inventory → Branch Inventory → Live POS Sync → Website Sync → CRM Update → Analytics Update
+              </p>
+            </div>
+          </div>
+
+          <div class="hidden md:flex flex-1 max-w-xl items-center gap-3">
+            <input
+              placeholder="Search branch stock, SKU, transfer, batch, serial..."
+              class="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+            />
+          </div>
+
+          <div class="flex items-center gap-3">
+            <select class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
+              <option>All Branches</option>
+              <option>Mumbai Flagship</option>
+              <option>Delhi Electronics</option>
+              <option>Bengaluru Beauty</option>
+              <option>Chennai Accessories</option>
+            </select>
+
+            <button class="hidden sm:block rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
+              Quick Actions
+            </button>
+
+            <div class="hidden xl:flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5">
+              <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+              <span class="text-xs text-emerald-300">Live Sync</span>
+            </div>
+
+            <button class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
+              Alerts
+            </button>
+
+            <button class="h-10 w-10 rounded-xl bg-slate-800 text-sm">
+              AD
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="p-5 lg:p-8 space-y-6">
+
+        <!-- Page Header -->
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+          <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">
+                  Branch Inventory
+                </span>
+                <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">
+                  POS Source of Sale
+                </span>
+                <span class="rounded-full bg-blue-500/10 text-blue-300 px-3 py-1 text-xs">
+                  Website Stock Visibility
+                </span>
+              </div>
+
+              <h1 class="mt-4 text-3xl font-semibold">
+                Branch-level stock command center
+              </h1>
+
+              <p class="mt-2 max-w-3xl text-sm text-slate-400">
+                Monitor branch-wise available stock, incoming transfers, outgoing transfers, reserved units,
+                low-stock thresholds, category-specific restrictions and live downstream availability for POS and website.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href="inventory.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                Open Main Inventory
+              </a>
+              <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                Receive Transfer
+              </button>
+              <a href="pos.html" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                Open POS
+              </a>
+            </div>
+          </div>
+
+          <!-- Lifecycle Bar -->
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-6 gap-3">
+            <a href="inventory.html" class="rounded-2xl border border-slate-800 bg-slate-950 p-4 hover:border-indigo-400">
+              <p class="text-xs text-indigo-300">Step 01</p>
+              <p class="mt-1 text-sm font-medium">Main Inventory</p>
+            </a>
+
+            <div class="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+              <p class="text-xs text-cyan-300">Step 02</p>
+              <p class="mt-1 text-sm font-medium">Branch Inventory</p>
+            </div>
+
+            <a href="pos.html" class="rounded-2xl border border-slate-800 bg-slate-950 p-4 hover:border-emerald-400">
+              <p class="text-xs text-emerald-300">Step 03</p>
+              <p class="mt-1 text-sm font-medium">Live POS Sync</p>
+            </a>
+
+            <a href="orders.html" class="rounded-2xl border border-slate-800 bg-slate-950 p-4 hover:border-blue-400">
+              <p class="text-xs text-blue-300">Step 04</p>
+              <p class="mt-1 text-sm font-medium">Website Sync</p>
+            </a>
+
+            <a href="crm.html" class="rounded-2xl border border-slate-800 bg-slate-950 p-4 hover:border-fuchsia-400">
+              <p class="text-xs text-fuchsia-300">Step 05</p>
+              <p class="mt-1 text-sm font-medium">CRM Update</p>
+            </a>
+
+            <a href="analytics.html" class="rounded-2xl border border-slate-800 bg-slate-950 p-4 hover:border-amber-400">
+              <p class="text-xs text-amber-300">Step 06</p>
+              <p class="mt-1 text-sm font-medium">Analytics Update</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Branch Analytics Cards -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Branch SKUs</p>
+            <div class="mt-3 flex items-end justify-between">
+              <h3 class="text-3xl font-semibold">5,842</h3>
+              <span class="text-xs text-cyan-300">Active</span>
+            </div>
+            <p class="mt-3 text-xs text-slate-500">
+              Across 4 operating branches
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Available for POS</p>
+            <div class="mt-3 flex items-end justify-between">
+              <h3 class="text-3xl font-semibold">28,430</h3>
+              <span class="text-xs text-emerald-300">Live</span>
+            </div>
+            <p class="mt-3 text-xs text-slate-500">
+              Sellable branch inventory
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Reserved Online</p>
+            <div class="mt-3 flex items-end justify-between">
+              <h3 class="text-3xl font-semibold text-blue-300">1,186</h3>
+              <span class="text-xs text-blue-300">Website</span>
+            </div>
+            <p class="mt-3 text-xs text-slate-500">
+              Reserved from branch stock
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Incoming Transfers</p>
+            <div class="mt-3 flex items-end justify-between">
+              <h3 class="text-3xl font-semibold text-amber-300">214</h3>
+              <span class="text-xs text-amber-300">Pending</span>
+            </div>
+            <p class="mt-3 text-xs text-slate-500">
+              Awaiting receiving confirmation
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Low Stock Branch SKUs</p>
+            <div class="mt-3 flex items-end justify-between">
+              <h3 class="text-3xl font-semibold text-red-300">46</h3>
+              <span class="text-xs text-red-300">Critical</span>
+            </div>
+            <p class="mt-3 text-xs text-slate-500">
+              Needs allocation before POS gaps
+            </p>
+          </div>
+        </section>
+
+        <!-- Branch Operations Grid -->
+        <section class="grid grid-cols-1 2xl:grid-cols-4 gap-6">
+
+          <!-- Branch Stock Table -->
+          <div class="2xl:col-span-3 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800">
+              <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
+                <div>
+                  <h3 class="font-semibold">Branch Stock Table</h3>
+                  <p class="mt-1 text-sm text-slate-400">
+                    Branch-level stock controls POS sale eligibility and website live availability.
+                  </p>
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                  <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                    Request Stock
+                  </button>
+                  <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                    Transfer Out
+                  </button>
+                  <button class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                    Receive Incoming
+                  </button>
+                </div>
+              </div>
+
+              <!-- Filters -->
+              <div class="mt-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-3">
+                <input
+                  placeholder="Search SKU, branch, batch, serial..."
+                  class="xl:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+                />
+
+                <select class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm">
+                  <option>All Categories</option>
+                  <option>Clothing</option>
+                  <option>Electronics</option>
+                  <option>Cosmetics</option>
+                  <option>Accessories</option>
+                </select>
+
+                <select class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm">
+                  <option>All Branches</option>
+                  <option>Mumbai Flagship</option>
+                  <option>Delhi Electronics</option>
+                  <option>Bengaluru Beauty</option>
+                  <option>Chennai Accessories</option>
+                </select>
+
+                <select class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm">
+                  <option>All States</option>
+                  <option>Available</option>
+                  <option>Reserved</option>
+                  <option>Sold</option>
+                  <option>Damaged</option>
+                  <option>Returned</option>
+                  <option>Transfer Pending</option>
+                  <option>Warranty Claim</option>
+                  <option>Disposal</option>
+                  <option>Expired</option>
+                </select>
+
+                <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                  Filter
+                </button>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[1180px] text-sm">
+                <thead class="bg-slate-950 text-slate-400">
+                  <tr>
+                    <th class="text-left font-medium px-5 py-3">Branch / SKU</th>
+                    <th class="text-left font-medium px-5 py-3">Category Logic</th>
+                    <th class="text-left font-medium px-5 py-3">Branch Stock</th>
+                    <th class="text-left font-medium px-5 py-3">POS Availability</th>
+                    <th class="text-left font-medium px-5 py-3">Website Visibility</th>
+                    <th class="text-left font-medium px-5 py-3">Transfer State</th>
+                    <th class="text-left font-medium px-5 py-3">Risk</th>
+                    <th class="text-right font-medium px-5 py-3">Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody class="divide-y divide-slate-800">
+
+                  <!-- Clothing -->
+                  <tr class="hover:bg-slate-800/40">
+                    <td class="px-5 py-4">
+                      <div class="flex items-center gap-3">
+                        <div class="h-12 w-12 rounded-2xl bg-indigo-500/15 border border-indigo-500/20 flex items-center justify-center text-indigo-200">
+                          CL
+                        </div>
+                        <div>
+                          <p class="font-medium">Mumbai Flagship</p>
+                          <p class="mt-1 text-xs text-slate-400">CLO-SHT-OXF-BLU-M</p>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p>Oxford Cotton Shirt</p>
+                      <p class="mt-1 text-xs text-slate-400">Size: M / Color: Blue / Season: Summer</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p class="font-medium">420 units</p>
+                      <p class="mt-1 text-xs text-slate-400">Reserved: 18 / Sold today: 36</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">
+                        POS Available
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p class="text-blue-300">Visible online</p>
+                      <p class="mt-1 text-xs text-slate-500">Branch pickup and delivery enabled</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">
+                        Received
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-slate-800 text-slate-300 px-3 py-1 text-xs">
+                        Healthy
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4 text-right">
+                      <div class="flex justify-end gap-2">
+                        <button class="rounded-lg border border-slate-700 px-3 py-1.5 text-xs hover:bg-slate-800">
+                          Move
+                        </button>
+                        <a href="pos.html" class="rounded-lg bg-indigo-500 px-3 py-1.5 text-xs font-semibold hover:bg-indigo-400">
+                          Sell
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Electronics -->
+                  <tr class="hover:bg-slate-800/40">
+                    <td class="px-5 py-4">
+                      <div class="flex items-center gap-3">
+                        <div class="h-12 w-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/20 flex items-center justify-center text-cyan-200">
+                          EL
+                        </div>
+                        <div>
+                          <p class="font-medium">Delhi Electronics</p>
+                          <p class="mt-1 text-xs text-slate-400">ELE-AUD-NSP-BLK-V2</p>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p>NoiseShield Earbuds Pro</p>
+                      <p class="mt-1 text-xs text-slate-400">Serial verification / 12-month warranty</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p class="font-medium">260 units</p>
+                      <p class="mt-1 text-xs text-slate-400">Reserved: 42 / Warranty hold: 9</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">
+                        POS Available
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p class="text-blue-300">Visible online</p>
+                      <p class="mt-1 text-xs text-slate-500">Warranty hold excluded from stock</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">
+                        Received
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">
+                        Warranty Claims
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4 text-right">
+                      <div class="flex justify-end gap-2">
+                        <button class="rounded-lg border border-slate-700 px-3 py-1.5 text-xs hover:bg-slate-800">
+                          Verify
+                        </button>
+                        <a href="pos.html" class="rounded-lg bg-indigo-500 px-3 py-1.5 text-xs font-semibold hover:bg-indigo-400">
+                          Sell
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Cosmetics -->
+                  <tr class="hover:bg-slate-800/40">
+                    <td class="px-5 py-4">
+                      <div class="flex items-center gap-3">
+                        <div class="h-12 w-12 rounded-2xl bg-fuchsia-500/15 border border-fuchsia-500/20 flex items-center justify-center text-fuchsia-200">
+                          CO
+                        </div>
+                        <div>
+                          <p class="font-medium">Bengaluru Beauty</p>
+                          <p class="mt-1 text-xs text-slate-400">COS-SER-HDG-30ML</p>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p>HydraGlow Serum 30ml</p>
+                      <p class="mt-1 text-xs text-slate-400">Batch: COS-BT-884 / Expiry monitored</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p class="font-medium">390 units</p>
+                      <p class="mt-1 text-xs text-red-300">186 units near expiry</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">
+                        Limited POS
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p class="text-amber-300">Limited online</p>
+                      <p class="mt-1 text-xs text-slate-500">Expiry warning shown internally</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">
+                        Received
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-red-500/10 text-red-300 px-3 py-1 text-xs">
+                        Expiry Risk
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4 text-right">
+                      <div class="flex justify-end gap-2">
+                        <button class="rounded-lg border border-slate-700 px-3 py-1.5 text-xs hover:bg-slate-800">
+                          Batch
+                        </button>
+                        <button class="rounded-lg bg-amber-500 px-3 py-1.5 text-xs font-semibold text-slate-950 hover:bg-amber-400">
+                          Promote
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Accessories -->
+                  <tr class="hover:bg-slate-800/40">
+                    <td class="px-5 py-4">
+                      <div class="flex items-center gap-3">
+                        <div class="h-12 w-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center text-emerald-200">
+                          AC
+                        </div>
+                        <div>
+                          <p class="font-medium">Chennai Accessories</p>
+                          <p class="mt-1 text-xs text-slate-400">ACC-WLT-CL-BRN</p>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p>Classic Leather Wallet</p>
+                      <p class="mt-1 text-xs text-slate-400">Brown / Leather / Gift eligible</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p class="font-medium">44 units</p>
+                      <p class="mt-1 text-xs text-red-300">Below branch threshold</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">
+                        Low POS Stock
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p class="text-blue-300">Visible online</p>
+                      <p class="mt-1 text-xs text-slate-500">Low stock badge enabled</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">
+                        Transfer Needed
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-red-500/10 text-red-300 px-3 py-1 text-xs">
+                        Stockout Risk
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4 text-right">
+                      <div class="flex justify-end gap-2">
+                        <a href="inventory.html" class="rounded-lg border border-slate-700 px-3 py-1.5 text-xs hover:bg-slate-800">
+                          Request
+                        </a>
+                        <a href="pos.html" class="rounded-lg bg-indigo-500 px-3 py-1.5 text-xs font-semibold hover:bg-indigo-400">
+                          Sell
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Incoming Transfer -->
+                  <tr class="hover:bg-slate-800/40">
+                    <td class="px-5 py-4">
+                      <div class="flex items-center gap-3">
+                        <div class="h-12 w-12 rounded-2xl bg-amber-500/15 border border-amber-500/20 flex items-center justify-center text-amber-200">
+                          IN
+                        </div>
+                        <div>
+                          <p class="font-medium">Mumbai Flagship</p>
+                          <p class="mt-1 text-xs text-slate-400">CLO-TEE-SLM-BLK-S</p>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p>Slim Fit Black Tee</p>
+                      <p class="mt-1 text-xs text-slate-400">Size: S / Color: Black / Summer drop</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p class="font-medium">86 units</p>
+                      <p class="mt-1 text-xs text-amber-300">Incoming: 120 pending</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">
+                        Restricted
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <p class="text-amber-300">Hidden when below threshold</p>
+                      <p class="mt-1 text-xs text-slate-500">Will update after receiving</p>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">
+                        Transfer Pending
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">
+                        Await Receiving
+                      </span>
+                    </td>
+
+                    <td class="px-5 py-4 text-right">
+                      <div class="flex justify-end gap-2">
+                        <button class="rounded-lg bg-indigo-500 px-3 py-1.5 text-xs font-semibold hover:bg-indigo-400">
+                          Receive
+                        </button>
+                        <button class="rounded-lg border border-slate-700 px-3 py-1.5 text-xs hover:bg-slate-800">
+                          Track
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Operations Panel -->
+          <aside class="space-y-6">
+
+            <!-- Incoming Stock -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold">Incoming Stock</h3>
+                  <p class="mt-1 text-sm text-slate-400">
+                    Transfers from main inventory awaiting branch confirmation.
+                  </p>
+                </div>
+                <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">
+                  214
+                </span>
+              </div>
+
+              <div class="mt-5 space-y-3">
+                <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <div class="flex items-start justify-between gap-3">
+                    <div>
+                      <p class="text-sm font-medium">Oxford Cotton Shirt</p>
+                      <p class="mt-1 text-xs text-slate-400">Main Warehouse → Mumbai</p>
+                    </div>
+                    <span class="text-xs text-cyan-300">120 units</span>
+                  </div>
+
+                  <div class="mt-3 grid grid-cols-2 gap-2">
+                    <button class="rounded-lg bg-indigo-500 px-3 py-2 text-xs font-semibold hover:bg-indigo-400">
+                      Receive
+                    </button>
+                    <button class="rounded-lg border border-slate-700 px-3 py-2 text-xs hover:bg-slate-800">
+                      Inspect
+                    </button>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <div class="flex items-start justify-between gap-3">
+                    <div>
+                      <p class="text-sm font-medium">Slim Fit Black Tee</p>
+                      <p class="mt-1 text-xs text-slate-400">Main Warehouse → Mumbai</p>
+                    </div>
+                    <span class="text-xs text-amber-300">120 pending</span>
+                  </div>
+
+                  <div class="mt-3 grid grid-cols-2 gap-2">
+                    <button class="rounded-lg bg-indigo-500 px-3 py-2 text-xs font-semibold hover:bg-indigo-400">
+                      Receive
+                    </button>
+                    <button class="rounded-lg border border-slate-700 px-3 py-2 text-xs hover:bg-slate-800">
+                      Track
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Transfer Workflow -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold">Branch Transfer Workflow</h3>
+                  <p class="mt-1 text-sm text-slate-400">
+                    Move stock between branches or request from main inventory.
+                  </p>
+                </div>
+                <span class="rounded-full bg-indigo-500/15 text-indigo-200 px-3 py-1 text-xs">
+                  Manual
+                </span>
+              </div>
+
+              <div class="mt-5 space-y-4">
+                <div>
+                  <label class="text-xs text-slate-400">Transfer type</label>
+                  <select class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm">
+                    <option>Main Inventory to Branch</option>
+                    <option>Branch to Branch</option>
+                    <option>Branch to Return Inspection</option>
+                    <option>Branch to Disposal</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">From</label>
+                  <select class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm">
+                    <option>Main Inventory Warehouse</option>
+                    <option>Mumbai Flagship</option>
+                    <option>Delhi Electronics</option>
+                    <option>Bengaluru Beauty</option>
+                    <option>Chennai Accessories</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">To</label>
+                  <select class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm">
+                    <option>Mumbai Flagship</option>
+                    <option>Delhi Electronics</option>
+                    <option>Bengaluru Beauty</option>
+                    <option>Chennai Accessories</option>
+                    <option>Return Inspection Bin</option>
+                    <option>Disposal Inventory</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">SKU</label>
+                  <input
+                    value="ACC-WLT-CL-BRN"
+                    class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+                  />
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="text-xs text-slate-400">Quantity</label>
+                    <input
+                      value="80"
+                      class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="text-xs text-slate-400">State</label>
+                    <select class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm">
+                      <option>Transfer Pending</option>
+                      <option>Available</option>
+                      <option>Damaged</option>
+                      <option>Returned</option>
+                      <option>Disposal</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <p class="text-sm font-medium">Connected impact</p>
+
+                  <div class="mt-3 space-y-2 text-xs text-slate-400">
+                    <div class="flex justify-between">
+                      <span>Source branch stock</span>
+                      <span class="text-red-300">Reduced</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>Destination branch stock</span>
+                      <span class="text-cyan-300">Pending receive</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>POS sale eligibility</span>
+                      <span class="text-emerald-300">Updates after receive</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>Website visibility</span>
+                      <span class="text-blue-300">Recalculated</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>Analytics movement</span>
+                      <span class="text-amber-300">Logged</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="w-full rounded-xl bg-indigo-500 py-3 text-sm font-semibold hover:bg-indigo-400">
+                  Create Branch Transfer
+                </button>
+              </div>
+            </section>
+
+            <!-- Branch Risk Alerts -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold">Branch Risk Alerts</h3>
+                  <p class="mt-1 text-sm text-slate-400">
+                    Operational issues affecting sale readiness.
+                  </p>
+                </div>
+                <span class="rounded-full bg-red-500/10 text-red-300 px-3 py-1 text-xs">
+                  9 Open
+                </span>
+              </div>
+
+              <div class="mt-5 space-y-3">
+                <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <p class="text-sm font-medium">Chennai stockout risk</p>
+                  <p class="mt-1 text-xs text-slate-400">
+                    Classic Leather Wallet below threshold. Website low-stock badge active.
+                  </p>
+                </div>
+
+                <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <p class="text-sm font-medium">Bengaluru cosmetics expiry</p>
+                  <p class="mt-1 text-xs text-slate-400">
+                    HydraGlow Serum batch COS-BT-884 needs promotion or disposal review.
+                  </p>
+                </div>
+
+                <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <p class="text-sm font-medium">Delhi warranty claims</p>
+                  <p class="mt-1 text-xs text-slate-400">
+                    9 electronics units excluded from POS and website availability.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+          </aside>
+        </section>
+
+        <!-- Branch Inventory Movement and Sync -->
+        <section class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+          <!-- Movement History -->
+          <div class="xl:col-span-2 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between gap-4">
+              <div>
+                <h3 class="font-semibold">Branch Inventory Movement</h3>
+                <p class="mt-1 text-sm text-slate-400">
+                  Every branch movement updates POS, website, CRM context and analytics logs.
+                </p>
+              </div>
+
+              <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                View Audit Log
+              </button>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[900px] text-sm">
+                <thead class="bg-slate-950 text-slate-400">
+                  <tr>
+                    <th class="text-left font-medium px-5 py-3">Movement</th>
+                    <th class="text-left font-medium px-5 py-3">SKU</th>
+                    <th class="text-left font-medium px-5 py-3">Branch</th>
+                    <th class="text-left font-medium px-5 py-3">State</th>
+                    <th class="text-left font-medium px-5 py-3">Downstream Impact</th>
+                    <th class="text-left font-medium px-5 py-3">Status</th>
+                  </tr>
+                </thead>
+
+                <tbody class="divide-y divide-slate-800">
+                  <tr>
+                    <td class="px-5 py-4">Incoming Transfer</td>
+                    <td class="px-5 py-4">CLO-SHT-OXF-BLU-M</td>
+                    <td class="px-5 py-4">Mumbai Flagship</td>
+                    <td class="px-5 py-4 text-cyan-300">Transfer Pending</td>
+                    <td class="px-5 py-4 text-slate-400">POS enabled after receiving</td>
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">
+                        Awaiting Receive
+                      </span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="px-5 py-4">Website Reservation</td>
+                    <td class="px-5 py-4">COS-SER-HDG-30ML</td>
+                    <td class="px-5 py-4">Bengaluru Beauty</td>
+                    <td class="px-5 py-4 text-blue-300">Reserved</td>
+                    <td class="px-5 py-4 text-slate-400">Website stock reduced, CRM pending purchase</td>
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-blue-500/10 text-blue-300 px-3 py-1 text-xs">
+                        Reserved
+                      </span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="px-5 py-4">POS Sale</td>
+                    <td class="px-5 py-4">ACC-WLT-CL-BRN</td>
+                    <td class="px-5 py-4">Chennai Accessories</td>
+                    <td class="px-5 py-4 text-slate-300">Sold</td>
+                    <td class="px-5 py-4 text-slate-400">CRM purchase history and analytics updated</td>
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">
+                        Completed
+                      </span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="px-5 py-4">Warranty Hold</td>
+                    <td class="px-5 py-4">ELE-AUD-NSP-BLK-V2</td>
+                    <td class="px-5 py-4">Delhi Electronics</td>
+                    <td class="px-5 py-4 text-amber-300">Warranty Claim</td>
+                    <td class="px-5 py-4 text-slate-400">Excluded from POS and website availability</td>
+                    <td class="px-5 py-4">
+                      <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">
+                        Claim Queue
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Live Channel Sync -->
+          <aside class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-semibold">Live Channel Sync</h3>
+                <p class="mt-1 text-sm text-slate-400">
+                  Branch stock feeds POS and website availability.
+                </p>
+              </div>
+              <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">
+                Live
+              </span>
+            </div>
+
+            <div class="mt-5 space-y-4">
+              <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                <div class="flex items-center justify-between text-sm">
+                  <span>POS Sync</span>
+                  <span class="text-emerald-300">Online</span>
+                </div>
+                <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div class="h-full w-[98%] bg-emerald-400"></div>
+                </div>
+                <p class="mt-2 text-xs text-slate-500">
+                  Available and reserved states reflected in billing.
+                </p>
+              </div>
+
+              <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                <div class="flex items-center justify-between text-sm">
+                  <span>Website Sync</span>
+                  <span class="text-blue-300">Active</span>
+                </div>
+                <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div class="h-full w-[94%] bg-blue-400"></div>
+                </div>
+                <p class="mt-2 text-xs text-slate-500">
+                  Customer-facing availability uses branch stock rules.
+                </p>
+              </div>
+
+              <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                <div class="flex items-center justify-between text-sm">
+                  <span>CRM Context</span>
+                  <span class="text-fuchsia-300">Ready</span>
+                </div>
+                <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div class="h-full w-[88%] bg-fuchsia-400"></div>
+                </div>
+                <p class="mt-2 text-xs text-slate-500">
+                  Purchases, reservations and returns attach to customer profiles.
+                </p>
+              </div>
+
+              <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                <div class="flex items-center justify-between text-sm">
+                  <span>Analytics Stream</span>
+                  <span class="text-amber-300">Logging</span>
+                </div>
+                <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div class="h-full w-[91%] bg-amber-400"></div>
+                </div>
+                <p class="mt-2 text-xs text-slate-500">
+                  Movement, sale readiness

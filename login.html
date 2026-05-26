@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RetailOS - Secure Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-950 text-slate-100">
+  <main class="min-h-screen grid lg:grid-cols-2">
+    <section class="hidden lg:flex relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-12">
+      <div class="absolute inset-0 opacity-30">
+        <div class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-indigo-500 blur-3xl"></div>
+        <div class="absolute bottom-10 right-10 h-80 w-80 rounded-full bg-cyan-500 blur-3xl"></div>
+      </div>
+
+      <div class="relative z-10 flex flex-col justify-between w-full">
+        <div>
+          <div class="flex items-center gap-3">
+            <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">
+              R
+            </div>
+            <div>
+              <h1 class="text-xl font-semibold">Trenz RetailOS Enterprise</h1>
+              <p class="text-sm text-slate-400">Connected Retail Commerce Operating System</p>
+            </div>
+          </div>
+
+          <div class="mt-20 max-w-xl">
+            <p class="text-sm uppercase tracking-[0.35em] text-cyan-300">Unified Lifecycle</p>
+            <h2 class="mt-4 text-5xl font-semibold leading-tight">
+              Inventory, branches, POS, website, CRM and analytics in one operating layer.
+            </h2>
+            <p class="mt-6 text-slate-400 text-lg">
+              Built for clothing, electronics, cosmetics and accessories retailers managing multiple branches with live stock synchronization.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p class="text-2xl font-semibold">12</p>
+            <p class="mt-1 text-xs text-slate-400">Connected Modules</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p class="text-2xl font-semibold">Live</p>
+            <p class="mt-1 text-xs text-slate-400">Stock Sync</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p class="text-2xl font-semibold">RBAC</p>
+            <p class="mt-1 text-xs text-slate-400">Branch Access</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex items-center justify-center p-6 bg-slate-950">
+      <div class="w-full max-w-md">
+        <div class="mb-8 lg:hidden flex items-center gap-3">
+          <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">
+            R
+          </div>
+          <div>
+            <h1 class="text-xl font-semibold">RetailOS Enterprise</h1>
+            <p class="text-sm text-slate-400">Connected Retail Commerce OS</p>
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-slate-800 bg-slate-900/80 shadow-2xl shadow-black/30 p-6">
+          <div>
+            <p class="text-sm text-cyan-300">Secure Access</p>
+            <h2 class="mt-2 text-2xl font-semibold">Sign in to operations console</h2>
+            <p class="mt-2 text-sm text-slate-400">
+              Role-based access for admin, branch manager and cashier workflows.
+            </p>
+          </div>
+
+          <form class="mt-8 space-y-5" action="dashboard.html">
+            <div>
+              <label class="text-sm text-slate-300">Role</label>
+              <select class="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+                <option>Admin - All branches</option>
+                <option>Branch Manager - Assigned branch</option>
+                <option>Cashier - POS only</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-sm text-slate-300">Branch access</label>
+              <select class="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+                <option>All Branches</option>
+                <option>Mumbai Flagship</option>
+                <option>Delhi Electronics</option>
+                <option>Bengaluru Beauty</option>
+                <option>Chennai Accessories</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-sm text-slate-300">Email</label>
+              <input type="email" value="admin@retailos.in" class="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+            </div>
+
+            <div>
+              <label class="text-sm text-slate-300">Password</label>
+              <input type="password" value="password" class="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+            </div>
+
+            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+              <div class="flex items-start gap-3">
+                <div class="mt-1 h-2.5 w-2.5 rounded-full bg-emerald-400"></div>
+                <div>
+                  <p class="text-sm font-medium">Access policy preview</p>
+                  <p class="mt-1 text-xs text-slate-400">
+                    Admin can allocate inventory, approve returns, manage CRM and view analytics. Cashier access is limited to POS billing and invoice lookup.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <button class="w-full rounded-xl bg-indigo-500 py-3 text-sm font-semibold text-white hover:bg-indigo-400">
+              Sign in and open dashboard
+            </button>
+          </form>
+
+          <div class="mt-6 grid grid-cols-3 gap-3 text-xs text-slate-400">
+            <div class="rounded-xl bg-slate-950 border border-slate-800 p-3">
+              Admin
+            </div>
+            <div class="rounded-xl bg-slate-950 border border-slate-800 p-3">
+              Manager
+            </div>
+            <div class="rounded-xl bg-slate-950 border border-slate-800 p-3">
+              Cashier
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
