@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cashier POS</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#f3f4f6;
+}
+
+header{
+    background:#111827;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+    padding:20px;
+}
+
+.products,
+.cart{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+}
+
+.search-box{
+    margin-bottom:20px;
+}
+
+.search-box input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+.product{
+    background:#f9fafb;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.product button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.cart-item{
+    border-bottom:1px solid #ddd;
+    padding:10px 0;
+}
+
+.total{
+    margin-top:20px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.checkout{
+    width:100%;
+    margin-top:20px;
+    background:#16a34a;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.stock{
+    font-size:14px;
+    color:#666;
+    margin-top:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>TRENZ CASHIER POS</h1>
+</header>
+
+<div class="container">
+
+    <div class="products">
+
+        <div class="search-box">
+            <input type="text" placeholder="Search Product...">
+        </div>
+
+        <div class="product">
+            <div>
+                <h3>Oversized Hoodie</h3>
+                <p>₹1499</p>
+                <div class="stock">Stock: <span id="stock1">12</span></div>
+            </div>
+
+            <button onclick="addToCart('Oversized Hoodie',1499,'stock1')">
+                Add
+            </button>
+        </div>
+
+        <div class="product">
+            <div>
+                <h3>Streetwear Cargo</h3>
+                <p>₹1899</p>
+                <div class="stock">Stock: <span id="stock2">7</span></div>
+            </div>
+
+            <button onclick="addToCart('Streetwear Cargo',1899,'stock2')">
+                Add
+            </button>
+        </div>
+
+        <div class="product">
+            <div>
+                <h3>Women Basic Tee</h3>
+                <p>₹899</p>
+                <div class="stock">Stock: <span id="stock3">18</span></div>
+            </div>
+
+            <button onclick="addToCart('Women Basic Tee',899,'stock3')">
+                Add
+            </button>
+        </div>
+
+    </div>
+
+    <div class="cart">
+
+        <h2>Billing Cart</h2>
+
+        <div id="cartItems"></div>
+
+        <div class="total">
+            Total: ₹<span id="total">0</span>
+        </div>
+
+        <button class="checkout" onclick="checkout()">
+            Checkout
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+let total = 0;
+
+function addToCart(product,price,stockId){
+
+    let stockElement = document.getElementById(stockId);
+
+    let currentStock = parseInt(stockElement.innerText);
+
+    if(currentStock <= 0){
+        alert("Out of Stock");
+        return;
+    }
+
+    stockElement.innerText = currentStock - 1;
+
+    let cart = document.getElementById("cartItems");
+
+    let item = document.createElement("div");
+
+    item.classList.add("cart-item");
+
+    item.innerHTML = `
+        <h4>${product}</h4>
+        <p>₹${price}</p>
+    `;
+
+    cart.appendChild(item);
+
+    total += price;
+
+    document.getElementById("total").innerText = total;
+}
+
+function checkout(){
+
+    alert("Payment Successful");
+
+    document.getElementById("cartItems").innerHTML = "";
+
+    total = 0;
+
+    document.getElementById("total").innerText = total;
+}
+
+</script>
+
+</body>
+</html>

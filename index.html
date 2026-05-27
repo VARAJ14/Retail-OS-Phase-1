@@ -3,120 +3,189 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RetailOS - Enterprise Commerce Operating System</title>
+
+  <title>TRENZOS RETAIL - Secure Login</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="app-shell.css" />
 </head>
 
-<body class="bg-slate-950 text-slate-100">
-  <main class="min-h-screen flex items-center justify-center p-6">
-    <section class="w-full max-w-5xl rounded-[2rem] border border-slate-800 bg-slate-900 shadow-2xl shadow-black/30 overflow-hidden">
-      <div class="grid grid-cols-1 lg:grid-cols-2">
-        <div class="p-8 lg:p-10 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950">
-          <div class="flex items-center gap-3">
-            <div class="h-12 w-12 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">
-              R
-            </div>
-            <div>
-              <h1 class="text-xl font-semibold">RetailOS Enterprise</h1>
-              <p class="text-sm text-slate-400">Multi-Branch Retail Commerce OS</p>
-            </div>
-          </div>
-
-          <div class="mt-16">
-            <p class="text-sm uppercase tracking-[0.35em] text-cyan-300">Connected Lifecycle</p>
-            <h2 class="mt-4 text-4xl font-semibold leading-tight">
-              One operating system for inventory, branches, POS, website, CRM and analytics.
-            </h2>
-            <p class="mt-5 text-sm text-slate-400 max-w-lg">
-              Built for clothing, electronics, cosmetics and accessories retailers with branch-level operations,
-              live stock visibility, returns, role-based access and enterprise reporting.
-            </p>
-          </div>
-
-          <div class="mt-10 grid grid-cols-2 gap-3">
-            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p class="text-2xl font-semibold">Live</p>
-              <p class="mt-1 text-xs text-slate-400">POS and website sync</p>
-            </div>
-
-            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p class="text-2xl font-semibold">RBAC</p>
-              <p class="mt-1 text-xs text-slate-400">Role and branch access</p>
-            </div>
-
-            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p class="text-2xl font-semibold">4</p>
-              <p class="mt-1 text-xs text-slate-400">Retail categories</p>
-            </div>
-
-            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p class="text-2xl font-semibold">360°</p>
-              <p class="mt-1 text-xs text-slate-400">Customer intelligence</p>
-            </div>
-          </div>
+<body class="min-h-screen bg-slate-950 text-slate-100">
+  <main class="min-h-screen flex items-center justify-center px-4 py-8">
+    <section class="w-full max-w-md">
+      <div class="mb-6 flex items-center justify-center gap-3">
+        <div class="h-12 w-12 rounded-2xl bg-indigo-500 flex items-center justify-center font-black shadow-lg shadow-indigo-500/30">
+          T
         </div>
 
-        <div class="p-8 lg:p-10">
-          <div class="rounded-3xl border border-slate-800 bg-slate-950 p-6">
-            <h3 class="text-2xl font-semibold">Open RetailOS prototype</h3>
-            <p class="mt-2 text-sm text-slate-400">
-              Start from the secure login or jump directly into the connected operations dashboard.
-            </p>
-
-            <div class="mt-6 space-y-3">
-              <a href="login.html" class="block rounded-xl bg-indigo-500 px-5 py-3 text-center text-sm font-semibold hover:bg-indigo-400">
-                Open Login System
-              </a>
-
-              <a href="dashboard.html" class="block rounded-xl border border-slate-700 bg-slate-900 px-5 py-3 text-center text-sm hover:bg-slate-800">
-                Open Central Dashboard
-              </a>
-
-              <a href="system-map.html" class="block rounded-xl border border-slate-700 bg-slate-900 px-5 py-3 text-center text-sm hover:bg-slate-800">
-                View System Map
-              </a>
-            </div>
-          </div>
-
-          <div class="mt-6 rounded-3xl border border-slate-800 bg-slate-950 p-6">
-            <h3 class="font-semibold">Operational lifecycle</h3>
-
-            <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <a href="inventory.html" class="rounded-2xl border border-slate-800 bg-slate-900 p-4 hover:border-indigo-400">
-                <p class="text-xs text-indigo-300">Step 01</p>
-                <p class="mt-1 text-sm font-medium">Main Inventory</p>
-              </a>
-
-              <a href="branch-inventory.html" class="rounded-2xl border border-slate-800 bg-slate-900 p-4 hover:border-cyan-400">
-                <p class="text-xs text-cyan-300">Step 02</p>
-                <p class="mt-1 text-sm font-medium">Branch Inventory</p>
-              </a>
-
-              <a href="pos.html" class="rounded-2xl border border-slate-800 bg-slate-900 p-4 hover:border-emerald-400">
-                <p class="text-xs text-emerald-300">Step 03</p>
-                <p class="mt-1 text-sm font-medium">Live POS Sync</p>
-              </a>
-
-              <a href="website.html" class="rounded-2xl border border-slate-800 bg-slate-900 p-4 hover:border-blue-400">
-                <p class="text-xs text-blue-300">Step 04</p>
-                <p class="mt-1 text-sm font-medium">Website Sync</p>
-              </a>
-
-              <a href="crm.html" class="rounded-2xl border border-slate-800 bg-slate-900 p-4 hover:border-fuchsia-400">
-                <p class="text-xs text-fuchsia-300">Step 05</p>
-                <p class="mt-1 text-sm font-medium">CRM Update</p>
-              </a>
-
-              <a href="analytics.html" class="rounded-2xl border border-slate-800 bg-slate-900 p-4 hover:border-amber-400">
-                <p class="text-xs text-amber-300">Step 06</p>
-                <p class="mt-1 text-sm font-medium">Analytics Update</p>
-              </a>
-            </div>
-          </div>
+        <div>
+          <h1 class="text-xl font-semibold tracking-tight">TRENZOS RETAIL</h1>
+          <p class="text-xs text-slate-400">Enterprise Authentication Gateway</p>
         </div>
       </div>
+
+      <div class="rounded-[2rem] border border-white/10 bg-white/[0.06] shadow-2xl shadow-black/40 backdrop-blur-xl overflow-hidden">
+        <div class="border-b border-white/10 bg-white/[0.03] px-6 py-5">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p class="text-xs uppercase tracking-[0.28em] text-emerald-300">SSL Protected</p>
+              <h2 class="mt-2 text-2xl font-semibold">Sign in securely</h2>
+            </div>
+
+            <div class="rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-3 py-2">
+              <div class="flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                <span class="text-xs font-medium text-emerald-300">Encrypted</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form id="loginForm" class="space-y-5 px-6 py-6">
+          <div id="loginAlert" class="hidden rounded-2xl border border-red-400/30 bg-red-400/10 px-4 py-3">
+            <p class="text-sm font-medium text-red-300">Authentication failed</p>
+            <p id="loginAlertText" class="mt-1 text-xs text-red-200">
+              Please verify your role, branch and credentials.
+            </p>
+          </div>
+
+          <div>
+            <label for="role" class="text-sm font-medium text-slate-300">Role</label>
+            <select
+              id="role"
+              class="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 py-3 text-sm outline-none transition focus:border-indigo-400"
+              required
+            >
+              <option value="owner">Owner</option>
+              <option value="manager">Manager</option>
+              <option value="cashier">Cashier</option>
+              <option value="staff">Staff</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="branch" class="text-sm font-medium text-slate-300">Branch</label>
+            <select
+              id="branch"
+              class="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 py-3 text-sm outline-none transition focus:border-indigo-400"
+              required
+            >
+              <option value="all">Select All</option>
+              <option value="anna-nagar">BEST CHOICE ANNA NAGAR BRANCH</option>
+              <option value="padi">PADI BRANCH</option>
+              <option value="spencer">SPENCER</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="email" class="text-sm font-medium text-slate-300">Email address</label>
+            <input
+              id="email"
+              type="email"
+              autocomplete="email"
+              placeholder="name@trenzosretail.com"
+              class="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 py-3 text-sm outline-none transition placeholder:text-slate-600 focus:border-indigo-400"
+              required
+            />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between">
+              <label for="password" class="text-sm font-medium text-slate-300">Password</label>
+              <button
+                id="togglePassword"
+                type="button"
+                class="text-xs font-medium text-indigo-300 hover:text-indigo-200"
+              >
+                Show
+              </button>
+            </div>
+
+            <input
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Enter secure password"
+              class="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 py-3 text-sm outline-none transition placeholder:text-slate-600 focus:border-indigo-400"
+              required
+            />
+          </div>
+
+          <div class="flex items-center justify-between gap-4">
+            <label class="flex items-center gap-2 text-sm text-slate-400">
+              <input
+                id="rememberDevice"
+                type="checkbox"
+                class="h-4 w-4 rounded border-slate-700 bg-slate-950 text-indigo-500"
+              />
+              Remember device
+            </label>
+
+            <a href="forgot-password.html" class="text-sm font-medium text-indigo-300 hover:text-indigo-200">
+              Forgot password?
+            </a>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full rounded-xl bg-indigo-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition hover:bg-indigo-400"
+          >
+            Start secure session
+          </button>
+
+          <div class="grid grid-cols-3 gap-3 pt-1 text-xs">
+            <div class="rounded-2xl border border-slate-800 bg-slate-950/70 p-3">
+              <p class="text-slate-500">Channel</p>
+              <p class="mt-1 font-medium text-emerald-300">SSL/TLS</p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-800 bg-slate-950/70 p-3">
+              <p class="text-slate-500">Session</p>
+              <p class="mt-1 font-medium text-cyan-300">Encrypted</p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-800 bg-slate-950/70 p-3">
+              <p class="text-slate-500">Access</p>
+              <p class="mt-1 font-medium text-amber-300">RBAC</p>
+            </div>
+          </div>
+        </form>
+
+        <footer class="border-t border-white/10 bg-slate-950/60 px-6 py-4">
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-center gap-2">
+              <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+              <p class="text-xs text-slate-400">Secure session gateway active</p>
+            </div>
+
+            <p class="text-xs text-slate-500">
+              TRENZOS RETAIL RBAC v1.0
+            </p>
+          </div>
+        </footer>
+      </div>
+
+      <p class="mt-5 text-center text-xs text-slate-600">
+        Protected operational access for inventory, POS, CRM, website and analytics modules.
+      </p>
     </section>
   </main>
+
+  <script src="shared/rbac.js"></script>
+  <script src="shared/session.js"></script>
+  <script src="shared/auth.js"></script>
 </body>
 </html>
+<a href="forgot-password.html">
+  Forgot Password?
+</a>
+<button onclick="handleLogin()">Login</button>
+
+<script>
+function handleLogin() {
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    loginUser(email, password);
+}
+</script>

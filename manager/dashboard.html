@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZOS RETAIL - Manager Dashboard</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
+      <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
+        <div>
+          <h1 class="font-semibold">TRENZOS RETAIL</h1>
+          <p class="text-xs text-slate-400">Branch Manager</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
+        <a href="dashboard.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
+          <span>Dashboard</span>
+          <span class="text-xs">Branch</span>
+        </a>
+        <a href="../branch-inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Inventory</a>
+        <a href="../orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
+        <a href="../pos.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">POS Monitoring</a>
+        <a href="../crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM</a>
+        <a href="../returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns</a>
+        <a href="../staff.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Staff Monitoring</a>
+        <a href="../reports.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Reports</a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <div class="rounded-2xl bg-slate-900 border border-slate-800 p-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-400">Branch Sync</span>
+            <span class="text-xs text-emerald-300">Live</span>
+          </div>
+          <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+            <div class="h-full w-[94%] bg-emerald-400"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="flex-1 min-w-0">
+
+      <!-- Topbar -->
+      <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
+          <div>
+            <h2 class="text-lg font-semibold">Manager Dashboard</h2>
+            <p id="managerBranchLabel" class="text-xs text-slate-400">BEST CHOICE ANNA NAGAR BRANCH</p>
+          </div>
+
+          <div class="hidden md:flex flex-1 max-w-xl">
+            <input
+              placeholder="Search order, SKU, customer..."
+              class="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+            />
+          </div>
+
+          <div class="flex items-center gap-3">
+            <select id="managerBranchSelect" class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
+              <option value="anna-nagar">BEST CHOICE ANNA NAGAR BRANCH</option>
+              <option value="padi">PADI BRANCH</option>
+              <option value="spencer">SPENCER</option>
+            </select>
+
+            <div class="hidden xl:flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5">
+              <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+              <span class="text-xs text-emerald-300">Live Sync</span>
+            </div>
+
+            <button class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">Alerts</button>
+            <button class="h-10 w-10 rounded-xl bg-slate-800 text-sm">MG</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="p-5 lg:p-8 space-y-6">
+
+        <!-- Header -->
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+          <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
+            <div>
+              <div class="flex flex-wrap gap-2">
+                <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">Manager</span>
+                <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">Branch Live</span>
+                <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">Operational Control</span>
+              </div>
+
+              <h1 class="mt-4 text-3xl font-semibold">Branch control center</h1>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href="../branch-inventory.html" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Stock</a>
+              <a href="../orders.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">Orders</a>
+              <a href="../returns.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">Returns</a>
+            </div>
+          </div>
+
+          <div id="managerLifecycle" class="mt-6 grid grid-cols-1 md:grid-cols-6 gap-3"></div>
+        </section>
+
+        <!-- KPI Cards -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-4">
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Branch Sales</p>
+            <h3 id="managerSales" class="mt-3 text-3xl font-semibold">₹0</h3>
+            <p class="mt-3 text-xs text-emerald-300">Today</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Orders</p>
+            <h3 id="managerOrders" class="mt-3 text-3xl font-semibold">0</h3>
+            <p class="mt-3 text-xs text-blue-300">POS + website</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Available Stock</p>
+            <h3 id="managerStock" class="mt-3 text-3xl font-semibold">0</h3>
+            <p class="mt-3 text-xs text-cyan-300">Sellable units</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Low Stock</p>
+            <h3 id="managerLowStock" class="mt-3 text-3xl font-semibold text-amber-300">0</h3>
+            <p class="mt-3 text-xs text-amber-300">Needs stock</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Returns</p>
+            <h3 id="managerReturns" class="mt-3 text-3xl font-semibold text-red-300">0</h3>
+            <p class="mt-3 text-xs text-red-300">Pending</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Staff Online</p>
+            <h3 id="managerStaff" class="mt-3 text-3xl font-semibold">0</h3>
+            <p class="mt-3 text-xs text-emerald-300">Shift active</p>
+          </div>
+        </section>
+
+        <!-- Manager Grid -->
+        <section class="grid grid-cols-1 2xl:grid-cols-4 gap-6">
+
+          <!-- Queue -->
+          <div class="2xl:col-span-3 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+              <div>
+                <h3 class="font-semibold">Today’s Work Queue</h3>
+                <p class="mt-1 text-sm text-slate-400">Receive stock, pack orders, inspect returns.</p>
+              </div>
+
+              <a href="../branch-inventory.html" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                Open Branch Stock
+              </a>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[860px] text-sm">
+                <thead class="bg-slate-950 text-slate-400">
+                  <tr>
+                    <th class="text-left font-medium px-5 py-3">ID</th>
+                    <th class="text-left font-medium px-5 py-3">Item</th>
+                    <th class="text-left font-medium px-5 py-3">Qty</th>
+                    <th class="text-left font-medium px-5 py-3">From</th>
+                    <th class="text-left font-medium px-5 py-3">To</th>
+                    <th class="text-right font-medium px-5 py-3">Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="managerQueue" class="divide-y divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Panel -->
+          <aside class="space-y-6">
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Branch Alerts</h3>
+              <div id="managerAlerts" class="mt-5 space-y-3"></div>
+            </section>
+
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Live Activity</h3>
+              <div id="managerActivity" class="mt-5 space-y-3"></div>
+            </section>
+          </aside>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="../shared/dashboard-data.js"></script>
+  <script src="../shared/dashboard-flow.js"></script>
+
+  <script>
+    const managerKpis = TRENZOS_DASHBOARD_DATA.kpis.manager;
+
+    function setManagerBranch(branchId) {
+      const branch = getBranchById(branchId) || getBranchById("anna-nagar");
+
+      document.getElementById("managerBranchLabel").textContent = branch.name;
+      document.getElementById("managerSales").textContent = formatINR(branch.salesToday);
+      document.getElementById("managerOrders").textContent = branch.ordersToday;
+      document.getElementById("managerStock").textContent = managerKpis.availableStock.toLocaleString("en-IN");
+      document.getElementById("managerLowStock").textContent = branch.lowStock;
+      document.getElementById("managerReturns").textContent = branch.returnsPending;
+      document.getElementById("managerStaff").textContent = managerKpis.staffOnline;
+    }
+
+    const branchSelect = document.getElementById("managerBranchSelect");
+
+    branchSelect.addEventListener("change", function () {
+      setManagerBranch(this.value);
+    });
+
+    setManagerBranch("anna-nagar");
+    renderLifecycle("managerLifecycle");
+    renderManagerQueue("managerQueue");
+    renderInventoryAlerts("managerAlerts", 3);
+    renderActivity("managerActivity");
+  </script>
+</body>
+</html>

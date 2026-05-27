@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZOS RETAIL - Owner Dashboard</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
+      <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
+        <div>
+          <h1 class="font-semibold">TRENZOS RETAIL</h1>
+          <p class="text-xs text-slate-400">Owner Control</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
+        <a href="dashboard.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
+          <span>Dashboard</span>
+          <span class="text-xs">Owner</span>
+        </a>
+        <a href="../inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Main Inventory</a>
+        <a href="../branch-inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Inventory</a>
+        <a href="../product-create.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Products</a>
+        <a href="../pos.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">POS Monitoring</a>
+        <a href="../orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
+        <a href="../crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM</a>
+        <a href="../campaigns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Campaigns</a>
+        <a href="../returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns & Refunds</a>
+        <a href="../analytics.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Analytics</a>
+        <a href="../reports.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Reports</a>
+        <a href="../website-control.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Website Control</a>
+        <a href="../staff.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Staff Management</a>
+        <a href="../settings.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Settings</a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <div class="rounded-2xl bg-slate-900 border border-slate-800 p-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-400">System Sync</span>
+            <span class="text-xs text-emerald-300">Live</span>
+          </div>
+          <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+            <div class="h-full w-[97%] bg-emerald-400"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="flex-1 min-w-0">
+
+      <!-- Topbar -->
+      <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
+          <div>
+            <h2 class="text-lg font-semibold">Owner Dashboard</h2>
+            <p class="text-xs text-slate-400">All branches · Full business control</p>
+          </div>
+
+          <div class="hidden md:flex flex-1 max-w-xl">
+            <input
+              placeholder="Search SKU, branch, order, customer..."
+              class="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+            />
+          </div>
+
+          <div class="flex items-center gap-3">
+            <select class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
+              <option>Select All</option>
+              <option>BEST CHOICE ANNA NAGAR BRANCH</option>
+              <option>PADI BRANCH</option>
+              <option>SPENCER</option>
+            </select>
+
+            <div class="hidden xl:flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5">
+              <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+              <span class="text-xs text-emerald-300">Live Sync</span>
+            </div>
+
+            <button class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">Alerts</button>
+            <button class="h-10 w-10 rounded-xl bg-slate-800 text-sm">OW</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="p-5 lg:p-8 space-y-6">
+
+        <!-- Header -->
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+          <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
+            <div>
+              <div class="flex flex-wrap gap-2">
+                <span class="rounded-full bg-indigo-500/15 text-indigo-200 px-3 py-1 text-xs">Owner</span>
+                <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">All Branches Live</span>
+                <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">Tamil Nadu Retail Feed</span>
+              </div>
+
+              <h1 class="mt-4 text-3xl font-semibold">Business command center</h1>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href="../inventory.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">Inventory</a>
+              <a href="../website-control.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">Website</a>
+              <a href="../analytics.html" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Analytics</a>
+            </div>
+          </div>
+
+          <div id="ownerLifecycle" class="mt-6 grid grid-cols-1 md:grid-cols-6 gap-3"></div>
+        </section>
+
+        <!-- KPI Cards -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-4">
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Sales Today</p>
+            <h3 id="ownerSales" class="mt-3 text-3xl font-semibold">₹0</h3>
+            <p class="mt-3 text-xs text-emerald-300">POS + website</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Orders</p>
+            <h3 id="ownerOrders" class="mt-3 text-3xl font-semibold">0</h3>
+            <p class="mt-3 text-xs text-blue-300">All channels</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Branches</p>
+            <h3 id="ownerBranches" class="mt-3 text-3xl font-semibold">0</h3>
+            <p class="mt-3 text-xs text-cyan-300">Live locations</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Low Stock</p>
+            <h3 id="ownerLowStock" class="mt-3 text-3xl font-semibold text-amber-300">0</h3>
+            <p class="mt-3 text-xs text-amber-300">Needs action</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Returns</p>
+            <h3 id="ownerReturns" class="mt-3 text-3xl font-semibold text-red-300">0</h3>
+            <p class="mt-3 text-xs text-red-300">Pending review</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">CRM Updates</p>
+            <h3 id="ownerCrm" class="mt-3 text-3xl font-semibold text-fuchsia-300">0</h3>
+            <p class="mt-3 text-xs text-fuchsia-300">Today</p>
+          </div>
+        </section>
+
+        <!-- Main Grid -->
+        <section class="grid grid-cols-1 2xl:grid-cols-4 gap-6">
+
+          <!-- Branch Table -->
+          <div class="2xl:col-span-3 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+              <div>
+                <h3 class="font-semibold">Live Branch Feed</h3>
+                <p class="mt-1 text-sm text-slate-400">Sales, orders, stock and returns by branch.</p>
+              </div>
+
+              <a href="../branch-inventory.html" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                Manage Stock
+              </a>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[980px] text-sm">
+                <thead class="bg-slate-950 text-slate-400">
+                  <tr>
+                    <th class="text-left font-medium px-5 py-3">Branch</th>
+                    <th class="text-left font-medium px-5 py-3">Sales</th>
+                    <th class="text-left font-medium px-5 py-3">Orders</th>
+                    <th class="text-left font-medium px-5 py-3">Stock</th>
+                    <th class="text-left font-medium px-5 py-3">Low SKUs</th>
+                    <th class="text-left font-medium px-5 py-3">Returns</th>
+                    <th class="text-left font-medium px-5 py-3">Sync</th>
+                    <th class="text-right font-medium px-5 py-3">Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="ownerBranchTable" class="divide-y divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Panel -->
+          <aside class="space-y-6">
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Inventory Alerts</h3>
+              <div id="ownerAlerts" class="mt-5 space-y-3"></div>
+            </section>
+
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Live Activity</h3>
+              <div id="ownerActivity" class="mt-5 space-y-3"></div>
+            </section>
+          </aside>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="../shared/dashboard-data.js"></script>
+  <script src="../shared/dashboard-flow.js"></script>
+
+  <script>
+    const ownerKpis = TRENZOS_DASHBOARD_DATA.kpis.owner;
+
+    document.getElementById("ownerSales").textContent = formatINR(ownerKpis.netSalesToday);
+    document.getElementById("ownerOrders").textContent = ownerKpis.totalOrders;
+    document.getElementById("ownerBranches").textContent = ownerKpis.activeBranches;
+    document.getElementById("ownerLowStock").textContent = ownerKpis.lowStockSkus;
+    document.getElementById("ownerReturns").textContent = ownerKpis.returnsPending;
+    document.getElementById("ownerCrm").textContent = ownerKpis.crmUpdates;
+
+    renderLifecycle("ownerLifecycle");
+    renderOwnerBranchTable("ownerBranchTable");
+    renderInventoryAlerts("ownerAlerts", 4);
+    renderActivity("ownerActivity");
+  </script>
+</body>
+</html>
