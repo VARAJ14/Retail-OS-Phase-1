@@ -3,188 +3,145 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RetailOS - Staff Management</title>
+
+  <title>TRENZ OS RETAIL - Staff Management</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-slate-950 text-slate-100">
   <div class="min-h-screen flex">
 
-    <!-- Sidebar -->
     <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
       <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
-        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">R</div>
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
         <div>
-          <h1 class="font-semibold">RetailOS</h1>
-          <p class="text-xs text-slate-400">Enterprise Commerce</p>
+          <h1 class="font-semibold">TRENZ OS</h1>
+          <p class="text-xs text-slate-400">Staff & RBAC</p>
         </div>
       </div>
 
       <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
-        <a href="dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Dashboard</a>
-        <a href="inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Main Inventory</a>
-        <a href="branch-inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Inventory</a>
-        <a href="product-create.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Products</a>
-        <a href="pos.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">POS</a>
-        <a href="orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
-        <a href="crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Customers</a>
-        <a href="crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM</a>
-        <a href="campaigns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Campaigns</a>
-        <a href="returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns & Refunds</a>
-        <a href="analytics.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Analytics</a>
-        <a href="reports.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Reports</a>
-
+        <a href="owner/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Owner Dashboard</a>
+        <a href="manager/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Manager Dashboard</a>
         <a href="staff.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
           <span>Staff Management</span>
           <span class="text-xs">RBAC</span>
         </a>
-
-        <a href="settings.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Settings</a>
+        <a href="settings.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Settings</a>
+        <a href="system-map.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">System Map</a>
       </nav>
-
-      <div class="p-4 border-t border-slate-800">
-        <div class="rounded-2xl bg-slate-900 border border-slate-800 p-4">
-          <p class="text-xs text-slate-400">Access Control</p>
-          <p class="mt-2 text-sm font-medium text-indigo-300">
-            Roles control branch inventory, POS billing, returns approval, CRM and reports.
-          </p>
-        </div>
-      </div>
     </aside>
 
-    <!-- Main Area -->
     <div class="flex-1 min-w-0">
-
-      <!-- Topbar -->
       <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
-        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
-          <div class="flex items-center gap-3">
-            <button class="lg:hidden rounded-xl border border-slate-800 px-3 py-2 text-sm">Menu</button>
-
-            <div>
-              <h2 class="text-lg font-semibold">Staff Management & Role Access</h2>
-              <p class="text-xs text-slate-400">
-                Admin → Branch Manager → Cashier → Operations → Marketing → Finance
-              </p>
-            </div>
+        <div class="h-full flex items-center justify-between px-5 lg:px-8">
+          <div>
+            <h2 class="text-lg font-semibold">Staff Management</h2>
+            <p class="text-xs text-slate-400">Roles, branches and permission access</p>
           </div>
 
-          <div class="hidden md:flex flex-1 max-w-xl items-center gap-3">
-            <input
-              placeholder="Search staff, role, branch, permission, shift..."
-              class="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
-            />
-          </div>
-
-          <div class="flex items-center gap-3">
-            <select class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
-              <option>All Branches</option>
-              <option>Mumbai Flagship</option>
-              <option>Delhi Electronics</option>
-              <option>Bengaluru Beauty</option>
-              <option>Chennai Accessories</option>
-            </select>
-
-            <button class="hidden sm:block rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
-              Quick Actions
-            </button>
-
-            <div class="hidden xl:flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5">
-              <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
-              <span class="text-xs text-emerald-300">Live Sync</span>
-            </div>
-
-            <button class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">Alerts</button>
-            <button class="h-10 w-10 rounded-xl bg-slate-800 text-sm">AD</button>
-          </div>
+          <button class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+            Add Staff
+          </button>
         </div>
       </header>
 
       <main class="p-5 lg:p-8 space-y-6">
-
-        <!-- Header -->
         <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
-          <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
-            <div>
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="rounded-full bg-indigo-500/15 text-indigo-200 px-3 py-1 text-xs">Role-Based Access</span>
-                <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">Branch-Level Controls</span>
-                <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">Approval Permissions</span>
-              </div>
-
-              <h1 class="mt-4 text-3xl font-semibold">
-                Enterprise staff, roles and branch permissions
-              </h1>
-
-              <p class="mt-2 max-w-3xl text-sm text-slate-400">
-                Control who can allocate inventory, receive branch stock, run POS billing, approve returns, access CRM, launch campaigns and export analytics reports.
-              </p>
-            </div>
-
-            <div class="flex flex-wrap gap-3">
-              <a href="settings.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
-                Permission Settings
-              </a>
-              <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
-                Import Staff
-              </button>
-              <button class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
-                Add Staff Member
-              </button>
-            </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-full bg-indigo-500/15 text-indigo-200 px-3 py-1 text-xs">Owner</span>
+            <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">Manager</span>
+            <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">Cashier</span>
+            <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">Staff</span>
           </div>
+
+          <h1 class="mt-4 text-3xl font-semibold">Enterprise staff and access control</h1>
+          <p class="mt-2 max-w-3xl text-sm text-slate-400">
+            Control who can access inventory, POS, website, CRM, returns, analytics and settings.
+          </p>
         </section>
 
-        <!-- Staff KPIs -->
         <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
           <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
-            <p class="text-sm text-slate-400">Active Staff</p>
-            <div class="mt-3 flex items-end justify-between">
-              <h3 class="text-3xl font-semibold">184</h3>
-              <span class="text-xs text-emerald-300">Online 42</span>
-            </div>
-            <p class="mt-3 text-xs text-slate-500">Across all branches and roles</p>
+            <p class="text-sm text-slate-400">Total Staff</p>
+            <h3 class="mt-3 text-3xl font-semibold">184</h3>
           </div>
 
           <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
-            <p class="text-sm text-slate-400">Branch Managers</p>
-            <div class="mt-3 flex items-end justify-between">
-              <h3 class="text-3xl font-semibold">12</h3>
-              <span class="text-xs text-cyan-300">Assigned</span>
-            </div>
-            <p class="mt-3 text-xs text-slate-500">Can receive transfers and manage branch stock</p>
+            <p class="text-sm text-slate-400">Managers</p>
+            <h3 class="mt-3 text-3xl font-semibold text-cyan-300">12</h3>
           </div>
 
           <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
             <p class="text-sm text-slate-400">Cashiers</p>
-            <div class="mt-3 flex items-end justify-between">
-              <h3 class="text-3xl font-semibold">86</h3>
-              <span class="text-xs text-emerald-300">POS</span>
-            </div>
-            <p class="mt-3 text-xs text-slate-500">Restricted to billing and invoice lookup</p>
+            <h3 class="mt-3 text-3xl font-semibold text-emerald-300">86</h3>
           </div>
 
           <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
-            <p class="text-sm text-slate-400">Approval Users</p>
-            <div class="mt-3 flex items-end justify-between">
-              <h3 class="text-3xl font-semibold text-amber-300">18</h3>
-              <span class="text-xs text-amber-300">Returns</span>
-            </div>
-            <p class="mt-3 text-xs text-slate-500">Can approve refunds and exceptions</p>
+            <p class="text-sm text-slate-400">Staff</p>
+            <h3 class="mt-3 text-3xl font-semibold text-amber-300">84</h3>
           </div>
 
           <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
             <p class="text-sm text-slate-400">Access Alerts</p>
-            <div class="mt-3 flex items-end justify-between">
-              <h3 class="text-3xl font-semibold text-red-300">5</h3>
-              <span class="text-xs text-red-300">Review</span>
-            </div>
-            <p class="mt-3 text-xs text-slate-500">Permission conflicts or login issues</p>
+            <h3 class="mt-3 text-3xl font-semibold text-red-300">5</h3>
           </div>
         </section>
 
-        <!-- Staff Main Grid -->
-        <section class="grid grid-cols-1 2xl:grid-cols-4 gap-6">
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+          <div class="p-5 border-b border-slate-800">
+            <h3 class="font-semibold">Staff directory</h3>
+            <p class="mt-1 text-sm text-slate-400">Branch-level access and role status.</p>
+          </div>
 
-          <div class="2xl:col-span-3 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
-           
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[860px] text-sm">
+              <thead class="bg-slate-950 text-slate-400">
+                <tr>
+                  <th class="text-left px-5 py-3">Name</th>
+                  <th class="text-left px-5 py-3">Role</th>
+                  <th class="text-left px-5 py-3">Branch</th>
+                  <th class="text-left px-5 py-3">Access</th>
+                  <th class="text-left px-5 py-3">Status</th>
+                  <th class="text-right px-5 py-3">Action</th>
+                </tr>
+              </thead>
+              <tbody id="staffRows" class="divide-y divide-slate-800"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+          <div class="p-5 border-b border-slate-800">
+            <h3 class="font-semibold">Permission matrix</h3>
+            <p class="mt-1 text-sm text-slate-400">Owner, manager, cashier and staff access rules.</p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[860px] text-sm">
+              <thead class="bg-slate-950 text-slate-400">
+                <tr>
+                  <th class="text-left px-5 py-3">Module</th>
+                  <th class="text-left px-5 py-3">Owner</th>
+                  <th class="text-left px-5 py-3">Manager</th>
+                  <th class="text-left px-5 py-3">Cashier</th>
+                  <th class="text-left px-5 py-3">Staff</th>
+                </tr>
+              </thead>
+              <tbody id="permissionRows" class="divide-y divide-slate-800"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="shared/governance-data.js"></script>
+  <script src="shared/governance-flow.js"></script>
+  <script>
+    renderStaffRows("staffRows");
+    renderPermissionRows("permissionRows");
+  </script>
+</body>
+</html>

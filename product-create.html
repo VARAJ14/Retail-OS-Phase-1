@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZ OS RETAIL - Product Creation</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
+      <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
+        <div>
+          <h1 class="font-semibold">TRENZ OS</h1>
+          <p class="text-xs text-slate-400">Product Authority</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
+        <a href="owner/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Owner Dashboard</a>
+        <a href="manager/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Manager Dashboard</a>
+        <a href="inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Main Inventory</a>
+        <a href="branch-inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Inventory</a>
+
+        <a href="product-create.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
+          <span>Products</span>
+          <span class="text-xs">Create</span>
+        </a>
+
+        <a href="cashier/pos.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">POS Billing</a>
+        <a href="orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
+        <a href="website/index.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Website</a>
+        <a href="crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM</a>
+        <a href="owner/returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns</a>
+        <a href="analytics.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Analytics</a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-400">Product Flow</span>
+            <span class="text-emerald-300">Ready</span>
+          </div>
+          <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+            <div class="h-full w-[90%] bg-emerald-400"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="flex-1 min-w-0">
+
+      <!-- Topbar -->
+      <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
+          <div>
+            <h2 class="text-lg font-semibold">Product Creation</h2>
+            <p class="text-xs text-slate-400">Create SKU → Initialize Main Inventory → Allocate to Branches</p>
+          </div>
+
+          <div class="hidden md:flex flex-1 max-w-xl">
+            <input
+              placeholder="Search product, SKU, supplier, category..."
+              class="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+            />
+          </div>
+
+          <div class="flex items-center gap-3">
+            <select class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
+              <option>Select All</option>
+              <option>BEST CHOICE ANNA NAGAR BRANCH</option>
+              <option>PADI BRANCH</option>
+              <option>SPENCER</option>
+            </select>
+
+            <div class="hidden xl:flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5">
+              <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+              <span class="text-xs text-emerald-300">Live Sync</span>
+            </div>
+
+            <button class="h-10 w-10 rounded-xl bg-slate-800 text-sm">PR</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="p-5 lg:p-8 space-y-6">
+
+        <!-- Header -->
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+          <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
+            <div>
+              <div class="flex flex-wrap gap-2">
+                <span class="rounded-full bg-indigo-500/15 text-indigo-200 px-3 py-1 text-xs">SKU Authority</span>
+                <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">Barcode Ready</span>
+                <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">Inventory Initialization</span>
+              </div>
+
+              <h1 class="mt-4 text-3xl font-semibold">Create product and initialize stock</h1>
+              <p class="mt-2 max-w-3xl text-sm text-slate-400">
+                Add products with category rules, pricing, supplier, stock, website visibility and inventory state.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href="inventory.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                Main Inventory
+              </a>
+              <a href="branch-inventory.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                Branch Allocation
+              </a>
+              <button onclick="simulateProductSave()" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                Save Product
+              </button>
+            </div>
+          </div>
+
+          <!-- Flow Bar -->
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-5 gap-3">
+            <div class="rounded-2xl border border-indigo-500/30 bg-indigo-500/10 p-4">
+              <p class="text-xs text-indigo-300">Step 01</p>
+              <p class="mt-1 text-sm font-semibold">Product Details</p>
+            </div>
+
+            <div class="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+              <p class="text-xs text-cyan-300">Step 02</p>
+              <p class="mt-1 text-sm font-semibold">SKU Rules</p>
+            </div>
+
+            <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+              <p class="text-xs text-emerald-300">Step 03</p>
+              <p class="mt-1 text-sm font-semibold">Inventory Init</p>
+            </div>
+
+            <div class="rounded-2xl border border-blue-500/30 bg-blue-500/10 p-4">
+              <p class="text-xs text-blue-300">Step 04</p>
+              <p class="mt-1 text-sm font-semibold">Website Ready</p>
+            </div>
+
+            <div class="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4">
+              <p class="text-xs text-amber-300">Step 05</p>
+              <p class="mt-1 text-sm font-semibold">Analytics Tag</p>
+            </div>
+          </div>
+        </section>
+
+        <div id="saveStatus" class="hidden"></div>
+
+        <!-- Main Layout -->
+        <section class="grid grid-cols-1 2xl:grid-cols-4 gap-6">
+
+          <!-- Product Form -->
+          <div class="2xl:col-span-3 space-y-6">
+
+            <!-- Basic Details -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <h3 class="font-semibold">Basic product details</h3>
+                  <p class="mt-1 text-sm text-slate-400">Name, brand, category, supplier and SKU identity.</p>
+                </div>
+
+                <span id="skuPreviewBadge" class="rounded-full bg-indigo-500/15 text-indigo-200 px-3 py-1 text-xs">
+                  CLO-SHT-MEN-WHT-M
+                </span>
+              </div>
+
+              <div class="mt-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                <div class="xl:col-span-2">
+                  <label class="text-xs text-slate-400">Product Name</label>
+                  <input
+                    id="productNameInput"
+                    value="Men Cotton Shirt"
+                    class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400"
+                  />
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Brand</label>
+                  <input
+                    value="TRENZ Basics"
+                    class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400"
+                  />
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Category</label>
+                  <select
+                    id="categoryInput"
+                    onchange="refreshProductCategoryUI()"
+                    class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400"
+                  >
+                    <option>Clothing</option>
+                    <option>Electronics</option>
+                    <option>Cosmetics</option>
+                    <option>Accessories</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Product Code</label>
+                  <input
+                    id="productCodeInput"
+                    value="SHT"
+                    oninput="updateSkuPreview()"
+                    class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400"
+                  />
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Segment</label>
+                  <select
+                    id="segmentInput"
+                    onchange="updateSkuPreview()"
+                    class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400"
+                  >
+                    <option>MEN</option>
+                    <option>WOMEN</option>
+                    <option>KIDS</option>
+                    <option>UNISEX</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Supplier</label>
+                  <select class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+                    <option>Tamil Nadu Textiles Co.</option>
+                    <option>Chennai Electronics Hub</option>
+                    <option>South Beauty Distributors</option>
+                    <option>Accessory Mart Chennai</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Status</label>
+                  <select class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+                    <option>Active</option>
+                    <option>Draft</option>
+                    <option>Inactive</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- Category Specific Fields -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Category-specific fields</h3>
+              <p class="mt-1 text-sm text-slate-400">Fields change based on clothing, electronics, cosmetics and accessories.</p>
+
+              <div id="dynamicCategoryFields" class="mt-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4"></div>
+            </section>
+
+            <!-- SKU + Barcode -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">SKU and barcode-ready architecture</h3>
+              <p class="mt-1 text-sm text-slate-400">SKU is the product identity used by inventory, POS, website, CRM and analytics.</p>
+
+              <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-slate-400">Generated SKU</label>
+                  <input
+                    id="skuPreviewInput"
+                    value="CLO-SHT-MEN-WHT-M"
+                    readonly
+                    class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-indigo-300 outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Barcode Ready ID</label>
+                  <input
+                    value="890-TRENZ-CLO-0001"
+                    class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <!-- Pricing -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Pricing controls</h3>
+              <p class="mt-1 text-sm text-slate-400">Owner-controlled pricing flows to POS, website, invoice and analytics.</p>
+
+              <div class="mt-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                <div>
+                  <label class="text-xs text-slate-400">MRP</label>
+                  <input value="1599" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Selling Price</label>
+                  <input value="1299" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">GST %</label>
+                  <select class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+                    <option>5</option>
+                    <option>12</option>
+                    <option>18</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Discount %</label>
+                  <input value="19" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+                </div>
+              </div>
+            </section>
+
+            <!-- Inventory Initialization -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Inventory initialization</h3>
+              <p class="mt-1 text-sm text-slate-400">Creates opening stock in Main Inventory with Available state.</p>
+
+              <div class="mt-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                <div>
+                  <label class="text-xs text-slate-400">Opening Stock</label>
+                  <input
+                    id="openingStockInput"
+                    value="320"
+                    class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400"
+                  />
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Main Warehouse Qty</label>
+                  <input value="320" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Low Stock Threshold</label>
+                  <input value="25" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+                </div>
+
+                <div>
+                  <label class="text-xs text-slate-400">Initial State</label>
+                  <select class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+                    <option>Available</option>
+                    <option>Transfer Pending</option>
+                    <option>Reserved</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- Website Visibility -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Website visibility and merchandising</h3>
+              <p class="mt-1 text-sm text-slate-400">Controls customer-facing product discovery.</p>
+
+              <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3">
+                <label class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm font-medium">Show Online</span>
+                    <input type="checkbox" checked />
+                  </div>
+                </label>
+
+                <label class="rounded-2xl border border-indigo-500/30 bg-indigo-500/10 p-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm font-medium">Featured</span>
+                    <input type="checkbox" checked />
+                  </div>
+                </label>
+
+                <label class="rounded-2xl border border-blue-500/30 bg-blue-500/10 p-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm font-medium">New Arrival</span>
+                    <input type="checkbox" checked />
+                  </div>
+                </label>
+
+                <label class="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm font-medium">Offer Item</span>
+                    <input type="checkbox" checked />
+                  </div>
+                </label>
+
+                <label class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm font-medium">Best Seller</span>
+                    <input type="checkbox" />
+                  </div>
+                </label>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- Right Panel -->
+          <aside class="space-y-6">
+
+            <section id="categoryRulePanel"></section>
+
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Connected save impact</h3>
+              <p class="mt-1 text-sm text-slate-400">Saving product updates all downstream modules.</p>
+
+              <div class="mt-5 space-y-3 text-xs">
+                <div class="flex justify-between rounded-2xl
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">Product Master</span>
+                  <span class="text-indigo-300">SKU created</span>
+                </div>
+
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">Main Inventory</span>
+                  <span class="text-emerald-300">Stock initialized</span>
+                </div>
+
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">Branch Inventory</span>
+                  <span class="text-cyan-300">Allocation ready</span>
+                </div>
+
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">POS</span>
+                  <span class="text-emerald-300">Sellable after allocation</span>
+                </div>
+
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">Website</span>
+                  <span class="text-blue-300">Visible after branch stock</span>
+                </div>
+
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">CRM + Analytics</span>
+                  <span class="text-amber-300">Tracking enabled</span>
+                </div>
+              </div>
+
+              <button onclick="simulateProductSave()" class="mt-5 w-full rounded-xl bg-indigo-500 py-3 text-sm font-semibold hover:bg-indigo-400">
+                Save Product & Initialize Inventory
+              </button>
+            </section>
+
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Inventory lifecycle</h3>
+              <p class="mt-1 text-sm text-slate-400">This product enters the connected flow.</p>
+
+              <div class="mt-5 space-y-3 text-xs">
+                <div class="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-4">
+                  <p class="text-indigo-300 font-semibold">1. Product Creation</p>
+                  <p class="mt-1 text-slate-400">Create SKU and category rules.</p>
+                </div>
+
+                <div class="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4">
+                  <p class="text-emerald-300 font-semibold">2. Main Inventory</p>
+                  <p class="mt-1 text-slate-400">Opening stock becomes Available.</p>
+                </div>
+
+                <div class="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-4">
+                  <p class="text-cyan-300 font-semibold">3. Branch Allocation</p>
+                  <p class="mt-1 text-slate-400">Owner allocates stock to branches.</p>
+                </div>
+
+                <div class="rounded-2xl border border-blue-500/20 bg-blue-500/10 p-4">
+                  <p class="text-blue-300 font-semibold">4. POS + Website</p>
+                  <p class="mt-1 text-slate-400">Branch stock becomes sellable online and offline.</p>
+                </div>
+
+                <div class="rounded-2xl border border-fuchsia-500/20 bg-fuchsia-500/10 p-4">
+                  <p class="text-fuchsia-300 font-semibold">5. CRM</p>
+                  <p class="mt-1 text-slate-400">Sales and returns update customer profile.</p>
+                </div>
+
+                <div class="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-4">
+                  <p class="text-amber-300 font-semibold">6. Analytics</p>
+                  <p class="mt-1 text-slate-400">Product performance is measured.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Creation events</h3>
+              <p class="mt-1 text-sm text-slate-400">Live product creation audit trail.</p>
+
+              <div id="creationEvents" class="mt-5 space-y-3"></div>
+            </section>
+
+          </aside>
+        </section>
+
+        <!-- Recent Products -->
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+          <div class="p-5 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <h3 class="font-semibold">Recently created products</h3>
+              <p class="mt-1 text-sm text-slate-400">Products created here are initialized into Main Inventory.</p>
+            </div>
+
+            <a href="inventory.html" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+              Open Main Inventory
+            </a>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[880px] text-sm">
+              <thead class="bg-slate-950 text-slate-400">
+                <tr>
+                  <th class="text-left font-medium px-5 py-3">Product</th>
+                  <th class="text-left font-medium px-5 py-3">Category</th>
+                  <th class="text-left font-medium px-5 py-3">Stock</th>
+                  <th class="text-left font-medium px-5 py-3">State</th>
+                  <th class="text-left font-medium px-5 py-3">Website</th>
+                  <th class="text-right font-medium px-5 py-3">Next Step</th>
+                </tr>
+              </thead>
+
+              <tbody id="recentProductsRows" class="divide-y divide-slate-800"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="shared/product-data.js"></script>
+  <script src="shared/product-flow.js"></script>
+
+  <script>
+    refreshProductCategoryUI();
+    renderRecentProducts("recentProductsRows");
+    renderCreationEvents("creationEvents");
+
+    document.addEventListener("input", function (event) {
+      if (
+        event.target.id === "productCodeInput" ||
+        event.target.id === "segmentInput" ||
+        event.target.id === "colorInput" ||
+        event.target.id === "variantInput"
+      ) {
+        updateSkuPreview();
+      }
+    });
+
+    document.addEventListener("change", function (event) {
+      if (
+        event.target.id === "productCodeInput" ||
+        event.target.id === "segmentInput" ||
+        event.target.id === "colorInput" ||
+        event.target.id === "variantInput"
+      ) {
+        updateSkuPreview();
+      }
+    });
+  </script>
+</body>
+</html>

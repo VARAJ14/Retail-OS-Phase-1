@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZ OS RETAIL - System Map</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+  <main class="min-h-screen p-5 lg:p-8">
+    <section class="mx-auto max-w-7xl space-y-6">
+
+      <div class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+        <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
+          <div>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded-full bg-indigo-500/15 text-indigo-200 px-3 py-1 text-xs">TRENZ OS RETAIL</span>
+              <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">Final Connected Flow</span>
+            </div>
+
+            <h1 class="mt-4 text-3xl font-semibold">Unified enterprise retail operating system</h1>
+            <p class="mt-2 max-w-3xl text-sm text-slate-400">
+              Final map of the connected product, inventory, branch, POS, website, CRM, returns, analytics and governance ecosystem.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <a href="owner/dashboard.html" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Owner Dashboard</a>
+            <a href="login.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">Login</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lifecycle Map -->
+      <section class="grid grid-cols-1 md:grid-cols-4 xl:grid-cols-7 gap-4">
+        <a href="product-create.html" class="rounded-3xl border border-indigo-500/20 bg-indigo-500/10 p-5 hover:border-indigo-400">
+          <p class="text-xs text-indigo-300">01</p>
+          <h3 class="mt-2 font-semibold">Product Creation</h3>
+          <p class="mt-2 text-xs text-slate-400">SKU, category rules, pricing and opening stock.</p>
+        </a>
+
+        <a href="inventory.html" class="rounded-3xl border border-emerald-500/20 bg-emerald-500/10 p-5 hover:border-emerald-400">
+          <p class="text-xs text-emerald-300">02</p>
+          <h3 class="mt-2 font-semibold">Main Inventory</h3>
+          <p class="mt-2 text-xs text-slate-400">Master stock authority and branch allocation.</p>
+        </a>
+
+        <a href="branch-inventory.html" class="rounded-3xl border border-cyan-500/20 bg-cyan-500/10 p-5 hover:border-cyan-400">
+          <p class="text-xs text-cyan-300">03</p>
+          <h3 class="mt-2 font-semibold">Branch Inventory</h3>
+          <p class="mt-2 text-xs text-slate-400">Branch stock, transfer receive and sellability.</p>
+        </a>
+
+        <a href="cashier/pos.html" class="rounded-3xl border border-blue-500/20 bg-blue-500/10 p-5 hover:border-blue-400">
+          <p class="text-xs text-blue-300">04</p>
+          <h3 class="mt-2 font-semibold">POS Billing</h3>
+          <p class="mt-2 text-xs text-slate-400">Billing, GST, invoices and branch stock update.</p>
+        </a>
+
+        <a href="website/index.html" class="rounded-3xl border border-fuchsia-500/20 bg-fuchsia-500/10 p-5 hover:border-fuchsia-400">
+          <p class="text-xs text-fuchsia-300">05</p>
+          <h3 class="mt-2 font-semibold">Website</h3>
+          <p class="mt-2 text-xs text-slate-400">Customer shopping, cart, checkout and tracking.</p>
+        </a>
+
+        <a href="crm.html" class="rounded-3xl border border-amber-500/20 bg-amber-500/10 p-5 hover:border-amber-400">
+          <p class="text-xs text-amber-300">06</p>
+          <h3 class="mt-2 font-semibold">CRM</h3>
+          <p class="mt-2 text-xs text-slate-400">Customer lifecycle, loyalty and segments.</p>
+        </a>
+
+        <a href="analytics.html" class="rounded-3xl border border-slate-700 bg-slate-900 p-5 hover:border-slate-500">
+          <p class="text-xs text-slate-400">07</p>
+          <h3 class="mt-2 font-semibold">Analytics</h3>
+          <p class="mt-2 text-xs text-slate-400">Performance, return rate, reports and insights.</p>
+        </a>
+      </section>
+
+      <!-- Full Page Registry -->
+      <section class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+        <div class="p-5 border-b border-slate-800">
+          <h2 class="font-semibold">Final page registry</h2>
+          <p class="mt-1 text-sm text-slate-400">All generated frontend pages and their operational roles.</p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[900px] text-sm">
+            <thead class="bg-slate-950 text-slate-400">
+              <tr>
+                <th class="text-left px-5 py-3">Page</th>
+                <th class="text-left px-5 py-3">Purpose</th>
+                <th class="text-left px-5 py-3">Connected Flow</th>
+                <th class="text-right px-5 py-3">Open</th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y divide-slate-800">
+              <tr><td class="px-5 py-4">login.html</td><td class="px-5 py-4">SSL login + role routing</td><td class="px-5 py-4">Auth → RBAC</td><td class="px-5 py-4 text-right"><a href="login.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">owner/dashboard.html</td><td class="px-5 py-4">Owner master dashboard</td><td class="px-5 py-4">Global control</td><td class="px-5 py-4 text-right"><a href="owner/dashboard.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">manager/dashboard.html</td><td class="px-5 py-4">Manager branch dashboard</td><td class="px-5 py-4">Branch operations</td><td class="px-5 py-4 text-right"><a href="manager/dashboard.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">cashier/pos.html</td><td class="px-5 py-4">Cashier billing</td><td class="px-5 py-4">POS → Stock → CRM</td><td class="px-5 py-4 text-right"><a href="cashier/pos.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">staff/tasks.html</td><td class="px-5 py-4">Staff task console</td><td class="px-5 py-4">Branch tasks</td><td class="px-5 py-4 text-right"><a href="staff/tasks.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">product-create.html</td><td class="px-5 py-4">Product and SKU creation</td><td class="px-5 py-4">Product → Main Inventory</td><td class="px-5 py-4 text-right"><a href="product-create.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">inventory.html</td><td class="px-5 py-4">Master inventory authority</td><td class="px-5 py-4">Main → Branch</td><td class="px-5 py-4 text-right"><a href="inventory.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">branch-inventory.html</td><td class="px-5 py-4">Branch inventory sync</td><td class="px-5 py-4">Branch → POS / Website</td><td class="px-5 py-4 text-right"><a href="branch-inventory.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">orders.html</td><td class="px-5 py-4">Order management</td><td class="px-5 py-4">Orders → Fulfillment</td><td class="px-5 py-4 text-right"><a href="orders.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">website/index.html</td><td class="px-5 py-4">Customer e-commerce</td><td class="px-5 py-4">Website → Cart → Checkout</td><td class="px-5 py-4 text-right"><a href="website/index.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">website/returns.html</td><td class="px-5 py-4">Customer returns</td><td class="px-5 py-4">Customer → Return Request</td><td class="px-5 py-4 text-right"><a href="website/returns.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">owner/returns.html</td><td class="px-5 py-4">Owner return control</td><td class="px-5 py-4">Returns → Refunds → Analytics</td><td class="px-5 py-4 text-right"><a href="owner/returns.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">manager/returns.html</td><td class="px-5 py-4">Manager return inspection</td><td class="px-5 py-4">Branch inspection</td><td class="px-5 py-4 text-right"><a href="manager/returns.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">crm.html</td><td class="px-5 py-4">Customer intelligence</td><td class="px-5 py-4">CRM → Campaigns</td><td class="px-5 py-4 text-right"><a href="crm.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">campaigns.html</td><td class="px-5 py-4">Campaigns and offers</td><td class="px-5 py-4">CRM → Website → Orders</td><td class="px-5 py-4 text-right"><a href="campaigns.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">analytics.html</td><td class="px-5 py-4">Analytics dashboard</td><td class="px-5 py-4">All modules → Insights</td><td class="px-5 py-4 text-right"><a href="analytics.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">reports.html</td><td class="px-5 py-4">Reports and exports</td><td class="px-5 py-4">Analytics → Reports</td><td class="px-5 py-4 text-right"><a href="reports.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">staff.html</td><td class="px-5 py-4">Staff and permissions</td><td class="px-5 py-4">RBAC governance</td><td class="px-5 py-4 text-right"><a href="staff.html" class="text-indigo-300">Open</a></td></tr>
+              <tr><td class="px-5 py-4">settings.html</td><td class="px-5 py-4">System rules</td><td class="px-5 py-4">Governance</td><td class="px-5 py-4 text-right"><a href="settings.html" class="text-indigo-300">Open</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Final Architecture Summary -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="rounded-3xl border border-emerald-500/20 bg-emerald-500/10 p-5">
+          <h3 class="font-semibold text-emerald-300">Inventory lifecycle complete</h3>
+          <p class="mt-2 text-sm text-slate-400">Product creation, main inventory, branch allocation, POS and website stock are connected.</p>
+        </div>
+
+        <div class="rounded-3xl border border-fuchsia-500/20 bg-fuchsia-500/10 p-5">
+          <h3 class="font-semibold text-fuchsia-300">Customer lifecycle complete</h3>
+          <p class="mt-2 text-sm text-slate-400">Orders, CRM, loyalty, campaigns, saved products and returns are connected.</p>
+        </div>
+
+        <div class="rounded-3xl border border-amber-500/20 bg-amber-500/10 p-5">
+          <h3 class="font-semibold text-amber-300">Governance complete</h3>
+          <p class="mt-2 text-sm text-slate-400">RBAC, staff roles, system settings, reports and analytics complete the enterprise layer.</p>
+        </div>
+      </section>
+
+    </section>
+  </main>
+</body>
+</html>

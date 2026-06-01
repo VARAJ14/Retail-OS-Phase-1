@@ -3,84 +3,102 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RetailOS - Settings</title>
+
+  <title>TRENZ OS RETAIL - Settings</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-slate-950 text-slate-100">
   <div class="min-h-screen flex">
 
-    <!-- Sidebar -->
     <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
       <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
-        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">
-          R
-        </div>
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
         <div>
-          <h1 class="font-semibold">RetailOS</h1>
-          <p class="text-xs text-slate-400">Enterprise Commerce</p>
+          <h1 class="font-semibold">TRENZ OS</h1>
+          <p class="text-xs text-slate-400">Settings</p>
         </div>
       </div>
 
       <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
-        <a href="dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Dashboard</a>
-        <a href="inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Main Inventory</a>
-        <a href="branch-inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Inventory</a>
-        <a href="product-create.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Products</a>
-        <a href="pos.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">POS</a>
-        <a href="orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
-        <a href="crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Customers</a>
-        <a href="crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM</a>
-        <a href="campaigns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Campaigns</a>
-        <a href="returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns & Refunds</a>
-        <a href="analytics.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Analytics</a>
-        <a href="reports.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Reports</a>
+        <a href="owner/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Owner Dashboard</a>
         <a href="staff.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Staff Management</a>
-
         <a href="settings.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
           <span>Settings</span>
           <span class="text-xs">System</span>
         </a>
-
-        <a href="website.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Website Flow</a>
-        <a href="system-map.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">System Map</a>
+        <a href="system-map.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">System Map</a>
       </nav>
-
-      <div class="p-4 border-t border-slate-800">
-        <div class="rounded-2xl bg-slate-900 border border-slate-800 p-4">
-          <p class="text-xs text-slate-400">System Governance</p>
-          <p class="mt-2 text-sm font-medium text-indigo-300">
-            Settings control inventory states, branch rules, tax logic, roles and sync behavior.
-          </p>
-        </div>
-      </div>
     </aside>
 
-    <!-- Main Area -->
     <div class="flex-1 min-w-0">
-
-      <!-- Topbar -->
       <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
-        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
-          <div class="flex items-center gap-3">
-            <button class="lg:hidden rounded-xl border border-slate-800 px-3 py-2 text-sm">
-              Menu
-            </button>
-
-            <div>
-              <h2 class="text-lg font-semibold">System Settings</h2>
-              <p class="text-xs text-slate-400">
-                Inventory Rules → Branch Rules → POS Rules → Website Rules → CRM Rules → Analytics Rules
-              </p>
-            </div>
+        <div class="h-full flex items-center justify-between px-5 lg:px-8">
+          <div>
+            <h2 class="text-lg font-semibold">System Settings</h2>
+            <p class="text-xs text-slate-400">Inventory, GST, return, website, session and alerts rules</p>
           </div>
 
-          <div class="hidden md:flex flex-1 max-w-xl items-center gap-3">
-            <input
-              placeholder="Search setting, branch rule, tax, role, sync configuration..."
-              class="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
-            />
+          <button class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+            Save Settings
+          </button>
+        </div>
+      </header>
+
+      <main class="p-5 lg:p-8 space-y-6">
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+          <h1 class="text-3xl font-semibold">Enterprise governance settings</h1>
+          <p class="mt-2 max-w-3xl text-sm text-slate-400">
+            Configure system-wide business rules used across product creation, inventory, POS, website, CRM, returns and analytics.
+          </p>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="rounded-3xl border border-indigo-500/20 bg-indigo-500/10 p-5">
+            <h3 class="font-semibold text-indigo-200">Inventory states</h3>
+            <p class="mt-2 text-sm text-slate-400">Available, Reserved, Sold, Returned, Damaged, Transfer Pending, Warranty Claim, Disposal, Expired.</p>
           </div>
 
-          <div class
+          <div class="rounded-3xl border border-emerald-500/20 bg-emerald-500/10 p-5">
+            <h3 class="font-semibold text-emerald-300">GST and billing</h3>
+            <p class="mt-2 text-sm text-slate-400">GST slabs, invoice format, POS payment and refund rules.</p>
+          </div>
 
+          <div class="rounded-3xl border border-fuchsia-500/20 bg-fuchsia-500/10 p-5">
+            <h3 class="font-semibold text-fuchsia-300">CRM and loyalty</h3>
+            <p class="mt-2 text-sm text-slate-400">Points, customer segmentation, return risk and campaign eligibility.</p>
+          </div>
+        </section>
+
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+          <div class="p-5 border-b border-slate-800">
+            <h3 class="font-semibold">System rules</h3>
+            <p class="mt-1 text-sm text-slate-400">Connected settings used by all operational modules.</p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[860px] text-sm">
+              <thead class="bg-slate-950 text-slate-400">
+                <tr>
+                  <th class="text-left px-5 py-3">Setting</th>
+                  <th class="text-left px-5 py-3">Value</th>
+                  <th class="text-left px-5 py-3">Status</th>
+                  <th class="text-right px-5 py-3">Action</th>
+                </tr>
+              </thead>
+              <tbody id="settingsRows" class="divide-y divide-slate-800"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="shared/governance-data.js"></script>
+  <script src="shared/governance-flow.js"></script>
+  <script>
+    renderSettingsRows("settingsRows");
+  </script>
+</body>
+</html>

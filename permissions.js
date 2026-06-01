@@ -1,6 +1,6 @@
 const RETAIL_ROLES = {
   owner: {
-    label: "Owner",
+    label: "owner",
     level: 100,
     defaultBranch: "all",
     dashboard: "owner-dashboard.html",
@@ -43,7 +43,7 @@ const RETAIL_ROLES = {
   },
 
   manager: {
-    label: "Manager",
+    label: "manager",
     level: 60,
     defaultBranch: "mumbai",
     dashboard: "manager-dashboard.html",
@@ -79,7 +79,7 @@ const RETAIL_ROLES = {
   },
 
   cashier: {
-    label: "Cashier",
+    label: "cashier",
     level: 30,
     defaultBranch: "mumbai",
     dashboard: "cashier-pos.html",

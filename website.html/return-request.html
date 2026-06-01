@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZ OS RETAIL - Returns & Refunds</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100 pb-20 md:pb-0">
+  <div id="customerHeader"></div>
+
+  <main class="mx-auto max-w-7xl px-4 py-5 space-y-6">
+
+    <!-- Header -->
+    <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-6">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+        <div>
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">Returns</span>
+            <span class="rounded-full bg-blue-500/10 text-blue-300 px-3 py-1 text-xs">Refund Tracking</span>
+            <span class="rounded-full bg-fuchsia-500/10 text-fuchsia-300 px-3 py-1 text-xs">CRM Linked</span>
+          </div>
+
+          <h1 class="mt-4 text-2xl md:text-3xl font-semibold">Returns & refunds</h1>
+          <p class="mt-2 max-w-2xl text-sm text-slate-400">
+            Request returns, track refund status and view your return history in one place.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4">
+          <p class="text-sm font-semibold text-emerald-300">Return support active</p>
+          <p class="mt-1 text-xs text-slate-400">Anna Nagar, Padi and Spencer branches</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Return Flow -->
+    <section class="grid grid-cols-2 md:grid-cols-5 gap-3">
+      <div class="rounded-2xl border border-indigo-500/30 bg-indigo-500/10 p-4">
+        <p class="text-xs text-indigo-300">Step 01</p>
+        <p class="mt-1 text-sm font-semibold">Select Order</p>
+      </div>
+
+      <div class="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+        <p class="text-xs text-cyan-300">Step 02</p>
+        <p class="mt-1 text-sm font-semibold">Reason</p>
+      </div>
+
+      <div class="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4">
+        <p class="text-xs text-amber-300">Step 03</p>
+        <p class="mt-1 text-sm font-semibold">Validation</p>
+      </div>
+
+      <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+        <p class="text-xs text-emerald-300">Step 04</p>
+        <p class="mt-1 text-sm font-semibold">Refund</p>
+      </div>
+
+      <div class="rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-4">
+        <p class="text-xs text-fuchsia-300">Step 05</p>
+        <p class="mt-1 text-sm font-semibold">CRM Update</p>
+      </div>
+    </section>
+
+    <!-- Main Return Grid -->
+    <section class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+      <!-- Request Return -->
+      <div class="xl:col-span-2 space-y-6">
+
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 overflow-hidden">
+          <div class="p-5 border-b border-slate-800">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <h2 class="font-semibold">Request a return</h2>
+                <p class="mt-1 text-sm text-slate-400">Choose an order item and submit a return request.</p>
+              </div>
+
+              <span class="rounded-full bg-blue-500/10 text-blue-300 px-3 py-1 text-xs">
+                ORD-TN-78412
+              </span>
+            </div>
+          </div>
+
+          <div class="p-5 space-y-5">
+
+            <!-- Order Item Selection -->
+            <div>
+              <label class="text-xs text-slate-400">Select item</label>
+
+              <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+                <label class="block rounded-2xl border border-indigo-500/30 bg-indigo-500/10 p-4 cursor-pointer">
+                  <div class="flex items-start gap-3">
+                    <input type="radio" name="returnItem" checked class="mt-1" />
+
+                    <div class="h-14 w-14 rounded-2xl border border-indigo-500/20 bg-indigo-500/10 flex items-center justify-center text-indigo-200 font-black">
+                      CL
+                    </div>
+
+                    <div>
+                      <p class="text-sm font-semibold">Denim Jacket</p>
+                      <p class="mt-1 text-xs text-slate-400">CLO-JKT-DNM-BLU-L · Blue / L</p>
+                      <p class="mt-1 text-xs text-emerald-300">Exchange eligible</p>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="block rounded-2xl border border-slate-800 bg-slate-950 p-4 cursor-pointer">
+                  <div class="flex items-start gap-3">
+                    <input type="radio" name="returnItem" class="mt-1" />
+
+                    <div class="h-14 w-14 rounded-2xl border border-fuchsia-500/20 bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-200 font-black">
+                      CO
+                    </div>
+
+                    <div>
+                      <p class="text-sm font-semibold">Herbal Face Cream 100ml</p>
+                      <p class="mt-1 text-xs text-slate-400">COS-FC-HERBAL100 · Batch COS-TN-884</p>
+                      <p class="mt-1 text-xs text-red-300">Hygiene restricted</p>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Return Reason -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="text-xs text-slate-400">Return reason</label>
+                <select class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+                  <option>Size issue</option>
+                  <option>Wrong item received</option>
+                  <option>Damaged item</option>
+                  <option>Quality issue</option>
+                  <option>Warranty issue</option>
+                  <option>Changed mind</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-xs text-slate-400">Preferred resolution</label>
+                <select class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+                  <option>Exchange item</option>
+                  <option>Refund to original payment</option>
+                  <option>Store credit</option>
+                  <option>Warranty claim</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Return Details -->
+            <div>
+              <label class="text-xs text-slate-400">Additional details</label>
+              <textarea
+                rows="4"
+                class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400"
+                placeholder="Example: Size is too large. Need medium size instead."
+              >Size is too large. Need medium size instead.</textarea>
+            </div>
+
+            <!-- Return Method -->
+            <div>
+              <label class="text-xs text-slate-400">Return method</label>
+
+              <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+                <label class="block rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 cursor-pointer">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <p class="text-sm font-semibold">Branch drop-off</p>
+                      <p class="mt-1 text-xs text-slate-400">BEST CHOICE ANNA NAGAR BRANCH</p>
+                    </div>
+                    <input type="radio" name="returnMethod" checked />
+                  </div>
+                </label>
+
+                <label class="block rounded-2xl border border-slate-800 bg-slate-950 p-4 cursor-pointer">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <p class="text-sm font-semibold">Pickup request</p>
+                      <p class="mt-1 text-xs text-slate-400">Pickup from saved address</p>
+                    </div>
+                    <input type="radio" name="returnMethod" />
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Validation -->
+            <div class="rounded-3xl border border-slate-800 bg-slate-950 p-4">
+              <h3 class="font-semibold">Return validation</h3>
+
+              <div class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+                <div class="rounded-2xl border border-slate-800 bg-slate-900 p-3">
+                  <p class="text-slate-400">Order status</p>
+                  <p class="mt-1 font-medium text-emerald-300">Delivered</p>
+                </div>
+
+                <div class="rounded-2xl border border-slate-800 bg-slate-900 p-3">
+                  <p class="text-slate-400">Return window</p>
+                  <p class="mt-1 font-medium text-emerald-300">Valid</p>
+                </div>
+
+                <div class="rounded-2xl border border-slate-800 bg-slate-900 p-3">
+                  <p class="text-slate-400">Category rule</p>
+                  <p class="mt-1 font-medium text-cyan-300">Exchange allowed</p>
+                </div>
+
+                <div class="rounded-2xl border border-slate-800 bg-slate-900 p-3">
+                  <p class="text-slate-400">Next inventory state</p>
+                  <p class="mt-1 font-medium text-fuchsia-300">Returned</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button class="rounded-xl bg-indigo-500 px-5 py-3 text-sm font-semibold hover:bg-indigo-400">
+                Submit Return Request
+              </button>
+
+              <a href="order-tracking.html" class="rounded-xl border border-slate-700 bg-slate-950 px-5 py-3 text-center text-sm hover:bg-slate-800">
+                Back to Order
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Return History -->
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 overflow-hidden">
+          <div class="p-5 border-b border-slate-800">
+            <h2 class="font-semibold">Return history</h2>
+            <p class="mt-1 text-sm text-slate-400">Track all return and refund requests.</p>
+          </div>
+
+          <div id="returnHistory" class="p-5 space-y-4"></div>
+        </section>
+      </div>
+
+      <!-- Right Panel -->
+      <aside class="space-y-5">
+
+        <!-- Refund Status -->
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+          <h2 class="font-semibold">Refund status</h2>
+          <p class="mt-1 text-sm text-slate-400">Current return request progress.</p>
+
+          <div class="mt-5 space-y-3">
+            <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium">Return approved</span>
+                <span class="text-xs text-emerald-300">Done</span>
+              </div>
+              <p class="mt-1 text-xs text-slate-400">Denim Jacket exchange approved.</p>
+            </div>
+
+            <div class="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium">Exchange initiated</span>
+                <span class="text-xs text-cyan-300">Active</span>
+              </div>
+              <p class="mt-1 text-xs text-slate-400">Medium size reserved at Anna Nagar.</p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium">Refund</span>
+                <span class="text-xs text-slate-500">Not required</span>
+              </div>
+              <p class="mt-1 text-xs text-slate-400">Exchange selected instead of refund.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Return Policy -->
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+          <h2 class="font-semibold">Category return rules</h2>
+
+          <div class="mt-5 space-y-3 text-xs">
+            <div class="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-4">
+              <p class="font-semibold text-indigo-200">Clothing</p>
+              <p class="mt-1 text-slate-400">Size and color exchange allowed after inspection.</p>
+            </div>
+
+            <div class="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-4">
+              <p class="font-semibold text-cyan-300">Electronics</p>
+              <p class="mt-1 text-slate-400">Warranty validation and serial verification required.</p>
+            </div>
+
+            <div class="rounded-2xl border border-fuchsia-500/20 bg-fuchsia-500/10 p-4">
+              <p class="font-semibold text-fuchsia-300">Cosmetics</p>
+              <p class="mt-1 text-slate-400">Opened hygiene-sensitive products cannot be restocked.</p>
+            </div>
+
+            <div class="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4">
+              <p class="font-semibold text-emerald-300">Accessories</p>
+              <p class="mt-1 text-slate-400">Return allowed if unused, tagged and within policy.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Operational Sync -->
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+          <h2 class="font-semibold">Return sync impact</h2>
+          <p class="mt-1 text-sm text-slate-400">What happens after approval.</p>
+
+          <div class="mt-5 space-y-3 text-xs">
+            <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+              <span class="text-slate-400">Inventory</span>
+              <span class="text-cyan-300">Returned → Inspection</span>
+            </div>
+
+            <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+              <span class="text-slate-400">CRM</span>
+              <span class="text-fuchsia-300">Return history updated</span>
+            </div>
+
+            <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+              <span class="text-slate-400">Analytics</span>
+              <span class="text-amber-300">Return rate logged</span>
+            </div>
+
+            <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+              <span class="text-slate-400">Manager Queue</span>
+              <span class="text-emerald-300">Approval task created</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Return Analytics Snapshot -->
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+          <h2 class="font-semibold">Return analytics</h2>
+          <p class="mt-1 text-sm text-slate-400">Customer-visible summary.</p>
+
+          <div class="mt-5 grid grid-cols-1 gap-3 text-xs">
+            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+              <p class="text-slate-400">Return rate</p>
+              <p class="mt-1 text-xl font-semibold text-amber-300">8.6%</p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+              <p class="text-slate-400">Refund amount under process</p>
+              <p class="mt-1 text-xl font-semibold text-red-300">₹3,84,250</p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+              <p class="text-slate-400">Most returned</p>
+              <p class="mt-1 text-sm font-medium">Denim Jacket, Earbuds, Face Cream</p>
+            </div>
+          </div>
+        </section>
+
+      </aside>
+    </section>
+  </main>
+
+  <div id="mobileBottomNav"></div>
+
+  <script src="../shared/ecommerce-data.js"></script>
+  <script src="../shared/ecommerce-ui.js"></script>
+
+  <script>
+    renderCustomerHeader("returns");
+    renderMobileBottomNav("orders");
+    renderReturnList("returnHistory");
+  </script>
+</body>
+</html>

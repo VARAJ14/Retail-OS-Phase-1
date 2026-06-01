@@ -2,7 +2,7 @@ const TRENZOS_RBAC = {
   roles: {
     owner: {
       label: "Owner",
-      redirect: 'owner-dashboard.html',
+      redirect: "owner/dashboard.html",
       branchScope: "all",
       permissions: [
         "dashboard:global",
@@ -20,7 +20,7 @@ const TRENZOS_RBAC = {
 
     manager: {
       label: "Manager",
-      redirect: "manager-dashboard.html",
+      redirect: "manager/dashboard.html",
       branchScope: "assigned",
       permissions: [
         "dashboard:branch",

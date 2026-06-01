@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZ OS RETAIL - Product Detail</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100 pb-24 md:pb-0">
+  <div id="customerHeader"></div>
+
+  <main class="mx-auto max-w-7xl px-4 py-5 space-y-8">
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Gallery -->
+      <div class="space-y-4">
+        <div id="productMainImage" class="rounded-[2rem] border border-slate-800 bg-slate-900 h-[420px] flex items-center justify-center"></div>
+
+        <div id="productThumbs" class="grid grid-cols-4 gap-3"></div>
+      </div>
+
+      <!-- Details -->
+      <div class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5 md:p-6">
+        <div id="productDetailContent"></div>
+      </div>
+    </section>
+
+    <!-- Frequently Bought Together -->
+    <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5 md:p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-semibold">Frequently bought together</h2>
+          <p class="mt-1 text-sm text-slate-400">Add useful combinations to save time.</p>
+        </div>
+      </div>
+
+      <div id="frequentlyBought" class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    </section>
+
+    <!-- Related Products -->
+    <section>
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-semibold">Related products</h2>
+          <p class="mt-1 text-sm text-slate-400">More from the same shopping interest.</p>
+        </div>
+      </div>
+
+      <div id="relatedProducts" class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    </section>
+  </main>
+
+  <!-- Sticky Mobile Actions -->
+  <div class="fixed bottom-0 left-0 right-0 z-50 border-t border-slate-800 bg-slate-950/95 p-4 backdrop-blur md:hidden">
+    <div class="grid grid-cols-2 gap-3">
+      <a href="cart.html" class="rounded-xl border border-slate-700 bg-slate-900 py-3 text-center text-sm font-semibold">
+        Add to Cart
+      </a>
+      <a href="checkout.html" class="rounded-xl bg-indigo-500 py-3 text-center text-sm font-semibold">
+        Buy Now
+      </a>
+    </div>
+  </div>
+
+  <script src="../shared/ecommerce-data.js"></script>
+  <script src="../shared/ecommerce-ui.js"></script>
+
+  <script>
+    renderCustomerHeader("products");
+
+    const params = new URLSearchParams(window.location.search);
+    const selectedId = params.get("id") || "prd-denim-jacket";
+    const product = getProduct(selectedId) || getProduct("prd-denim-jacket");
+
+    document.title = `TRENZ OS RETAIL - ${product.name}`;
+
+    document.getElementById("productMainImage").innerHTML = `
+      <div class="h-48 w-48 rounded-[2rem] border ${categoryChipClass(product.category)} flex items-center justify-center text-5xl font-black">
+        ${product.imageCode}
+      </div>
+    `;
+
+    document.getElementById("productThumbs").innerHTML = [1, 2, 3, 4].map((item) => `
+      <button class="rounded-2xl border border-slate-800 bg-slate-900 h-24 flex items-center justify-center hover:border-indigo-400">
+        <span class="text-xl font-black">${product.imageCode}</span>
+      </button>
+    `).join("");
+
+    document.getElementById("productDetailContent").innerHTML = `
+      <div class="flex flex-wrap gap-2">
+        <span class="rounded-full px-3 py-1 text-xs ${badgeClass(product.badge)}">${product.badge}</span>
+        <span class="rounded-full border px-3 py-1 text-xs ${categoryChipClass(product.category)}">${product.category}</span>
+      </div>
+
+      <h1 class="mt-4 text-3xl font-semibold">${product.name}</h1>
+      <p class="mt-1 text-sm text-slate-400">${product.brand} · ${product.sku}</p>
+
+      <div class="mt-4 flex items-center gap-2 text-sm">
+        <span class="rounded-lg bg-emerald-500/10 text-emerald-300 px-2 py-1">★ ${product.rating}</span>
+        <span class="text-slate-400">${product.reviews} reviews</span>
+      </div>
+
+      <div class="mt-5 flex items-end gap-3">
+        <span class="text-4xl font-semibold">${money(product.price)}</span>
+        <span class="text-lg text-slate-500 line-through">${money(product.mrp)}</span>
+        <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">${product.discount}% off</span>
+      </div>
+
+      <p class="mt-5 text-sm text-slate-300 leading-relaxed">${product.description}</p>
+
+      <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        ${product.bullets.map((bullet) => `
+          <div class="rounded-2xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-300">
+            ${bullet}
+          </div>
+        `).join("")}
+      </div>
+
+      <div class="mt-6 rounded-3xl border border-slate-800 bg-slate-950 p-4">
+        <h3 class="font-semibold">Branch availability</h3>
+        <div class="mt-4 space-y-3 text-sm">
+          ${TRENZ_ECOMMERCE_DATA.branches.map((branch) => `
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">${branch.name}</span>
+              <span class="${product.branchStock[branch.id] <= 10 ? "text-amber-300" : "text-emerald-300"}">
+                ${branchStockText(product, branch.id)}
+              </span>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-3xl border border-slate-800 bg-slate-950 p-4">
+        <h3 class="font-semibold">Return rule</h3>
+        <p class="mt-2 text-sm text-slate-400">${product.returnRule}</p>
+      </div>
+
+      <div class="mt-6 hidden md:grid grid-cols-2 gap-3">
+        <a href="cart.html" class="rounded-xl border border-slate-700 bg-slate-950 py-3 text-center text-sm font-semibold hover:bg-slate-800">
+          Add to Cart
+        </a>
+        <a href="checkout.html" class="rounded-xl bg-indigo-500 py-3 text-center text-sm font-semibold hover:bg-indigo-400">
+          Buy Now
+        </a>
+      </div>
+    `;
+
+    renderProductSection("frequentlyBought", (item) => item.id !== product.id && item.offer, 4);
+    renderProductSection("relatedProducts", (item) => item.id !== product.id && item.category === product.category, 4);
+  </script>
+</body>
+</html>

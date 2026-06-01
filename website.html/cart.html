@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZ OS RETAIL - Cart</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100 pb-20 md:pb-0">
+  <div id="customerHeader"></div>
+
+  <main class="mx-auto max-w-7xl px-4 py-5 space-y-6">
+    <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5 md:p-6">
+      <h1 class="text-2xl md:text-3xl font-semibold">Shopping cart</h1>
+      <p class="mt-1 text-sm text-slate-400">Items are reserved from branch inventory until checkout.</p>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 rounded-[2rem] border border-slate-800 bg-slate-900 overflow-hidden">
+        <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+          <div>
+            <h2 class="font-semibold">Cart items</h2>
+            <p class="mt-1 text-sm text-slate-400">Quantity controls and branch reservation status.</p>
+          </div>
+
+          <span class="rounded-full bg-blue-500/10 text-blue-300 px-3 py-1 text-xs">
+            Reserved
+          </span>
+        </div>
+
+        <div id="cartItems"></div>
+      </div>
+
+      <aside class="space-y-4">
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+          <h2 class="font-semibold">Apply coupon</h2>
+          <div class="mt-4 flex gap-2">
+            <input
+              value="TRENZ150"
+              class="min-w-0 flex-1 rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400"
+            />
+            <button class="rounded-xl bg-indigo-500 px-4 py-3 text-sm font-semibold hover:bg-indigo-400">
+              Apply
+            </button>
+          </div>
+        </section>
+
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+          <h2 class="font-semibold">Delivery options</h2>
+
+          <div class="mt-4 space-y-3">
+            <label class="block rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium">Branch pickup</span>
+                <input type="radio" name="delivery" checked />
+              </div>
+              <p class="mt-1 text-xs text-slate-400">Pick up today from Anna Nagar.</p>
+            </label>
+
+            <label class="block rounded-2xl border border-slate-800 bg-slate-950 p-4">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium">Home delivery</span>
+                <input type="radio" name="delivery" />
+              </div>
+              <p class="mt-1 text-xs text-slate-400">Estimated delivery by tonight.</p>
+            </label>
+          </div>
+        </section>
+
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+          <h2 class="font-semibold">Order summary</h2>
+          <div id="orderSummary" class="mt-5"></div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div id="mobileBottomNav"></div>
+
+  <script src="../shared/ecommerce-data.js"></script>
+  <script src="../shared/ecommerce-ui.js"></script>
+
+  <script>
+    renderCustomerHeader("cart");
+    renderMobileBottomNav("cart");
+    renderCartItems("cartItems");
+    renderOrderSummary("orderSummary");
+  </script>
+</body>
+</html>

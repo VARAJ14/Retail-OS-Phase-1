@@ -3,24 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RetailOS - Campaigns</title>
+
+  <title>TRENZ OS RETAIL - Campaigns</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-slate-950 text-slate-100">
   <div class="min-h-screen flex">
-
-    <!-- Sidebar -->
     <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
       <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
-        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">
-          R
-        </div>
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
         <div>
-          <h1 class="font-semibold">RetailOS</h1>
-          <p class="text-xs text-slate-400">Enterprise Commerce</p>
+          <h1 class="font-semibold">TRENZ OS</h1>
+          <p class="text-xs text-slate-400">Campaigns</p>
         </div>
       </div>
 
       <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
-        <a href
+        <a href="owner/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Owner Dashboard</a>
+        <a href="crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM</a>
+        <a href="campaigns.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
+          <span>Campaigns</span>
+          <span class="text-xs">Offers</span>
+        </a>
+        <a href="website/index.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Website</a>
+        <a href="orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
+        <a href="analytics.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Analytics</a>
+      </nav>
+    </aside>
+
+    <div class="flex-1 min-w-0">
+      <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
+          <div>
+            <h2 class="text-lg font-semibold">Campaigns & Offers</h2>
+            <p class="text-xs text-slate-400">CRM Segments → Offers → Website Banners → Orders → Analytics</p>
+          </div>
+
+          <div class="hidden md:flex flex-1 max-w-xl">
+            <input placeholder="Search campaign, segment, product, branch..." class="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+          </div>
+
+          <div class="flex items-center gap-3">
+            <select class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
+              <option>Select All</option>
+              <option>BEST CHOICE ANNA NAGAR BRANCH</option>
+              <option>PADI BRANCH</option>
+              <option>SPENCER</option>
+            </select>
+            <button class="h-10 w-10 rounded-xl bg-slate-800 text-sm">CM</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="p-5 lg:p-8 space-y-6">
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+          <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
+            <div>
+              <div class="flex flex-wrap gap-2">
+                <span class="rounded-full bg-green-500/10 text-green-300 px-3 py-1 text-xs">WhatsApp</span>
+                <span class="rounded-full bg-blue-500/10 text-blue-300 px-3 py-1 text-xs">Website Banners</span>
+                <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">Offer ROI</span>
+              </div>
+              <h1 class="mt-4 text-3xl font-semibold">Promotions and customer campaigns</h1>
+              <p class="mt-2 text-sm text-slate-400">Launch branch-aware offers using CRM segments and live stock.</p>
+            </div>
+            <button class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Create Campaign</button>
+          </div>
+        </section>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-4">
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Active</p><h3 id="campaignActive" class="mt-3 text-3xl font-semibold">0</h3></div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">WhatsApp Sent</p><h3 id="campaignWhatsapp" class="mt-3 text-3xl font-semibold text-green-300">0</h3></div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Conversion</p><h3 id="campaignConversion" class="mt-3 text-3xl font-semibold text-cyan-300">0%</h3></div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Revenue</p><h3 id="campaignRevenue" class="mt-3 text-3xl font-semibold text-emerald-300">₹0</h3></div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Eligible</p><h3 id="campaignEligible" class="mt-3 text-3xl font-semibold text-fuchsia-300">0</h3></div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Banners</p><h3 id="campaignBanners" class="mt-3 text-3xl font-semibold text-blue-300">0</h3></div>
+        </section>
+
+        <section class="grid grid-cols-1 2xl:grid-cols-4 gap-6">
+          <div class="2xl:col-span-3 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800">
+              <h3 class="font-semibold">Campaign list</h3>
+              <p class="mt-1 text-sm text-slate-400">Track offers, segments, banners and revenue.</p>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[1220px] text-sm">
+                <thead class="bg-slate-950 text-slate-400">
+                  <tr>
+                    <th class="text-left font-medium px-5 py-3">Campaign</th>
+                    <th class="text-left font-medium px-5 py-3">Type</th>
+                    <th class="text-left font-medium px-5 py-3">Segment</th>
+                    <th class="text-left font-medium px-5 py-3">Offer</th>
+                    <th class="text-left font-medium px-5 py-3">Status</th>
+                    <th class="text-left font-medium px-5 py-3">Reach</th>
+                    <th class="text-left font-medium px-5 py-3">Revenue</th>
+                    <th class="text-left font-medium px-5 py-3">Website</th>
+                    <th class="text-right font-medium px-5 py-3">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="campaignRows" class="divide-y divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <aside class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <h3 class="font-semibold">Campaign builder</h3>
+            <div id="campaignBuilder" class="mt-5"></div>
+          </aside>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="shared/campaign-data.js"></script>
+  <script src="shared/campaign-flow.js"></script>
+  <script>
+    renderCampaignSummary();
+    renderCampaignRows("campaignRows");
+    renderCampaignBuilder("campaignBuilder");
+  </script>
+</body>
+</html>

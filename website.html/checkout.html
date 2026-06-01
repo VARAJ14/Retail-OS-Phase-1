@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZ OS RETAIL - Checkout</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100 pb-20 md:pb-0">
+  <div id="customerHeader"></div>
+
+  <main class="mx-auto max-w-7xl px-4 py-5 space-y-6">
+    <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5 md:p-6">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-semibold">Checkout</h1>
+          <p class="mt-1 text-sm text-slate-400">Complete your order in 3 simple steps.</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 text-xs">
+          <div class="rounded-xl bg-indigo-500/15 text-indigo-200 px-3 py-2 text-center">1. Details</div>
+          <div class="rounded-xl bg-blue-500/10 text-blue-300 px-3 py-2 text-center">2. Delivery</div>
+          <div class="rounded-xl bg-emerald-500/10 text-emerald-300 px-3 py-2 text-center">3. Payment</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Checkout Form -->
+      <div class="lg:col-span-2 space-y-5">
+
+        <!-- Step 1 -->
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+          <div class="flex items-center gap-3">
+            <div class="h-9 w-9 rounded-xl bg-indigo-500 flex items-center justify-center text-sm font-semibold">1</div>
+            <div>
+              <h2 class="font-semibold">Customer details</h2>
+              <p class="text-sm text-slate-400">Used for CRM and order updates.</p>
+            </div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <input value="Priya Raman" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+            <input value="+91 98765 43210" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+            <input value="priya.raman@email.com" class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+          </div>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+          <div class="flex items-center gap-3">
+            <div class="h-9 w-9 rounded-xl bg-blue-500 flex items-center justify-center text-sm font-semibold">2</div>
+            <div>
+              <h2 class="font-semibold">Address and delivery</h2>
+              <p class="text-sm text-slate-400">Choose delivery or branch pickup.</p>
+            </div>
+          </div>
+
+          <div class="mt-5 space-y-3">
+            <textarea class="w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" rows="3">Anna Nagar West, Chennai - 600040</textarea>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <label class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-medium">Branch pickup</span>
+                  <input type="radio" name="delivery" checked />
+                </div>
+                <p class="mt-1 text-xs text-slate-400">Anna Nagar · Ready today</p>
+              </label>
+
+              <label class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-medium">Home delivery</span>
+                  <input type="radio" name="delivery" />
+                </div>
+                <p class="mt-1 text-xs text-slate-400">Delivery by tonight</p>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+          <div class="flex items-center gap-3">
+            <div class="h-9 w-9 rounded-xl bg-emerald-500 flex items-center justify-center text-sm font-semibold text-slate-950">3</div>
+            <div>
+              <h2 class="font-semibold">Payment method</h2>
+              <p class="text-sm text-slate-400">Choose a quick payment option.</p>
+            </div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
+            <button class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-4 text-sm font-medium text-emerald-300">UPI</button>
+            <button class="rounded-2xl border border-slate-800 bg-slate-950 px-4 py-4 text-sm font-medium hover:bg-slate-800">Card</button>
+            <button class="rounded-2xl border border-slate-800 bg-slate-950 px-4 py-4 text-sm font-medium hover:bg-slate-800">Cash</button>
+            <button class="rounded-2xl border border-slate-800 bg-slate-950 px-4 py-4 text-sm font-medium hover:bg-slate-800">Wallet</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Summary -->
+      <aside class="lg:sticky lg:top-28 h-fit rounded-[2rem] border border-slate-800 bg-slate-900 p-5">
+        <h2 class="font-semibold">Order summary</h2>
+        <p class="mt-1 text-sm text-slate-400">Stock will move Reserved → Sold after placing order.</p>
+        <div id="checkoutSummary" class="mt-5"></div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="mobileBottomNav"></div>
+
+  <script src="../shared/ecommerce-data.js"></script>
+  <script src="../shared/ecommerce-ui.js"></script>
+
+  <script>
+    renderCustomerHeader("cart");
+    renderMobileBottomNav("cart");
+    renderOrderSummary("checkoutSummary", true);
+  </script>
+</body>
+</html>

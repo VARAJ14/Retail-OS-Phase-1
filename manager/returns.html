@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZ OS RETAIL - Manager Return Queue</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
+      <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
+        <div>
+          <h1 class="font-semibold">TRENZ OS</h1>
+          <p class="text-xs text-slate-400">Manager Returns</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
+        <a href="dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Dashboard</a>
+        <a href="../branch-inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Inventory</a>
+        <a href="../orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
+        <a href="../cashier/pos.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">POS Monitoring</a>
+        <a href="../crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM</a>
+        <a href="returns.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
+          <span>Returns</span>
+          <span class="text-xs">Branch</span>
+        </a>
+        <a href="../reports.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Reports</a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-400">Branch Return Sync</span>
+            <span class="text-emerald-300">Live</span>
+          </div>
+          <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+            <div class="h-full w-[89%] bg-emerald-400"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="flex-1 min-w-0">
+
+      <!-- Topbar -->
+      <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
+          <div>
+            <h2 class="text-lg font-semibold">Branch Return Queue</h2>
+            <p class="text-xs text-slate-400">BEST CHOICE ANNA NAGAR BRANCH · Inspection and approval</p>
+          </div>
+
+          <div class="hidden md:flex flex-1 max-w-xl">
+            <input
+              placeholder="Search return, invoice, customer, SKU..."
+              class="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+            />
+          </div>
+
+          <div class="flex items-center gap-3">
+            <select id="managerReturnBranchFilter" class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
+              <option value="anna-nagar">BEST CHOICE ANNA NAGAR BRANCH</option>
+              <option value="padi">PADI BRANCH</option>
+              <option value="spencer">SPENCER</option>
+            </select>
+
+            <div class="hidden xl:flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5">
+              <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+              <span class="text-xs text-emerald-300">Live Sync</span>
+            </div>
+
+            <button class="h-10 w-10 rounded-xl bg-slate-800 text-sm">MG</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="p-5 lg:p-8 space-y-6">
+
+        <!-- Header -->
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+          <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
+            <div>
+              <div class="flex flex-wrap gap-2">
+                <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">Manager</span>
+                <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">Inspection Queue</span>
+                <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">Branch Approval</span>
+              </div>
+
+              <h1 class="mt-4 text-3xl font-semibold">Return inspection and approval</h1>
+            </div>
+
+                       <div class="flex flex-wrap gap-3">
+              <a href="../website/returns.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                Customer Returns
+              </a>
+
+              <a href="../branch-inventory.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                Branch Inventory
+              </a>
+
+              <button class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                Export Branch Queue
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-5 gap-3">
+            <div class="rounded-2xl border border-indigo-500/30 bg-indigo-500/10 p-4">
+              <p class="text-xs text-indigo-300">Step 01</p>
+              <p class="mt-1 text-sm font-semibold">Customer Request</p>
+            </div>
+
+            <div class="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+              <p class="text-xs text-cyan-300">Step 02</p>
+              <p class="mt-1 text-sm font-semibold">Branch Inspect</p>
+            </div>
+
+            <div class="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4">
+              <p class="text-xs text-amber-300">Step 03</p>
+              <p class="mt-1 text-sm font-semibold">Approve / Reject</p>
+            </div>
+
+            <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+              <p class="text-xs text-emerald-300">Step 04</p>
+              <p class="mt-1 text-sm font-semibold">Refund / Exchange</p>
+            </div>
+
+            <div class="rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-4">
+              <p class="text-xs text-fuchsia-300">Step 05</p>
+              <p class="mt-1 text-sm font-semibold">CRM + Analytics</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- KPI Cards -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-4">
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Branch Requests</p>
+            <h3 id="managerTotalRequests" class="mt-3 text-3xl font-semibold">0</h3>
+            <p class="mt-3 text-xs text-slate-500">Selected branch</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Pending</p>
+            <h3 id="managerPendingApproval" class="mt-3 text-3xl font-semibold text-amber-300">0</h3>
+            <p class="mt-3 text-xs text-amber-300">Needs review</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Approved</p>
+            <h3 id="managerApprovedToday" class="mt-3 text-3xl font-semibold text-emerald-300">0</h3>
+            <p class="mt-3 text-xs text-emerald-300">Today</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Refund Value</p>
+            <h3 id="managerRefundAmount" class="mt-3 text-3xl font-semibold text-red-300">₹0</h3>
+            <p class="mt-3 text-xs text-red-300">Branch value</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Exchanges</p>
+            <h3 id="managerExchangeRequests" class="mt-3 text-3xl font-semibold text-cyan-300">0</h3>
+            <p class="mt-3 text-xs text-cyan-300">Size / item</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Warranty</p>
+            <h3 id="managerWarrantyClaims" class="mt-3 text-3xl font-semibold text-fuchsia-300">0</h3>
+            <p class="mt-3 text-xs text-fuchsia-300">Electronics</p>
+          </div>
+        </section>
+
+        <!-- Main Grid -->
+        <section class="grid grid-cols-1 2xl:grid-cols-4 gap-6">
+
+          <!-- Return Queue -->
+          <div class="2xl:col-span-3 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800">
+              <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
+                <div>
+                  <h3 class="font-semibold">Branch return queue</h3>
+                  <p class="mt-1 text-sm text-slate-400">
+                    Inspect returned items, approve exchanges and update inventory state.
+                  </p>
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                  <select id="managerReturnStatusFilter" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm">
+                    <option value="all">All Status</option>
+                    <option value="Pending Approval">Pending Approval</option>
+                    <option value="Under Review">Under Review</option>
+                    <option value="Manager Review">Manager Review</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                  </select>
+
+                  <button id="managerApplyReturnFilter" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                    Apply
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[1320px] text-sm">
+                <thead class="bg-slate-950 text-slate-400">
+                  <tr>
+                    <th class="text-left font-medium px-5 py-3">Return</th>
+                    <th class="text-left font-medium px-5 py-3">Customer</th>
+                    <th class="text-left font-medium px-5 py-3">Product</th>
+                    <th class="text-left font-medium px-5 py-3">Reason</th>
+                    <th class="text-left font-medium px-5 py-3">Validation</th>
+                    <th class="text-left font-medium px-5 py-3">Status</th>
+                    <th class="text-left font-medium px-5 py-3">Inventory</th>
+                    <th class="text-right font-medium px-5 py-3">Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="managerReturnTableRows" class="divide-y divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Impact Panel -->
+          <aside class="space-y-6">
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Inspection impact</h3>
+              <p class="mt-1 text-sm text-slate-400">
+                Latest selected return update.
+              </p>
+
+              <div id="managerApprovalImpactPanel" class="mt-5 space-y-3"></div>
+            </section>
+
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Branch activity</h3>
+              <div id="managerReturnActivity" class="mt-5 space-y-3"></div>
+            </section>
+          </aside>
+        </section>
+
+        <!-- Manager Rules -->
+        <section class="grid grid-cols-1 xl:grid-cols-4 gap-4">
+          <div class="rounded-3xl border border-indigo-500/20 bg-indigo-500/10 p-5">
+            <h3 class="font-semibold text-indigo-200">Clothing</h3>
+            <p class="mt-2 text-sm text-slate-400">
+              Inspect tags and condition. If valid, approve exchange and move item to Returned / Available after inspection.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-cyan-500/20 bg-cyan-500/10 p-5">
+            <h3 class="font-semibold text-cyan-300">Electronics</h3>
+            <p class="mt-2 text-sm text-slate-400">
+              Verify product serial and warranty. Defective units move to Warranty Claim and are hidden from POS / website stock.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-fuchsia-500/20 bg-fuchsia-500/10 p-5">
+            <h3 class="font-semibold text-fuchsia-300">Cosmetics</h3>
+            <p class="mt-2 text-sm text-slate-400">
+              Opened hygiene products cannot be restocked. Move to Disposal or send exception refund for owner review.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-emerald-500/20 bg-emerald-500/10 p-5">
+            <h3 class="font-semibold text-emerald-300">Accessories</h3>
+            <p class="mt-2 text-sm text-slate-400">
+              Check unused condition and tags. If valid, approve refund and restock after inspection.
+            </p>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="../shared/returns-data.js"></script>
+  <script src="../shared/returns-flow.js"></script>
+
+  <script>
+    function getManagerBranchSummary(branchId) {
+      const branch = getReturnBranch(branchId);
+      const branchRequests = getReturnsByBranch(branchId);
+
+      const exchangeRequests = branchRequests.filter((item) => item.resolution.toLowerCase().includes("exchange")).length;
+      const warrantyClaims = branchRequests.filter((item) => item.nextState === "Warranty Claim").length;
+
+      return {
+        totalRequests: branchRequests.length,
+        pendingApproval: branchRequests.filter((item) => item.status !== "Approved" && item.status !== "Rejected").length,
+        approvedToday: branch.approved,
+        rejectedToday: branch.rejected,
+        refundAmount: branch.refundValue,
+        exchangeRequests,
+        warrantyClaims,
+        disposalItems: branchRequests.filter((item) => item.nextState === "Disposal").length,
+        returnRate: TRENZ_RETURNS_DATA.summary.returnRate
+      };
+    }
+
+    function renderManagerBranch(branchId) {
+      const summary = getManagerBranchSummary(branchId);
+      const requests = getReturnsByBranch(branchId);
+
+      renderReturnSummary("manager", summary);
+      window.currentReturnRequests = requests;
+      renderReturnTable("managerReturnTableRows", requests);
+      renderApprovalPanel("managerApprovalImpactPanel", requests[0]?.id || "RET-TN-20491");
+      renderReturnActivity("managerReturnActivity");
+    }
+
+    document.getElementById("managerReturnBranchFilter").addEventListener("change", (event) => {
+      renderManagerBranch(event.target.value);
+    });
+
+    document.getElementById("managerApplyReturnFilter").addEventListener("click", () => {
+      const branchId = document.getElementById("managerReturnBranchFilter").value;
+      const status = document.getElementById("managerReturnStatusFilter").value;
+
+      let requests = getReturnsByBranch(branchId);
+
+      if (status !== "all") {
+        requests = requests.filter((item) => item.status === status);
+      }
+
+      window.currentReturnRequests = requests;
+      renderReturnTable("managerReturnTableRows", requests);
+    });
+
+    renderManagerBranch("anna-nagar");
+  </script>
+</body>
+</html>
+

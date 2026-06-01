@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZOS RETAIL - Cashier POS</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex w-64 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
+      <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
+        <div>
+          <h1 class="font-semibold">TRENZOS</h1>
+          <p class="text-xs text-slate-400">Cashier POS</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 px-4 py-5 space-y-1 text-sm">
+        <a href="pos.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
+          <span>POS</span>
+          <span class="text-xs">Live</span>
+        </a>
+        <a href="#invoices" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Invoices</a>
+        <a href="#customer" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Customer Search</a>
+        <a href="../returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns</a>
+        <a href="../login.html" class="block rounded-xl text-red-300 hover:bg-red-500/10 px-4 py-3">Logout</a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <div class="rounded-2xl bg-slate-900 border border-slate-800 p-4">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-400">Counter</span>
+            <span class="text-emerald-300">Open</span>
+          </div>
+          <p class="mt-2 text-sm font-medium">POS-AN-01</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="flex-1 min-w-0">
+
+      <!-- Topbar -->
+      <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
+          <div>
+            <h2 class="text-lg font-semibold">POS Billing</h2>
+            <p class="text-xs text-slate-400">BEST CHOICE ANNA NAGAR BRANCH · Morning Shift</p>
+          </div>
+
+          <div class="hidden md:flex flex-1 max-w-xl">
+            <input
+              placeholder="Scan barcode or search SKU..."
+              class="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+            />
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="hidden xl:flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5">
+              <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+              <span class="text-xs text-emerald-300">Live POS Sync</span>
+            </div>
+
+            <button class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">Hold Bill</button>
+            <button class="h-10 w-10 rounded-xl bg-slate-800 text-sm">DV</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="p-5 lg:p-8 space-y-6">
+
+        <!-- POS Status -->
+        <section class="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Branch</p>
+            <p class="mt-2 font-semibold">Anna Nagar</p>
+            <p class="mt-1 text-xs text-emerald-300">Live</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Cashier</p>
+            <p class="mt-2 font-semibold">M. Divya</p>
+            <p class="mt-1 text-xs text-slate-500">Active session</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Cart State</p>
+            <p class="mt-2 font-semibold text-blue-300">Reserved</p>
+            <p class="mt-1 text-xs text-slate-500">Until checkout</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">CRM</p>
+            <p class="mt-2 font-semibold text-fuchsia-300">Linked</p>
+            <p class="mt-1 text-xs text-slate-500">Customer attached</p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Sync</p>
+            <p class="mt-2 font-semibold text-emerald-300">Ready</p>
+            <p class="mt-1 text-xs text-slate-500">Inventory + analytics</p>
+          </div>
+        </section>
+
+        <!-- Main POS Layout -->
+        <section class="grid grid-cols-1 2xl:grid-cols-5 gap-6">
+
+          <!-- Product Area -->
+          <div class="2xl:col-span-3 space-y-6">
+
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
+                <div>
+                  <h3 class="font-semibold">Product Search</h3>
+                  <p class="mt-1 text-sm text-slate-400">SKU, barcode-ready search and branch stock.</p>
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                  <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                    Scan Barcode
+                  </button>
+                  <button class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                    Manual SKU
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-5 grid grid-cols-1 md:grid-cols-4 gap-3">
+                <input
+                  placeholder="Search product or SKU..."
+                  class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+                />
+
+                <select class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm">
+                  <option>All Categories</option>
+                  <option>Clothing</option>
+                  <option>Electronics</option>
+                  <option>Cosmetics</option>
+                  <option>Accessories</option>
+                </select>
+
+                <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                  Filter
+                </button>
+              </div>
+            </section>
+
+            <section id="productCards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4"></section>
+
+            <!-- Invoices -->
+            <section id="invoices" class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+              <div class="p-5 border-b border-slate-800">
+                <h3 class="font-semibold">Recent Invoices</h3>
+                <p class="mt-1 text-sm text-slate-400">Lookup, print and initiate returns.</p>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full min-w-[760px] text-sm">
+                  <thead class="bg-slate-950 text-slate-400">
+                    <tr>
+                      <th class="text-left font-medium px-5 py-3">Invoice</th>
+                      <th class="text-left font-medium px-5 py-3">Customer</th>
+                      <th class="text-left font-medium px-5 py-3">Amount</th>
+                      <th class="text-left font-medium px-5 py-3">Status</th>
+                      <th class="text-left font-medium px-5 py-3">Sync</th>
+                      <th class="text-right font-medium px-5 py-3">Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="invoiceTable" class="divide-y divide-slate-800"></tbody>
+                </table>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- Cart Area -->
+          <aside class="2xl:col-span-2 space-y-6">
+
+            <!-- Customer -->
+            <section id="customer" class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold">Customer</h3>
+                  <p class="mt-1 text-sm text-slate-400">Search or attach customer.</p>
+                </div>
+
+                <span class="rounded-full bg-fuchsia-500/10 text-fuchsia-300 px-3 py-1 text-xs">
+                  CRM Linked
+                </span>
+              </div>
+
+              <div class="mt-5 grid grid-cols-3 gap-3">
+                <input
+                  value="+91 98765 43210"
+                  class="col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+                />
+                <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                  Search
+                </button>
+              </div>
+
+              <div class="mt-4 rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm font-medium">Priya Raman</p>
+                    <p class="mt-1 text-xs text-slate-400">CRM-TN-10482 · Gold Member</p>
+                  </div>
+
+                  <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">
+                    1,840 pts
+                  </span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Cart -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+              <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold">Billing Cart</h3>
+                  <p class="mt-1 text-sm text-slate-400">Stock is reserved until payment.</p>
+                </div>
+
+                <span class="rounded-full bg-blue-500/10 text-blue-300 px-3 py-1 text-xs">
+                  Reserved
+                </span>
+              </div>
+
+              <div id="cartItems"></div>
+            </section>
+
+            <!-- Payment -->
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Payment</h3>
+
+              <div id="cartTotals" class="mt-5 space-y-3 text-sm"></div>
+
+              <div class="mt-5 grid grid-cols-2 gap-3">
+                <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm hover:bg-slate-800">Cash</button>
+                <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm hover:bg-slate-800">UPI</button>
+                <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm hover:bg-slate-800">Card</button>
+                <button class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm hover:bg-slate-800">Split</button>
+              </div>
+
+              <div class="mt-5 rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                <div class="space-y-2 text-xs">
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Branch Inventory</span>
+                    <span class="text-cyan-300">Reserved → Sold</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Website Stock</span>
+                    <span class="text-blue-300">Updated</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">CRM</span>
+                    <span class="text-fuchsia-300">Purchase added</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Analytics</span>
+                    <span class="text-amber-300">Sale logged</span>
+                  </div>
+                </div>
+              </div>
+
+              <button class="mt-5 w-full rounded-xl bg-emerald-500 py-3 text-sm font-semibold text-slate-950 hover:bg-emerald-400">
+                Complete Sale
+              </button>
+            </section>
+
+          </aside>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="../shared/pos-data.js"></script>
+  <script src="../shared/pos-flow.js"></script>
+
+  <script>
+    renderProductCards("productCards");
+    renderCart("cartItems");
+    renderCartTotals("cartTotals");
+    renderInvoices("invoiceTable");
+  </script>
+</body>
+</html>
