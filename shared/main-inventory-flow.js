@@ -103,7 +103,7 @@ function renderMainInventoryTable(containerId, products = TRENZ_MAIN_INVENTORY_D
           </div>
           <div class="flex justify-between gap-4">
             <span class="text-slate-400">Disposal</span>
-            <span>${item.discount}$<span>
+            <span>${item.disposal}$<span>
 
                       </div>
         </div>
@@ -252,9 +252,11 @@ function renderAllocationImpact(containerId, allocation) {
   `;
 }
 
-function selectAllocationSku(sku) {
-  const item = findMainInventoryItem(sku);
-
+function findMainInventoryItem(sku) {
+  return TRENZ_MAIN_INVENTORY_DATA.products.find(
+    item => item.sku === sku
+  );
+}
   if (!item) return;
 
   const skuInput = document.getElementById("allocationSkuInput");
@@ -264,7 +266,7 @@ function selectAllocationSku(sku) {
   if (skuInput) skuInput.value = item.sku;
   if (qtyInput) qtyInput.value = Math.min(40, item.available);
   if (productLabel) productLabel.textContent = `${item.name} · Available ${item.available.toLocaleString("en-IN")}`;
-}
+
 
 function pushMainMovement(event, sku, from, to, qty, state, impact) {
   TRENZ_MAIN_INVENTORY_DATA.movementLog.unshift({
@@ -376,4 +378,27 @@ function refreshMainInventoryUI(allocation) {
   renderAllocationRows("allocationRows");
   renderMainMovementRows("mainMovementRows");
   renderAllocationImpact("allocationImpactPanel", allocation);
+}
+function getMainInventoryTotals() {
+const products = TRENZ_MAIN_INVENTORY_DATA.products;
+
+return {
+totalSkus: products.length,
+mainStock: products.reduce((sum, item) => sum + item.mainStock, 0),
+available: products.reduce((sum, item) => sum + item.available, 0),
+transferPending: products.reduce((sum, item) => sum + item.transferPending, 0),
+riskStock: products.reduce(
+(sum, item) => sum + item.returned + item.warrantyClaim + item.disposal,
+0
+),
+lowStock: products.filter(item =>
+["Low Stock", "Reorder", "Expiry Watch"].includes(item.state)
+).length
+};
+}
+
+function findMainInventoryItem(sku) {
+return TRENZ_MAIN_INVENTORY_DATA.products.find(
+item => item.sku === sku
+);
 }

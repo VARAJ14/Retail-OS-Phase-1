@@ -365,5 +365,90 @@
   <script>
     refreshMainInventoryUI();
   </script>
+  <div id="stockModal" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/70" onclick="trenzCloseStockModal()"></div>
+
+  <div class="relative mx-auto mt-6 w-[92%] max-w-xl rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl shadow-black/50">
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <h3 class="text-xl font-semibold">Update Stock</h3>
+        <p id="stockProductName" class="mt-1 text-sm text-slate-400">Product</p>
+      </div>
+
+      <button onclick="trenzCloseStockModal()" class="rounded-xl border border-slate-700 px-3 py-2 text-sm hover:bg-slate-800">
+        Close
+      </button>
+    </div>
+
+    <input id="stockProductId" type="hidden" />
+
+    <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="text-xs text-slate-400">Main Stock</label>
+        <input id="stockMainInput" type="number" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+      </div>
+
+      <div>
+        <label class="text-xs text-slate-400">State</label>
+        <select id="stockStateInput" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+          <option>Available</option>
+          <option>Reserved</option>
+          <option>Sold</option>
+          <option>Returned</option>
+          <option>Damaged</option>
+          <option>Transfer Pending</option>
+          <option>Warranty Claim</option>
+          <option>Disposal</option>
+          <option>Expired</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="text-xs text-slate-400">BEST CHOICE ANNA NAGAR BRANCH</label>
+        <input id="stockAnnaInput" type="number" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+      </div>
+
+      <div>
+        <label class="text-xs text-slate-400">PADI BRANCH</label>
+        <input id="stockPadiInput" type="number" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="text-xs text-slate-400">SPENCER</label>
+        <input id="stockSpencerInput" type="number" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+      </div>
+    </div>
+
+    <div class="mt-5 rounded-2xl border border-slate-800 bg-slate-950 p-4">
+      <p class="text-sm font-semibold">Stock update impact</p>
+      <div class="mt-3 space-y-2 text-xs">
+        <div class="flex justify-between">
+          <span class="text-slate-400">Inventory</span>
+          <span class="text-cyan-300">Updated immediately</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">POS</span>
+          <span class="text-emerald-300">Visible if branch stock exists</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Website</span>
+          <span class="text-blue-300">Visible if branch stock exists</span>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="trenzSaveStockModal()" class="mt-5 w-full rounded-xl bg-indigo-500 py-3 text-sm font-semibold hover:bg-indigo-400">
+      Save Stock
+    </button>
+  </div>
+</div>
+
+<script src="shared/app-db.js"></script>
+<script src="shared/inventory-store.js"></script>
+<script>
+  if (document.getElementById("mainInventoryRows")) {
+    trenzRenderInventoryTable("mainInventoryRows");
+  }
+</script>
 </body>
 </html>

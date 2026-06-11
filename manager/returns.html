@@ -338,6 +338,44 @@
 
     renderManagerBranch("anna-nagar");
   </script>
+
+  <script src="../shared/app-db.js"></script>
+<script>
+  function renderPersistedReturnsIntoManagerTable() {
+    const localReturns = trenzDbGet(TRENZ_DB_KEYS.returns, []);
+
+    if (!localReturns.length || !document.getElementById("managerReturnTableRows")) return;
+
+    const rows = localReturns.map((item) => `
+      <tr class="hover:bg-slate-800/40">
+        <td class="px-5 py-4">
+          <p class="font-medium">${item.id}</p>
+          <p class="mt-1 text-xs text-slate-400">${item.orderId}</p>
+        </td>
+        <td class="px-5 py-4">${item.customer}</td>
+        <td class="px-5 py-4">${item.product}</td>
+        <td class="px-5 py-4">${item.reason}</td>
+        <td class="px-5 py-4">
+          <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">Inspect Required</span>
+        </td>
+        <td class="px-5 py-4">
+          <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">${item.status}</span>
+        </td>
+        <td class="px-5 py-4 text-cyan-300">${item.inventoryAction}</td>
+        <td class="px-5 py-4 text-right">
+          <button class="rounded-lg bg-indigo-500 px-3 py-1.5 text-xs font-semibold">Inspect</button>
+        </td>
+      </tr>
+    `).join("");
+
+    document.getElementById("managerReturnTableRows").insertAdjacentHTML("afterbegin", rows);
+  }
+
+  renderPersistedReturnsIntoManagerTable();
+</script>
 </body>
 </html>
+
+
+
 

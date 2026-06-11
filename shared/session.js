@@ -105,3 +105,13 @@ function markOtpVerified() {
 function clearRecoverySession() {
   sessionStorage.removeItem(RECOVERY_KEY);
 }
+window.createSecureSession = createSecureSession;
+window.getCurrentSession = getCurrentSession;
+window.clearCurrentSession = clearCurrentSession;
+
+window.getRememberedDevice = getRememberedDevice;
+
+window.startRecoverySession = startRecoverySession;
+window.getRecoverySession = getRecoverySession;
+window.markOtpVerified = markOtpVerified;
+window.clearRecoverySession = clearRecoverySession;

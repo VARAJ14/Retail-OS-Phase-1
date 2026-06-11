@@ -114,12 +114,15 @@
   <div id="mobileBottomNav"></div>
 
   <script src="../shared/ecommerce-data.js"></script>
-  <script src="../shared/ecommerce-ui.js"></script>
+<script src="../shared/ecommerce-ui.js"></script>
+<script src="../shared/app-db.js"></script>
+<script src="../shared/ecommerce-store.js"></script>
 
-  <script>
-    renderCustomerHeader("cart");
-    renderMobileBottomNav("cart");
-    renderOrderSummary("checkoutSummary", true);
-  </script>
-</body>
-</html>
+<script>
+  renderCustomerHeader("cart");
+  renderMobileBottomNav("cart");
+
+  if (document.getElementById("checkoutSummary")) {
+    trenzRenderPersistentOrderSummary("checkoutSummary", true);
+  }
+</script>

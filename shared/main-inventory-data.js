@@ -305,6 +305,24 @@ const TRENZ_MAIN_INVENTORY_DATA = {
     }
   ]
 };
+function getMainInventoryTotals() {
+  const products = TRENZ_MAIN_INVENTORY_DATA.products;
+
+  return {
+    totalSkus: products.length,
+    mainStock: products.reduce((sum, item) => sum + item.mainStock, 0),
+    available: products.reduce((sum, item) => sum + item.available, 0),
+    transferPending: products.reduce((sum, item) => sum + item.transferPending, 0),
+    riskStock: products.reduce(
+      (sum, item) =>
+        sum + item.returned + item.warrantyClaim + item.disposal,
+      0
+    ),
+    lowStock: products.filter(item =>
+      ["Low Stock", "Reorder", "Expiry Watch"].includes(item.state)
+    ).length
+  };
+}
 
 function mainInvMoney(value) {
   return new Intl.NumberFormat("en-IN", {
@@ -314,6 +332,9 @@ function mainInvMoney(value) {
   }).format(value);
 }
 
+function findMainInventoryItem(sku) {
+  return TRENZ_MAIN_INVENTORY_DATA.products.find((item) => item.sku === sku);
+}
 function getMainInventoryTotals() {
   const products = TRENZ_MAIN_INVENTORY_DATA.products;
 
@@ -322,13 +343,18 @@ function getMainInventoryTotals() {
     mainStock: products.reduce((sum, item) => sum + item.mainStock, 0),
     available: products.reduce((sum, item) => sum + item.available, 0),
     transferPending: products.reduce((sum, item) => sum + item.transferPending, 0),
-    riskStock: products.reduce((sum, item) => {
-      return sum + item.damaged + item.returned + item.warrantyClaim + item.disposal + item.expired;
-    }, 0),
-    lowStock: products.filter((item) => ["Low Stock", "Reorder", "Expiry Watch"].includes(item.state)).length
+    riskStock: products.reduce(
+      (sum, item) => sum + item.returned + item.warrantyClaim + item.disposal,
+      0
+    ),
+    lowStock: products.filter(item =>
+      ["Low Stock", "Reorder", "Expiry Watch"].includes(item.state)
+    ).length
   };
 }
 
 function findMainInventoryItem(sku) {
-  return TRENZ_MAIN_INVENTORY_DATA.products.find((item) => item.sku === sku);
+  return TRENZ_MAIN_INVENTORY_DATA.products.find(
+    item => item.sku === sku
+  );
 }

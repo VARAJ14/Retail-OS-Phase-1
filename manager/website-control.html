@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TRENZ OS RETAIL - Manager Website Control</title>
+
+ <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
+      <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
+        <div>
+          <h1 class="font-semibold">TRENZ OS</h1>
+          <p class="text-xs text-slate-400">Manager Website</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
+        <a href="dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Dashboard</a>
+        <a href="../branch-inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Inventory</a>
+        <a href="../orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
+        <a href="../crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM</a>
+        <a href="returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns</a>
+
+        <a href="manager/website-control.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
+          <span>Website Control</span>
+          <span class="text-xs">Branch</span>
+        </a>
+
+        <a href="../staff.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Staff Monitoring</a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-400">Branch Website Sync</span>
+            <span class="text-emerald-300">Live</span>
+          </div>
+          <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+            <div class="h-full w-[91%] bg-emerald-400"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="flex-1 min-w-0">
+
+      <!-- Topbar -->
+      <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
+          <div>
+            <h2 class="text-lg font-semibold">Branch Website Control</h2>
+            <p class="text-xs text-slate-400">Branch stock visibility · pickup readiness · local offer requests</p>
+          </div>
+
+          <div class="hidden md:flex flex-1 max-w-xl">
+            <input
+              placeholder="Search branch website product, order, stock issue..."
+              class="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-sm outline-none focus:border-indigo-400"
+            />
+          </div>
+
+          <div class="flex items-center gap-3">
+            <select id="managerWebsiteBranchSelect" class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
+              <option value="BEST CHOICE ANNA NAGAR BRANCH">BEST CHOICE ANNA NAGAR BRANCH</option>
+              <option value="PADI BRANCH">PADI BRANCH</option>
+              <option value="SPENCER">SPENCER</option>
+            </select>
+
+            <div class="hidden xl:flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5">
+              <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+              <span class="text-xs text-emerald-300">Live Sync</span>
+            </div>
+
+            <button class="h-10 w-10 rounded-xl bg-slate-800 text-sm">MW</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="p-5 lg:p-8 space-y-6">
+
+        <!-- Header -->
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+          <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
+            <div>
+              <div class="flex flex-wrap gap-2">
+                <span class="rounded-full bg-cyan-500/10 text-cyan-300 px-3 py-1 text-xs">Branch Manager</span>
+                <span class="rounded-full bg-blue-500/10 text-blue-300 px-3 py-1 text-xs">Website Stock View</span>
+                <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">Offer Requests Only</span>
+              </div>
+
+              <h1 class="mt-4 text-3xl font-semibold">Branch website readiness</h1>
+              <p class="mt-2 max-w-3xl text-sm text-slate-400">
+                Managers can review branch website visibility, pickup readiness, stock issues and request local promotions for owner approval.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href="../website/index.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                Preview Website
+              </a>
+
+              <a href="../orders.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+                Website Orders
+              </a>
+
+              <a href="../branch-inventory.html" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                Branch Inventory
+              </a>
+            </div>
+          </div>
+
+          <!-- Business status cards, no Step labels -->
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-5 gap-3">
+            <div class="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+              <p class="text-sm font-semibold">Branch Stock</p>
+              <p class="mt-1 text-xs text-slate-400">Website source</p>
+            </div>
+
+            <div class="rounded-2xl border border-blue-500/30 bg-blue-500/10 p-4">
+              <p class="text-sm font-semibold">Website Visibility</p>
+              <p class="mt-1 text-xs text-slate-400">Customer display</p>
+            </div>
+
+            <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+              <p class="text-sm font-semibold">Pickup Ready</p>
+              <p class="mt-1 text-xs text-slate-400">Branch fulfillment</p>
+            </div>
+
+            <div class="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4">
+              <p class="text-sm font-semibold">Offer Requests</p>
+              <p class="mt-1 text-xs text-slate-400">Owner approval</p>
+            </div>
+
+            <div class="rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-4">
+              <p class="text-sm font-semibold">CRM Impact</p>
+              <p class="mt-1 text-xs text-slate-400">Order customers</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="managerWebsiteAlert" class="hidden"></section>
+
+        <!-- Summary -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-4">
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Live Products</p>
+            <h3 id="managerLiveProducts" class="mt-3 text-3xl font-semibold">0</h3>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Categories</p>
+            <h3 id="managerVisibleCategories" class="mt-3 text-3xl font-semibold text-cyan-300">0</h3>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Banners</p>
+            <h3 id="managerActiveBanners" class="mt-3 text-3xl font-semibold text-blue-300">0</h3>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Offers</p>
+            <h3 id="managerActiveOffers" class="mt-3 text-3xl font-semibold text-amber-300">0</h3>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Synced Branches</p>
+            <h3 id="managerSyncedBranches" class="mt-3 text-3xl font-semibold text-emerald-300">0</h3>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+            <p class="text-sm text-slate-400">Issues</p>
+            <h3 id="managerStockIssues" class="mt-3 text-3xl font-semibold text-red-300">0</h3>
+          </div>
+        </section>
+
+        <!-- Main Grid -->
+        <section class="grid grid-cols-1 2xl:grid-cols-4 gap-6">
+
+          <!-- Branch Website Products -->
+          <div class="2xl:col-span-3 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                  <h3 class="font-semibold">Branch website product visibility</h3>
+                  <p class="mt-1 text-sm text-slate-400">Managers can view stock visibility and request promotion. Pricing and global visibility require owner.</p>
+                </div>
+
+                <button onclick="filterManagerWebsiteProducts()" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                  Refresh Branch View
+                </button>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[1120px] text-sm">
+                <thead class="bg-slate-950 text-slate-400">
+                  <tr>
+                    <th class="text-left px-5 py-3">Product</th>
+                    <th class="text-left px-5 py-3">Category</th>
+                    <th class="text-left px-5 py-3">Branch</th>
+                    <th class="text-left px-5 py-3">Stock</th>
+                    <th class="text-left px-5 py-3">Price</th>
+                    <th class="text-left px-5 py-3">Offer</th>
+                    <th class="text-left px-5 py-3">Status</th>
+                    <th class="text-right px-5 py-3">Request</th>
+                  </tr>
+                </thead>
+
+                <tbody id="managerWebsiteProductRows" class="divide-y divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Panel -->
+          <aside class="space-y-6">
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Manager access rules</h3>
+              <p class="mt-1 text-sm text-slate-400">Website control restrictions for branch managers.</p>
+
+              <div class="mt-5 space-y-3 text-xs">
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">View branch stock</span>
+                  <span class="text-emerald-300">Allowed</span>
+                </div>
+
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">Request local offer</span>
+                  <span class="text-amber-300">Allowed</span>
+                </div>
+
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">Change pricing</span>
+                  <span class="text-red-300">Owner only</span>
+                </div>
+
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">Change SEO</span>
+                  <span class="text-red-300">Owner only</span>
+                </div>
+
+                <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                  <span class="text-slate-400">Publish banners</span>
+                  <span class="text-red-300">Owner only</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+              <h3 class="font-semibold">Local offer requests</h3>
+              <p class="mt-1 text-sm text-slate-400">Requests sent for owner approval.</p>
+
+              <div id="managerLocalRequests" class="mt-5 space-y-3"></div>
+            </section>
+          </aside>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="../shared/website-control-data.js"></script>
+  <script src="../shared/website-control-flow.js"></script>
+
+  <script>
+    function filterManagerWebsiteProducts() {
+      const branchName = document.getElementById("managerWebsiteBranchSelect").value;
+      const products = getWebsiteProductsByBranch(branchName);
+      renderWebsiteProductRows("managerWebsiteProductRows", products, "manager");
+    }
+
+    renderWebsiteControlSummary("manager");
+    filterManagerWebsiteProducts();
+    renderLocalOfferRequests("managerLocalRequests");
+
+    document.getElementById("managerWebsiteBranchSelect").addEventListener("change", filterManagerWebsiteProducts);
+  </script>
+</body>
+</html>
+

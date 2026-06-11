@@ -219,6 +219,7 @@
                 </div>
               </div>
             </section>
+          
 
             <!-- Cart -->
             <section class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
@@ -293,3 +294,51 @@
   </script>
 </body>
 </html>
+<script src="../shared/app-db.js"></script>
+<script src="../shared/product-store.js"></script>
+
+<script>
+  function renderLocalStoragePosProducts() {
+    const container = document.getElementById("productCards");
+    if (!container) return;
+
+    const products = trenzGetProducts().filter((product) => product.posVisible);
+
+    container.innerHTML = products.map((product) => `
+      <article class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p class="text-sm font-semibold">${product.name}</p>
+            <p class="mt-1 text-xs text-slate-400">${product.sku}</p>
+          </div>
+          <span class="rounded-full bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">${product.state}</span>
+        </div>
+
+        <div class="mt-4 space-y-2 text-xs">
+          <div class="flex justify-between">
+            <span class="text-slate-400">Category</span>
+            <span>${product.category}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-400">Variant</span>
+            <span>${product.variant || "Standard"}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-400">Anna Nagar</span>
+            <span>${product.branchStock?.["BEST CHOICE ANNA NAGAR BRANCH"] || 0}</span>
+          </div>
+        </div>
+
+        <div class="mt-5 flex items-center justify-between">
+          <p class="text-xl font-semibold">₹${Number(product.price).toLocaleString("en-IN")}</p>
+          <button class="rounded-xl bg-indigo-500 px-4 py-2 text-sm font-semibold hover:bg-indigo-400">
+            Add
+          </button>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  renderLocalStoragePosProducts();
+</script>
+

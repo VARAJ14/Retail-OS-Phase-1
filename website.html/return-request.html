@@ -217,9 +217,9 @@
             </div>
 
             <div class="flex flex-col sm:flex-row gap-3">
-              <button class="rounded-xl bg-indigo-500 px-5 py-3 text-sm font-semibold hover:bg-indigo-400">
-                Submit Return Request
-              </button>
+              <button onclick="submitFrontendReturnRequest()" class="rounded-xl bg-indigo-500 px-5 py-3 text-sm font-semibold hover:bg-indigo-400">
+  Submit Return Request
+</button>
 
               <a href="order-tracking.html" class="rounded-xl border border-slate-700 bg-slate-950 px-5 py-3 text-center text-sm hover:bg-slate-800">
                 Back to Order
@@ -366,5 +366,22 @@
     renderMobileBottomNav("orders");
     renderReturnList("returnHistory");
   </script>
+  <script src="../shared/app-db.js"></script>
+<script src="../shared/ecommerce-store.js"></script>
+
+<script>
+  function submitFrontendReturnRequest() {
+    const request = trenzCreateReturnRequest("ORD-TN-78412", "PRD-001", "Size issue");
+
+    const alert = document.createElement("div");
+    alert.className = "rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4";
+    alert.innerHTML = `
+      <p class="text-sm font-semibold text-emerald-300">Return request submitted</p>
+      <p class="mt-1 text-xs text-slate-300">${request.id} has been saved and will appear in owner/manager return queue.</p>
+    `;
+
+    document.querySelector("main").prepend(alert);
+  }
+</script>
 </body>
 </html>

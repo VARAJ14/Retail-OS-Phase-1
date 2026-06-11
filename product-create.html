@@ -114,8 +114,8 @@
               <a href="branch-inventory.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
                 Branch Allocation
               </a>
-              <button onclick="simulateProductSave()" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
-                Save Product
+              <button onclick="finalizedProductSave()" class="mt-5 w-full rounded-xl bg-indigo-500 py-3 text-sm font-semibold hover:bg-indigo-400">
+  Save Product & Initialize Inventory
               </button>
             </div>
           </div>
@@ -289,12 +289,12 @@
               <div class="mt-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
                 <div>
                   <label class="text-xs text-slate-400">MRP</label>
-                  <input value="1599" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+                  <input data-product-mrp value="1599" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
                 </div>
 
                 <div>
                   <label class="text-xs text-slate-400">Selling Price</label>
-                  <input value="1299" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+                  <input data-product-selling-price value="1299" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
                 </div>
 
                 <div>
@@ -436,7 +436,7 @@
                 </div>
               </div>
 
-              <button onclick="simulateProductSave()" class="mt-5 w-full rounded-xl bg-indigo-500 py-3 text-sm font-semibold hover:bg-indigo-400">
+              <button onclick="trenzSaveProductFromCreatePage()"
                 Save Product & Initialize Inventory
               </button>
             </section>
@@ -526,6 +526,9 @@
   <script src="shared/product-data.js"></script>
   <script src="shared/product-flow.js"></script>
 
+  <script src="shared/app-db.js"></script>
+<script src="shared/product-store.js"></script>
+
   <script>
     refreshProductCategoryUI();
     renderRecentProducts("recentProductsRows");
@@ -555,3 +558,65 @@
   </script>
 </body>
 </html>
+<script src="shared/product-data.js"></script>
+<script src="shared/product-flow.js"></script>
+<script src="shared/app-db.js"></script>
+<script src="shared/product-store.js"></script>
+
+<script>
+  refreshProductCategoryUI();
+  renderRecentProducts("recentProductsRows");
+  renderCreationEvents("creationEvents");
+
+  document.addEventListener("input", function (event) {
+    if (
+      event.target.id === "productCodeInput" ||
+      event.target.id === "segmentInput" ||
+      event.target.id === "colorInput" ||
+      event.target.id === "variantInput"
+    ) {
+      updateSkuPreview();
+    }
+  });
+
+  document.addEventListener("change", function (event) {
+    if (
+      event.target.id === "productCodeInput" ||
+      event.target.id === "segmentInput" ||
+      event.target.id === "colorInput" ||
+      event.target.id === "variantInput"
+    ) {
+      updateSkuPreview();
+    }
+  });
+
+  window.finalizedProductSave = function () {
+    const product = trenzSaveProductFromCreatePage();
+
+    if (typeof renderRecentProducts === "function") {
+      TRENZ_PRODUCT_DATA.recentProducts.unshift({
+        sku: product.sku,
+        name: product.name,
+        category: product.category,
+        stock: product.stock,
+        state: product.state,
+        website: product.websiteVisible ? "Visible" : "Hidden",
+        nextStep: "Allocate to Branch"
+      });
+
+      renderRecentProducts("recentProductsRows");
+    }
+
+    if (typeof renderCreationEvents === "function") {
+      TRENZ_PRODUCT_DATA.creationEvents.unshift({
+        time: "Live",
+        event: "Product saved",
+        detail: `${product.sku} saved to LocalStorage product database.`,
+        module: "Products"
+      });
+
+      renderCreationEvents("creationEvents");
+    }
+  };
+</script>
+

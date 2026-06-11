@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRENZ OS RETAIL - Barcode Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 pb-16 lg:pb-0">
+  <main class="min-h-screen p-5 lg:p-8 space-y-6">
+    <div id="barcodeAlert"></div>
+
+    <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div>
+          <p class="text-xs text-slate-400">Products / Barcode Management</p>
+          <h1 class="mt-2 text-3xl font-semibold">Barcode Management</h1>
+          <p class="mt-2 text-sm text-slate-400">Generate, assign, validate, search and print barcodes.</p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button id="openBarcodeGenerateModalBtn" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+            Generate Barcode
+          </button>
+          <a href="barcode-print.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+            Print Batch
+          </a>
+          <a href="barcode-history.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
+            History
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <input id="barcodeSearchInput" placeholder="Search product, SKU, barcode..." class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+      <select id="barcodeCategoryFilter" class="rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm">
+        <option>All Categories</option>
+        <option>Clothing</option>
+        <option>Electronics</option>
+        <option>Cosmetics</option>
+        <option>Accessories</option>
+      </select>
+      <button id="barcodeFilterBtn" class="rounded-xl bg-indigo-500 px-4 py-3 text-sm font-semibold hover:bg-indigo-400">
+        Search
+      </button>
+    </section>
+
+    <section class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <div class="xl:col-span-2 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+        <div class="p-5 border-b border-slate-800">
+          <h2 class="font-semibold">Assigned Barcodes</h2>
+        </div>
+
+        <div id="barcodeLoading"></div>
+        <div id="barcodeEmpty"></div>
+        <div id="barcodeError"></div>
+
+        <div class="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+          <table class="w-full min-w-[960px] text-sm">
+            <thead class="bg-slate-950 text-slate-400">
+              <tr>
+                <th class="text-left px-5 py-3">Product</th>
+                <th class="text-left px-5 py-3">SKU</th>
+                <th class="text-left px-5 py-3">Barcode</th>
+                <th class="text-left px-5 py-3">Validation</th>
+                <th class="text-left px-5 py-3">Updated</th>
+                <th class="text-right px-5 py-3">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="barcodeRows" class="divide-y divide-slate-800"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <aside class="space-y-6">
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+          <h2 class="font-semibold">Barcode Preview</h2>
+          <div id="barcodePreview" class="mt-5 rounded-2xl border border-slate-800 bg-slate-950 p-6 text-center text-slate-400">
+            Select a barcode
+          </div>
+        </section>
+
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+          <h2 class="font-semibold">Validation Rules</h2>
+          <div class="mt-5 space-y-3 text-xs">
+            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">Unique per product</div>
+            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">Searchable in POS</div>
+            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">Printable in batches</div>
+            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">History logged</div>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div id="barcodeGenerateModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/70" onclick="closeBarcodeGenerateModal()"></div>
+    <div class="relative mx-auto mt-20 w-[92%] max-w-md rounded-3xl border border-slate-800 bg-slate-900 p-6">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-semibold">Generate Barcode</h3>
+        <button onclick="closeBarcodeGenerateModal()" class="rounded-xl border border-slate-700 px-3 py-2 text-sm hover:bg-slate-800">Close</button>
+      </div>
+
+      <div class="mt-5 space-y-4">
+        <label class="block">
+          <span class="text-xs text-slate-400">Select Product</span>
+          <select id="barcodeProductSelect" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm"></select>
+        </label>
+
+        <button id="confirmGenerateBarcodeBtn" class="w-full rounded-xl bg-indigo-500 py-3 text-sm font-semibold hover:bg-indigo-400">
+          Generate
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../shared/trenz-final-db.js"></script>
+  <script src="../shared/trenz-final-components.js"></script>
+
+  <script>
+    function getProducts() {
+      return trenzDb.get(TRENZ_FINAL_DB_KEYS.products, []);
+    }
+
+    function saveProducts(products) {
+      trenzDb.set(TRENZ_FINAL_DB_KEYS.products, products);
+    }
+
+    function barcodeValueFor(product) {
+      return product.barcode || `890TRNZ${String(product.id).replace(/\D/g, "").padStart(4, "0")}`;
+    }
+
+    function renderProductSelect() {
+      const select = document.getElementById("barcodeProductSelect");
+      const products = getProducts();
+
+      select.innerHTML = products.map((product) => `
+        <option value="${product.id}">${product.name} · ${product.sku}</option>
+      `).join("");
+    }
+
+    function renderBarcodeRows() {
+      const loading = document.getElementById("barcodeLoading");
+      const empty = document.getElementById("barcodeEmpty");
+      const error = document.getElementById("barcodeError");
+      const tbody = document.getElementById("barcodeRows");
+
+      loading.innerHTML = TrenzUI.loadingState("Loading barcode data...");
+      empty.innerHTML = "";
+      error.innerHTML = "";
+
+      setTimeout(() => {
+        const query = document.getElementById("barcodeSearchInput").value.toLowerCase();
+        const category = document.getElementById("barcodeCategoryFilter").value;
+
+        let products = getProducts();
+
+        if (query) {
+          products = products.filter((item) =>
+            item.name.toLowerCase().includes(query) ||
+            item.sku.toLowerCase().includes(query) ||
+            barcodeValueFor(item).toLowerCase().includes(query)
+          );
+        }
+
+        if (category !== "All Categories") {
+          products = products.filter((item) => item.category === category);
+        }
+
+        loading.innerHTML = "";
+
+        if (!products.length) {
+          empty.innerHTML = TrenzUI.emptyState("No barcode results", "Try a different SKU, barcode or category.", "", "");
+          tbody.innerHTML = "";
+          return;
+        }
+
+        tbody.innerHTML = products.map((item) => `
+          <tr class="hover:bg-slate-800/40">
+            <td class="px-5 py-4">
+              <p class="font-medium">${item.name}</p>
+              <p class="mt-1 text-xs text-slate-400">${item.category}</p>
+            </td>
+            <td class="px-5 py-4">${item.sku}</td>
+            <td class="px-5 py-4 font-mono">${barcodeValueFor(item)}</td>
+            <td class="px-5 py-4">${TrenzUI.badge("Valid", "emerald")}</td>
+            <td class="px-5 py-4">${item.updatedAt ? new Date(item.updatedAt).toLocaleString() : "Initial"}</td>
+            <td class="px-5 py-4 text-right">
+              <div class="flex justify-end gap-2">
+                <button onclick="previewBarcode('${item.id}')" class="rounded-lg border border-slate-700 px-3 py-1.5 text-xs hover:bg-slate-800">Preview</button>
+                <a href="barcode-preview.html?id=${item.id}" class="rounded-lg bg-indigo-500 px-3 py-1.5 text-xs font-semibold hover:bg-indigo-400">Open</a>
+              </div>
+            </td>
+          </tr>
+        `).join("");
+      }, 200);
+    }
+
+    function previewBarcode(productId) {
+      const product = getProducts().find((item) => item.id === productId);
+      if (!product) return;
+
+      document.getElementById("barcodePreview").innerHTML = `
+        <p class="font-semibold">${product.name}</p>
+        <p class="mt-1 text-xs text-slate-400">${product.sku}</p>
+        <div class="mt-5 rounded-xl bg-white p-4 text-slate-950">
+          <div class="font-mono text-xl tracking-[0.28em]">|||| || |||| |||</div>
+          <p class="mt-3 font-mono">${barcodeValueFor(product)}</p>
+        </div>
+        <a href="barcode-print.html" class="mt-5 inline-block rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold">
+          Print
+        </a>
+      `;
+    }
+
+    function openBarcodeGenerateModal() {
+      document.getElementById("barcodeGenerateModal").classList.remove("hidden");
+    }
+
+    function closeBarcodeGenerateModal() {
+      document.getElementById("barcodeGenerateModal").classList.add("hidden");
+    }
+
+    function generateBarcode() {
+      const productId = document.getElementById("barcodeProductSelect").value;
+      const products = getProducts();
+      const product = products.find((item) => item.id === productId);
+
+      if (!product) return;
+
+      product.barcode = barcodeValueFor(product);
+      product.updatedAt = new Date().toISOString();
+
+      saveProducts(products);
+      closeBarcodeGenerateModal();
+      renderBarcodeRows();
+
+      document.getElementById("barcodeAlert").innerHTML = TrenzUI.successState(
+        "Barcode generated",
+        `${product.barcode} assigned to ${product.name}.`
+      );
+    }
+
+    document.getElementById("openBarcodeGenerateModalBtn").addEventListener("click", openBarcodeGenerateModal);
+    document.getElementById("confirmGenerateBarcodeBtn").addEventListener("click", generateBarcode);
+    document.getElementById("barcodeFilterBtn").addEventListener("click", renderBarcodeRows);
+
+    renderProductSelect();
+    renderBarcodeRows();
+  </script>
+</body>
+</html>

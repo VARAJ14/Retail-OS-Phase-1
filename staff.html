@@ -9,39 +9,19 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-slate-950 text-slate-100">
+<body class="bg-slate-950 text-slate-100 pb-16 lg:pb-0">
   <div class="min-h-screen flex">
-
-    <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
-      <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
-        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
-        <div>
-          <h1 class="font-semibold">TRENZ OS</h1>
-          <p class="text-xs text-slate-400">Staff & RBAC</p>
-        </div>
-      </div>
-
-      <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
-        <a href="owner/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Owner Dashboard</a>
-        <a href="manager/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Manager Dashboard</a>
-        <a href="staff.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
-          <span>Staff Management</span>
-          <span class="text-xs">RBAC</span>
-        </a>
-        <a href="settings.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Settings</a>
-        <a href="system-map.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">System Map</a>
-      </nav>
-    </aside>
+    <div id="roleSidebar"></div>
 
     <div class="flex-1 min-w-0">
       <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
-        <div class="h-full flex items-center justify-between px-5 lg:px-8">
+        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
           <div>
             <h2 class="text-lg font-semibold">Staff Management</h2>
-            <p class="text-xs text-slate-400">Roles, branches and permission access</p>
+            <p class="text-xs text-slate-400">Create staff, assign roles, assign branches and manage access</p>
           </div>
 
-          <button class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+          <button onclick="trenzOpenAddStaff()" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
             Add Staff
           </button>
         </div>
@@ -56,80 +36,67 @@
             <span class="rounded-full bg-amber-500/10 text-amber-300 px-3 py-1 text-xs">Staff</span>
           </div>
 
-          <h1 class="mt-4 text-3xl font-semibold">Enterprise staff and access control</h1>
+          <h1 class="mt-4 text-3xl font-semibold">Staff, roles and branch access</h1>
           <p class="mt-2 max-w-3xl text-sm text-slate-400">
-            Control who can access inventory, POS, website, CRM, returns, analytics and settings.
+            Owner can create employees, assign roles, assign branches, reset passwords, disable users and delete users. Data persists with LocalStorage.
           </p>
         </section>
 
+        <section id="staffActionAlert" class="hidden"></section>
+
         <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
           <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
-            <p class="text-sm text-slate-400">Total Staff</p>
-            <h3 class="mt-3 text-3xl font-semibold">184</h3>
+            <p class="text-sm text-slate-400">Owner</p>
+            <h3 class="mt-3 text-3xl font-semibold text-indigo-300">1</h3>
           </div>
 
           <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
             <p class="text-sm text-slate-400">Managers</p>
-            <h3 class="mt-3 text-3xl font-semibold text-cyan-300">12</h3>
+            <h3 class="mt-3 text-3xl font-semibold text-cyan-300">3</h3>
           </div>
 
           <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
             <p class="text-sm text-slate-400">Cashiers</p>
-            <h3 class="mt-3 text-3xl font-semibold text-emerald-300">86</h3>
+            <h3 class="mt-3 text-3xl font-semibold text-emerald-300">1</h3>
           </div>
 
           <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
             <p class="text-sm text-slate-400">Staff</p>
-            <h3 class="mt-3 text-3xl font-semibold text-amber-300">84</h3>
+            <h3 class="mt-3 text-3xl font-semibold text-amber-300">1</h3>
           </div>
 
           <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
-            <p class="text-sm text-slate-400">Access Alerts</p>
-            <h3 class="mt-3 text-3xl font-semibold text-red-300">5</h3>
+            <p class="text-sm text-slate-400">Storage</p>
+            <h3 class="mt-3 text-3xl font-semibold text-fuchsia-300">Local</h3>
           </div>
         </section>
 
         <section class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
-          <div class="p-5 border-b border-slate-800">
-            <h3 class="font-semibold">Staff directory</h3>
-            <p class="mt-1 text-sm text-slate-400">Branch-level access and role status.</p>
+          <div class="p-5 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <h3 class="font-semibold">Staff table</h3>
+              <p class="mt-1 text-sm text-slate-400">Create, edit, disable, enable, reset password and delete staff.</p>
+            </div>
+
+            <button onclick="trenzOpenAddStaff()" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+              Add Employee
+            </button>
           </div>
 
-          <div class="overflow-x-auto">
-            <table class="w-full min-w-[860px] text-sm">
+          <div class="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+            <table class="w-full min-w-[1080px] text-sm">
               <thead class="bg-slate-950 text-slate-400">
                 <tr>
-                  <th class="text-left px-5 py-3">Name</th>
+                  <th class="text-left px-5 py-3">Staff</th>
+                  <th class="text-left px-5 py-3">Phone</th>
                   <th class="text-left px-5 py-3">Role</th>
                   <th class="text-left px-5 py-3">Branch</th>
-                  <th class="text-left px-5 py-3">Access</th>
                   <th class="text-left px-5 py-3">Status</th>
-                  <th class="text-right px-5 py-3">Action</th>
+                  <th class="text-right px-5 py-3">Actions</th>
                 </tr>
               </thead>
-              <tbody id="staffRows" class="divide-y divide-slate-800"></tbody>
-            </table>
-          </div>
-        </section>
 
-        <section class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
-          <div class="p-5 border-b border-slate-800">
-            <h3 class="font-semibold">Permission matrix</h3>
-            <p class="mt-1 text-sm text-slate-400">Owner, manager, cashier and staff access rules.</p>
-          </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full min-w-[860px] text-sm">
-              <thead class="bg-slate-950 text-slate-400">
-                <tr>
-                  <th class="text-left px-5 py-3">Module</th>
-                  <th class="text-left px-5 py-3">Owner</th>
-                  <th class="text-left px-5 py-3">Manager</th>
-                  <th class="text-left px-5 py-3">Cashier</th>
-                  <th class="text-left px-5 py-3">Staff</th>
-                </tr>
-              </thead>
-              <tbody id="permissionRows" class="divide-y divide-slate-800"></tbody>
+              <tbody id="staffCrudRows" class="divide-y divide-slate-800"></tbody>
             </table>
           </div>
         </section>
@@ -137,11 +104,80 @@
     </div>
   </div>
 
-  <script src="shared/governance-data.js"></script>
-  <script src="shared/governance-flow.js"></script>
+  <div id="mobileRoleNav"></div>
+
+  <div id="staffModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/70" onclick="trenzCloseStaffModal()"></div>
+
+    <div class="relative mx-auto mt-6 w-[92%] max-w-xl rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl shadow-black/50">
+      <div class="flex items-center justify-between gap-4">
+        <div>
+          <h3 id="staffModalTitle" class="text-xl font-semibold">Add Staff</h3>
+          <p class="mt-1 text-sm text-slate-400">Assign role, branch and access scope.</p>
+        </div>
+
+        <button onclick="trenzCloseStaffModal()" class="rounded-xl border border-slate-700 px-3 py-2 text-sm hover:bg-slate-800">
+          Close
+        </button>
+      </div>
+
+      <input id="staffIdInput" type="hidden" />
+
+      <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs text-slate-400">Name</label>
+          <input id="staffNameInput" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+        </div>
+
+        <div>
+          <label class="text-xs text-slate-400">Phone</label>
+          <input id="staffPhoneInput" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="text-xs text-slate-400">Email</label>
+          <input id="staffEmailInput" type="email" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400" />
+        </div>
+
+        <div>
+          <label class="text-xs text-slate-400">Role</label>
+          <select id="staffRoleInput" onchange="trenzUpdateRolePreview()" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+            <option>Owner</option>
+            <option>Manager</option>
+            <option>Cashier</option>
+            <option>Staff</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-xs text-slate-400">Branch</label>
+          <select id="staffBranchInput" class="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm outline-none focus:border-indigo-400">
+            <option>Select All</option>
+            <option>BEST CHOICE ANNA NAGAR BRANCH</option>
+            <option>PADI BRANCH</option>
+            <option>SPENCER</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="roleRestrictionPreview" class="mt-5"></div>
+
+      <button onclick="trenzSaveStaffFromModal()" class="mt-5 w-full rounded-xl bg-indigo-500 py-3 text-sm font-semibold hover:bg-indigo-400">
+        Save Staff
+      </button>
+    </div>
+  </div>
+
+  <script src="shared/app-routes.js"></script>
+  <script src="shared/app-db.js"></script>
+  <script src="shared/app-navigation.js"></script>
+  <script src="shared/staff-crud.js"></script>
+
   <script>
-    renderStaffRows("staffRows");
-    renderPermissionRows("permissionRows");
+    renderRoleSidebar("roleSidebar", "owner");
+    renderMobileRoleNav("mobileRoleNav", "owner");
+    trenzRenderStaffTable();
   </script>
 </body>
 </html>
+
