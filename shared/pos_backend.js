@@ -1180,9 +1180,9 @@
         changed = true;
         return {
           ...product,
-          barcode: product.barcode || reference.barcode,
+          barcode: !product.barcode || product.barcode === product.sku ? reference.barcode : product.barcode,
           inclusiveGst: Boolean(product.inclusiveGst || reference.inclusiveGst),
-          returnRule: product.returnRule || reference.returnRule,
+          returnRule: !product.returnRule || product.returnRule === "Invoice required" ? reference.returnRule : product.returnRule,
           details: product.details || reference.details,
           variants: product.variants || reference.variants
         };
