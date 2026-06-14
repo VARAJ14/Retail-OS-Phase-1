@@ -645,7 +645,9 @@ const POS_INTERNAL_SCREENS = [
   { id: "hold-bills", label: "Hold Bills", group: "Orders" },
   { id: "resume-bills", label: "Resume Bills", group: "Orders" },
   { id: "invoice-search", label: "Invoice Search", group: "Invoices" },
+  { id: "split-payments", label: "Split Payments", group: "Payments" },
   { id: "payment-history", label: "Payment History", group: "Reports" },
+  { id: "sales-history", label: "Sales History", group: "Reports" },
   { id: "receipt-history", label: "Receipt History", group: "Receipts" },
   { id: "receipt-reprint", label: "Receipt Reprint", group: "Receipts" },
   { id: "returns", label: "Returns", group: "Returns" },
@@ -893,6 +895,56 @@ function renderInternalScreen(containerId) {
           <span>${posMoney(payment.amount)}</span>
         </div>
       `).join("") || `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">No payment history yet.</p>`}</div>
+    `),
+
+    "split-payments": () => internalPanel("Split Payments", "Collect one bill through mixed cash, UPI, card, gift card and customer credit tenders.", `
+      ${summaryCards([
+        { label: "Total", value: posMoney(totals.total), hint: "Bill amount", tone: "text-blue-300" },
+        { label: "Paid", value: posMoney(totals.paid), hint: `${trenzGetPosSession().payments.length} tender(s)`, tone: "text-emerald-300" },
+        { label: "Balance", value: posMoney(totals.balance), hint: "Remaining due", tone: totals.balance > 0 ? "text-amber-300" : "text-emerald-300" },
+        { label: "Change", value: posMoney(totals.changeDue), hint: "Cash overpay", tone: "text-fuchsia-300" }
+      ])}
+      <div class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalSplitAmountInput" type="number" min="0" placeholder="Amount (blank = balance)" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <input id="internalSplitReferenceInput" placeholder="Reference / approval / UPI" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400 md:col-span-2" />
+      </div>
+      <div class="mt-4 grid grid-cols-2 gap-3 md:grid-cols-5">
+        ${(window.TRENZ_POS_DATA?.paymentMethods || ["Cash", "UPI", "Card", "Gift Card", "Customer Credit"]).map((method) => `
+          <button data-pos-action="split-payment" data-method="${posEscape(method)}" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm hover:bg-slate-800">${posEscape(method)}</button>
+        `).join("")}
+      </div>
+      <div class="mt-4 space-y-2 text-xs">
+        ${trenzGetPosSession().payments.map((payment) => `
+          <div class="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950 px-3 py-2">
+            <span>${posEscape(payment.method)} · ${posEscape(payment.reference || "No reference")}</span>
+            <span>${posMoney(payment.amount)} <button data-pos-action="remove-payment" data-payment-id="${posEscape(payment.id)}" class="ml-3 text-red-300">Remove</button></span>
+          </div>
+        `).join("") || `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">No split tenders captured yet.</p>`}
+      </div>
+      <button data-pos-action="complete-sale" class="mt-4 w-full rounded-xl bg-emerald-500 px-4 py-3 text-sm font-semibold text-slate-950 hover:bg-emerald-400">Generate Invoice After Split Payment</button>
+    `),
+
+    "sales-history": () => internalPanel("Sales History", "Review POS sales, invoice status, receipt status and inventory sync outcome.", `
+      ${summaryCards([
+        { label: "Invoices", value: String(invoices.length), hint: "Stored POS invoices", tone: "text-blue-300" },
+        { label: "Gross Sales", value: posMoney(daySales), hint: "Invoice total", tone: "text-emerald-300" },
+        { label: "Refunds", value: posMoney(dayRefunds), hint: "Refund rows", tone: "text-amber-300" },
+        { label: "Net Sales", value: posMoney(daySales - dayRefunds), hint: "Sales minus refunds", tone: "text-fuchsia-300" }
+      ])}
+      <div class="mt-4 space-y-3">
+        ${invoices.slice(0, 12).map((invoice) => `
+          <div class="flex flex-col gap-3 rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-xs md:flex-row md:items-center md:justify-between">
+            <div>
+              <p class="font-medium text-slate-200">${posEscape(invoice.id)} · ${posEscape(invoice.customer || "Walk-in Customer")}</p>
+              <p class="mt-1 text-slate-400">${posMoney(invoice.amount)} · ${posEscape(invoice.status || "Paid")} · ${posEscape(invoice.sync || "Inventory + CRM + Analytics Updated")}</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button data-pos-action="select-invoice" data-invoice-id="${posEscape(invoice.id)}" class="rounded-lg border border-slate-700 px-3 py-1.5 hover:bg-slate-800">Open Invoice</button>
+              <button data-pos-action="print-invoice" data-invoice-id="${posEscape(invoice.id)}" class="rounded-lg bg-indigo-500 px-3 py-1.5 font-semibold hover:bg-indigo-400">Receipt</button>
+            </div>
+          </div>
+        `).join("") || `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">No sales history yet.</p>`}
+      </div>
     `),
 
     "receipt-history": () => internalPanel("Receipt History", "Review paid invoices and receipt-ready transactions.", `
@@ -1151,6 +1203,20 @@ function trenzHandleInternalPosAction(action, target) {
   if (action === "print-invoice") {
     trenzSelectPosInvoice(target.dataset.invoiceId);
     trenzPrintReceipt();
+  }
+
+  if (action === "split-payment") {
+    const amount = internalInputValue("internalSplitAmountInput") || calculateCartTotals().balance;
+    const reference = internalInputValue("internalSplitReferenceInput");
+    trenzAddPosPayment(target.dataset.method, amount, reference);
+  }
+
+  if (action === "remove-payment") {
+    trenzRemovePosPayment(target.dataset.paymentId);
+  }
+
+  if (action === "complete-sale") {
+    trenzCompleteSale();
   }
 
   if (action === "print-selected-receipt") {
