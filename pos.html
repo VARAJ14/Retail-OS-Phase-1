@@ -578,5 +578,38 @@
       </main>
     </div>
   </div>
+  <script>
+    (function () {
+      function openCashier(section) {
+        window.location.href = "cashier/pos.html" + (section || "");
+      }
+
+      function showPosNotice(message) {
+        window.alert(message);
+      }
+
+      document.addEventListener("click", function (event) {
+        const button = event.target.closest("button");
+        if (!button) return;
+
+        const label = button.textContent.trim();
+
+        if (label === "Scan Barcode") openCashier("#billing");
+        else if (label === "Manual SKU") openCashier("#billing");
+        else if (label === "Add Custom Item") openCashier("#billing");
+        else if (label === "Filter") openCashier("#billing");
+        else if (label === "Lookup") openCashier("#customer");
+        else if (label === "Cash") openCashier("#billing");
+        else if (label === "UPI") openCashier("#billing");
+        else if (label === "Card") openCashier("#billing");
+        else if (label === "Split") openCashier("#billing");
+        else if (label === "Generate Invoice & Complete Sale") openCashier("#billing");
+        else if (label === "Quick Actions") openCashier("#billing");
+        else if (label === "Alerts") showPosNotice("No blocking POS alerts. Open the cashier POS for live billing actions.");
+        else if (label === "Menu") showPosNotice("Use the sidebar navigation on desktop or open the cashier POS for billing.");
+        else if (label === "CS") openCashier("#customer");
+      });
+    })();
+  </script>
 </body>
 </html>

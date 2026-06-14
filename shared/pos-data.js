@@ -28,17 +28,17 @@ const TRENZOS_POS_DATA = {
     },
     {
       id: "PRD-002",
-      sku: "ELE-CHG-USB45W",
+      sku: "ELE-EAR-NSP-BLK",
       barcode: "890100110002",
-      name: "USB-C Fast Charger 45W",
-      brand: "VoltMax",
+      name: "NoiseShield Earbuds Pro",
+      brand: "SoundMax",
       category: "Electronics",
       variant: "Black",
-      price: 1499,
+      price: 3499,
       gst: 18,
       inclusiveGst: false,
-      stock: 7,
-      state: "Low Stock",
+      stock: 32,
+      state: "Available",
       returnRule: "Warranty claim",
       details: "Serial controlled electronics item with warranty validation.",
       variants: ["Black", "White"]
@@ -174,15 +174,15 @@ const TRENZOS_POS_DATA = {
       customer: "Walk-in Customer",
       customerId: "Guest",
       salesperson: "M. Divya",
-      amount: 1499,
+      amount: 3499,
       status: "Paid",
       time: "10:31 AM",
       sync: "Analytics Updated",
       items: [
-        { id: "PRD-002", sku: "ELE-CHG-USB45W", name: "USB-C Fast Charger 45W", qty: 1, price: 1499, gst: 18 }
+        { id: "PRD-002", sku: "ELE-EAR-NSP-BLK", name: "NoiseShield Earbuds Pro", qty: 1, price: 3499, gst: 18 }
       ],
-      payments: [{ id: "PAY-SEED-2", method: "Cash", amount: 1499, reference: "CASH" }],
-      taxSummary: [{ slab: "18%", taxable: 1499, gst: 270, total: 1769 }],
+      payments: [{ id: "PAY-SEED-2", method: "Cash", amount: 3499, reference: "CASH" }],
+      taxSummary: [{ slab: "18%", taxable: 3499, gst: 630, total: 4129 }],
       createdAt: "2026-01-02T10:31:00.000Z"
     },
     {
@@ -256,7 +256,7 @@ const TRENZOS_POS_DATA = {
     {
       id: "TASK-AN-104",
       title: "Update shelf count",
-      item: "USB-C Fast Charger 45W",
+      item: "NoiseShield Earbuds Pro",
       qty: 7,
       priority: "Low Stock",
       module: "Inventory",

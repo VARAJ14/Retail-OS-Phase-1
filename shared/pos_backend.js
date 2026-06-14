@@ -1168,6 +1168,29 @@
   }
 
   function seedPosReferenceData() {
+    if (window.TRENZ_POS_DATA && Array.isArray(window.TRENZ_POS_DATA.products)) {
+      const referenceProducts = window.TRENZ_POS_DATA.products;
+      const products = getProducts();
+      let changed = false;
+
+      const enrichedProducts = products.map((product) => {
+        const reference = referenceProducts.find((item) => item.id === product.id || item.sku === product.sku);
+        if (!reference) return product;
+
+        changed = true;
+        return {
+          ...product,
+          barcode: product.barcode || reference.barcode,
+          inclusiveGst: Boolean(product.inclusiveGst || reference.inclusiveGst),
+          returnRule: product.returnRule || reference.returnRule,
+          details: product.details || reference.details,
+          variants: product.variants || reference.variants
+        };
+      });
+
+      if (changed) saveProducts(enrichedProducts);
+    }
+
     const invoices = getInvoices();
     if (!invoices.length && window.TRENZ_POS_DATA && Array.isArray(window.TRENZ_POS_DATA.invoices)) {
       saveInvoices(window.TRENZ_POS_DATA.invoices.map((invoice) => ({
