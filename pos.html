@@ -21,7 +21,7 @@
       </div>
 
       <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
-        <a href="dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Dashboard</a>
+        <a href="owner/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Dashboard</a>
         <a href="inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Main Inventory</a>
         <a href="branch-inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Inventory</a>
         <a href="product-create.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Products</a>
@@ -35,7 +35,7 @@
         <a href="crm.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Customers</a>
         <a href="crm.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">CRM</a>
         <a href="campaigns.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Campaigns</a>
-        <a href="returns.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Returns & Refunds</a>
+        <a href="owner/returns.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Returns & Refunds</a>
         <a href="analytics.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Analytics</a>
         <a href="reports.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Reports</a>
         <a href="staff.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Staff Management</a>
@@ -578,5 +578,38 @@
       </main>
     </div>
   </div>
+  <script>
+    (function () {
+      function openCashier(section) {
+        window.location.href = "cashier/pos.html" + (section || "");
+      }
+
+      function showPosNotice(message) {
+        window.alert(message);
+      }
+
+      document.addEventListener("click", function (event) {
+        const button = event.target.closest("button");
+        if (!button) return;
+
+        const label = button.textContent.trim();
+
+        if (label === "Scan Barcode") openCashier("#billing");
+        else if (label === "Manual SKU") openCashier("#billing");
+        else if (label === "Add Custom Item") openCashier("#billing");
+        else if (label === "Filter") openCashier("#billing");
+        else if (label === "Lookup") openCashier("#customer");
+        else if (label === "Cash") openCashier("#billing");
+        else if (label === "UPI") openCashier("#billing");
+        else if (label === "Card") openCashier("#billing");
+        else if (label === "Split") openCashier("#billing");
+        else if (label === "Generate Invoice & Complete Sale") openCashier("#billing");
+        else if (label === "Quick Actions") openCashier("#billing");
+        else if (label === "Alerts") showPosNotice("No blocking POS alerts. Open the cashier POS for live billing actions.");
+        else if (label === "Menu") showPosNotice("Use the sidebar navigation on desktop or open the cashier POS for billing.");
+        else if (label === "CS") openCashier("#customer");
+      });
+    })();
+  </script>
 </body>
 </html>

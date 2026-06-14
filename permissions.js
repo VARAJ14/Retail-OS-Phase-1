@@ -3,7 +3,7 @@ const RETAIL_ROLES = {
     label: "owner",
     level: 100,
     defaultBranch: "all",
-    dashboard: "owner-dashboard.html",
+    dashboard: "owner/dashboard.html",
     sidebar: [
       "Dashboard",
       "Main Inventory",
@@ -46,7 +46,7 @@ const RETAIL_ROLES = {
     label: "manager",
     level: 60,
     defaultBranch: "mumbai",
-    dashboard: "manager-dashboard.html",
+    dashboard: "manager/dashboard.html",
     sidebar: [
       "Dashboard",
       "Branch Inventory",
@@ -82,7 +82,7 @@ const RETAIL_ROLES = {
     label: "cashier",
     level: 30,
     defaultBranch: "mumbai",
-    dashboard: "cashier-pos.html",
+    dashboard: "cashier/pos.html",
     sidebar: [
       "POS",
       "Invoices",
@@ -115,7 +115,7 @@ const RETAIL_ROLES = {
     label: "Staff",
     level: 20,
     defaultBranch: "mumbai",
-    dashboard: "cashier-pos.html",
+    dashboard: "staff/tasks.html",
     sidebar: [
       "POS",
       "Invoices",
@@ -173,24 +173,35 @@ const RETAIL_BRANCHES = {
 };
 
 const PAGE_PERMISSION_MAP = {
-  "owner-dashboard.html": "dashboard",
-  "manager-dashboard.html": "dashboard",
-  "cashier-pos.html": "pos",
+  "owner/dashboard.html": "dashboard",
+  "manager/dashboard.html": "dashboard",
+  "cashier/pos.html": "pos",
+  "staff/tasks.html": "orders",
   "dashboard.html": "dashboard",
   "inventory.html": "mainInventory",
   "branch-inventory.html": "branchInventory",
   "product-create.html": "products",
   "pos.html": "pos",
   "orders.html": "orders",
-  "website.html": "websiteControl",
+  "website/index.html": "websiteControl",
+  "website/products.html": "websiteControl",
+  "website/product-detail.html": "websiteControl",
+  "website/cart.html": "websiteControl",
+  "website/checkout.html": "websiteControl",
+  "website/order-tracking.html": "websiteControl",
+  "website/account.html": "websiteControl",
+  "website/returns.html": "returns",
   "website-control.html": "websiteControl",
+  "owner/website-control.html": "websiteControl",
+  "manager/website-control.html": "websiteControl",
   "crm.html": "crm",
   "campaigns.html": "campaigns",
-  "returns.html": "returns",
+  "owner/returns.html": "returns",
+  "manager/returns.html": "returns",
   "analytics.html": "analytics",
   "reports.html": "reports",
   "staff.html": "staff",
-  "permissions.html": "staff",
+  "Products/barcode.html": "products",
   "settings.html": "settings"
 };
 

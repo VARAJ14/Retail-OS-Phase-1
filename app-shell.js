@@ -1,5 +1,5 @@
 const retailNavigation = [
-  { label: "Dashboard", href: "dashboard.html", badge: "Hub" },
+  { label: "Dashboard", href: "owner/dashboard.html", badge: "Hub" },
   { label: "Main Inventory", href: "inventory.html", badge: "Master" },
   { label: "Branch Inventory", href: "branch-inventory.html", badge: "Live" },
   { label: "Products", href: "product-create.html" },
@@ -8,12 +8,12 @@ const retailNavigation = [
   { label: "Customers", href: "crm.html" },
   { label: "CRM", href: "crm.html", badge: "Live" },
   { label: "Campaigns", href: "campaigns.html" },
-  { label: "Returns & Refunds", href: "returns.html", badge: "Critical" },
+  { label: "Returns & Refunds", href: "owner/returns.html", badge: "Critical" },
   { label: "Analytics", href: "analytics.html", badge: "Live" },
   { label: "Reports", href: "reports.html" },
   { label: "Staff Management", href: "staff.html", badge: "RBAC" },
   { label: "Settings", href: "settings.html" },
-  { label: "Website Flow", href: "website.html", badge: "Sync" },
+  { label: "Website Flow", href: "website/index.html", badge: "Sync" },
   { label: "System Map", href: "system-map.html" }
 ];
 
@@ -42,7 +42,7 @@ const pageMeta = {
     title: "Unified Order Management",
     subtitle: "Online Orders + POS Orders → Branch Assignment → Fulfillment → CRM + Analytics"
   },
-  "website.html": {
+  "index.html": {
     title: "E-Commerce Website Flow",
     subtitle: "Branch Inventory → Website Stock Visibility → Cart Reservation → Order → CRM → Analytics"
   },
@@ -87,7 +87,7 @@ function getCurrentPage() {
 
 function createSidebar(activePage) {
   const navItems = retailNavigation.map((item) => {
-    const isActive = item.href === activePage;
+    const isActive = item.href.split("/").pop() === activePage;
     const activeClass = isActive
       ? "bg-indigo-500/15 text-indigo-200"
       : "text-slate-300 hover:bg-slate-900";
@@ -190,7 +190,7 @@ function createTopbar(activePage) {
 
 function createMobileMenu(activePage) {
   const navItems = retailNavigation.map((item) => {
-    const isActive = item.href === activePage;
+    const isActive = item.href.split("/").pop() === activePage;
     const activeClass = isActive
       ? "bg-indigo-500/15 text-indigo-200"
       : "text-slate-300 hover:bg-slate-900";
@@ -258,7 +258,7 @@ function createQuickActionsPanel() {
           <p class="mt-1 text-xs text-slate-400">Branch sale to CRM and analytics</p>
         </a>
 
-        <a href="returns.html" class="rounded-2xl border border-slate-800 bg-slate-950 p-4 hover:border-amber-400">
+        <a href="owner/returns.html" class="rounded-2xl border border-slate-800 bg-slate-950 p-4 hover:border-amber-400">
           Start return workflow
           <p class="mt-1 text-xs text-slate-400">Validation, approval and inventory state update</p>
         </a>
