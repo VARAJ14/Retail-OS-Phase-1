@@ -634,6 +634,375 @@ function renderWorkflowStatus(containerId) {
   `).join("");
 }
 
+const POS_INTERNAL_SCREENS = [
+  { id: "open-shift", label: "Open Shift", group: "Shift" },
+  { id: "close-shift", label: "Close Shift", group: "Shift" },
+  { id: "product-search", label: "Product Search", group: "Products" },
+  { id: "barcode-billing", label: "Barcode Billing", group: "Products" },
+  { id: "sku-search", label: "SKU Search", group: "Products" },
+  { id: "customer-search", label: "Customer Search", group: "Customers" },
+  { id: "customer-create", label: "Customer Create", group: "Customers" },
+  { id: "hold-bills", label: "Hold Bills", group: "Orders" },
+  { id: "resume-bills", label: "Resume Bills", group: "Orders" },
+  { id: "invoice-search", label: "Invoice Search", group: "Invoices" },
+  { id: "payment-history", label: "Payment History", group: "Reports" },
+  { id: "receipt-history", label: "Receipt History", group: "Receipts" },
+  { id: "receipt-reprint", label: "Receipt Reprint", group: "Receipts" },
+  { id: "returns", label: "Returns", group: "Returns" },
+  { id: "refunds", label: "Refunds", group: "Returns" },
+  { id: "exchanges", label: "Exchanges", group: "Returns" },
+  { id: "loyalty", label: "Loyalty", group: "Promotions" },
+  { id: "coupons", label: "Coupons", group: "Promotions" },
+  { id: "gift-cards", label: "Gift Cards", group: "Promotions" },
+  { id: "cash-drawer", label: "Cash Drawer", group: "Shift" },
+  { id: "shift-summary", label: "Shift Summary", group: "Shift" },
+  { id: "day-end-summary", label: "Day End Summary", group: "Reports" }
+];
+
+function currentPosScreenId() {
+  const id = (window.location.hash || "#product-search").replace("#", "");
+  return POS_INTERNAL_SCREENS.some((screen) => screen.id === id) ? id : "product-search";
+}
+
+function screenTitle(screenId) {
+  return POS_INTERNAL_SCREENS.find((screen) => screen.id === screenId)?.label || "Product Search";
+}
+
+function internalPanel(title, description, body) {
+  return `
+    <div class="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+      <div>
+        <p class="text-xs uppercase tracking-wide text-indigo-300">Internal POS Screen</p>
+        <h3 class="mt-1 text-xl font-semibold">${posEscape(title)}</h3>
+        <p class="mt-1 text-sm text-slate-400">${posEscape(description)}</p>
+      </div>
+      <a href="#billing" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">Back to POS</a>
+    </div>
+    <div class="mt-5">${body}</div>
+  `;
+}
+
+function renderInternalScreenNav(containerId, compact = false) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const current = currentPosScreenId();
+  container.innerHTML = POS_INTERNAL_SCREENS.map((screen) => {
+    const active = screen.id === current;
+    const activeClass = active
+      ? "border-indigo-500/40 bg-indigo-500/15 text-indigo-200"
+      : "border-slate-800 bg-slate-950 text-slate-300 hover:bg-slate-800";
+    const content = compact
+      ? `<span>${posEscape(screen.label)}</span>`
+      : `<span>${posEscape(screen.label)}</span><span class="text-[10px] text-slate-500">${posEscape(screen.group)}</span>`;
+
+    return `
+      <a href="#${posEscape(screen.id)}" class="flex ${compact ? "items-center" : "flex-col"} gap-1 rounded-xl border ${activeClass} px-3 py-2.5 text-xs">
+        ${content}
+      </a>
+    `;
+  }).join("");
+}
+
+function internalProductRows(products) {
+  return products.slice(0, 6).map((product) => {
+    const stock = trenzGetProductBranchStock(product);
+    return `
+      <div class="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-xs">
+        <div>
+          <p class="font-medium text-slate-200">${posEscape(product.name)}</p>
+          <p class="mt-1 text-slate-400">${posEscape(product.sku)} · ${posEscape(product.barcode || product.sku)} · ${posEscape(product.variant || "Standard")}</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="${stock > 0 ? "text-emerald-300" : "text-red-300"}">${stock} in branch</span>
+          <button data-pos-action="add-product" data-product-id="${posEscape(product.id)}" class="rounded-lg bg-indigo-500 px-3 py-1.5 font-semibold text-slate-100 hover:bg-indigo-400" ${stock <= 0 ? "disabled" : ""}>Add</button>
+        </div>
+      </div>
+    `;
+  }).join("") || `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">No products found.</p>`;
+}
+
+function internalInvoiceRows(invoices, actions = true) {
+  return invoices.slice(0, 8).map((invoice) => `
+    <div class="flex flex-col gap-3 rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-xs md:flex-row md:items-center md:justify-between">
+      <div>
+        <p class="font-medium text-slate-200">${posEscape(invoice.id)} · ${posEscape(invoice.customer || "Walk-in Customer")}</p>
+        <p class="mt-1 text-slate-400">${posMoney(invoice.amount)} · ${posEscape(invoice.status || "Paid")} · ${posDate(invoice.createdAt)}</p>
+      </div>
+      ${actions ? `
+        <div class="flex flex-wrap gap-2">
+          <button data-pos-action="select-invoice" data-invoice-id="${posEscape(invoice.id)}" class="rounded-lg border border-slate-700 px-3 py-1.5 hover:bg-slate-800">Select</button>
+          <button data-pos-action="print-invoice" data-invoice-id="${posEscape(invoice.id)}" class="rounded-lg bg-indigo-500 px-3 py-1.5 font-semibold hover:bg-indigo-400">Print</button>
+        </div>
+      ` : ""}
+    </div>
+  `).join("") || `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">No invoices found.</p>`;
+}
+
+function internalCashTotals() {
+  const session = trenzGetPosSession();
+  const payments = trenzGetPosPayments().filter((payment) => !session.shift.id || payment.shiftId === session.shift.id);
+  const cashIn = payments.filter((payment) => payment.method === "Cash").reduce((sum, payment) => sum + Number(payment.amount || 0), 0);
+  const refunds = payments.filter((payment) => Number(payment.amount || 0) < 0).reduce((sum, payment) => sum + Math.abs(Number(payment.amount || 0)), 0);
+  const nonCash = payments.filter((payment) => payment.method !== "Cash").reduce((sum, payment) => sum + Number(payment.amount || 0), 0);
+
+  return {
+    openingCash: Number(session.shift.openingCash || 0),
+    cashIn,
+    refunds,
+    nonCash,
+    expectedCash: Number(session.shift.openingCash || 0) + cashIn - refunds
+  };
+}
+
+function summaryCards(items) {
+  return `
+    <div class="grid grid-cols-1 gap-3 md:grid-cols-4">
+      ${items.map((item) => `
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+          <p class="text-xs text-slate-400">${posEscape(item.label)}</p>
+          <p class="mt-2 text-lg font-semibold">${posEscape(item.value)}</p>
+          <p class="mt-1 text-xs ${item.tone || "text-slate-500"}">${posEscape(item.hint || "")}</p>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderInternalScreen(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const screenId = currentPosScreenId();
+  const session = trenzGetPosSession();
+  const totals = calculateCartTotals();
+  const selectedInvoice = trenzGetSelectedInvoice();
+  const invoices = trenzGetPosInvoices();
+  const payments = trenzGetPosPayments();
+  const returns = trenzDbGet(TRENZ_DB_KEYS.returns, []);
+  const cash = internalCashTotals();
+  const daySales = invoices.reduce((sum, invoice) => sum + Number(invoice.amount || 0), 0);
+  const dayRefunds = payments.filter((payment) => Number(payment.amount || 0) < 0).reduce((sum, payment) => sum + Math.abs(Number(payment.amount || 0)), 0);
+
+  const screenBodies = {
+    "open-shift": () => internalPanel("Open Shift", "Start cashier billing with opening cash and shift validation.", `
+      ${summaryCards([
+        { label: "Shift State", value: session.shift.status, hint: session.shift.id || "No active shift", tone: session.shift.status === "Open" ? "text-emerald-300" : "text-amber-300" },
+        { label: "Counter", value: "POS-AN-01", hint: "Anna Nagar", tone: "text-blue-300" },
+        { label: "Opening Cash", value: posMoney(session.shift.openingCash || 0), hint: "Cash drawer base", tone: "text-emerald-300" },
+        { label: "Validation", value: session.shift.status === "Open" ? "Ready" : "Required", hint: "Needed before sale", tone: session.shift.status === "Open" ? "text-emerald-300" : "text-red-300" }
+      ])}
+      <div class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalOpeningCashInput" type="number" min="0" value="${Number(session.shift.openingCash || 5000)}" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <button data-pos-action="open-shift" class="rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400">Open Shift</button>
+        <a href="#product-search" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-center text-sm hover:bg-slate-800">Go to Products</a>
+      </div>
+    `),
+
+    "close-shift": () => internalPanel("Close Shift", "Close the active POS shift after validating cash drawer and payments.", `
+      ${summaryCards([
+        { label: "Expected Cash", value: posMoney(cash.expectedCash), hint: "Opening + cash - refunds", tone: "text-emerald-300" },
+        { label: "Cash Payments", value: posMoney(cash.cashIn), hint: "Captured this shift", tone: "text-blue-300" },
+        { label: "Refunds", value: posMoney(cash.refunds), hint: "Cash out/refunds", tone: "text-amber-300" },
+        { label: "Non-Cash", value: posMoney(cash.nonCash), hint: "UPI/card/gift/credit", tone: "text-fuchsia-300" }
+      ])}
+      <div class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
+        <button data-pos-action="close-shift" class="rounded-xl bg-red-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-red-400">Close Shift</button>
+        <a href="#shift-summary" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-center text-sm hover:bg-slate-800">View Shift Summary</a>
+      </div>
+    `),
+
+    "product-search": () => internalPanel("Product Search", "Search products by name, category, variant, SKU, barcode and branch stock.", `
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-4">
+        <input id="internalProductSearchInput" placeholder="Product, SKU, barcode or variant" class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <button data-pos-action="product-search" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Search Products</button>
+        <a href="#barcode-billing" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-center text-sm hover:bg-slate-800">Barcode Billing</a>
+      </div>
+      <div class="mt-4 space-y-3">${internalProductRows(trenzSearchPosProducts())}</div>
+    `),
+
+    "barcode-billing": () => internalPanel("Barcode Billing", "Scan or enter barcode and add validated branch-stock item to cart.", `
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalBarcodeInput" placeholder="Example: 890100110001" class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <button data-pos-action="barcode-add" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Add Barcode Item</button>
+      </div>
+      <div class="mt-4 space-y-3">${internalProductRows(trenzSearchPosProducts("", "All Categories", "Available in Branch"))}</div>
+    `),
+
+    "sku-search": () => internalPanel("SKU Search", "Find exact SKU and add it to the active POS bill.", `
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalSkuInput" placeholder="Example: CLO-SHT-MEN-WHT-M" class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <button data-pos-action="sku-add" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Add SKU Item</button>
+      </div>
+      <div class="mt-4 space-y-3">${internalProductRows(trenzSearchPosProducts())}</div>
+    `),
+
+    "customer-search": () => internalPanel("Customer Search", "Lookup and attach customer with CRM, loyalty and history.", `
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalCustomerSearchInput" placeholder="Phone, name, CRM ID or email" class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <button data-pos-action="customer-search" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Search Customer</button>
+      </div>
+      <div class="mt-4 space-y-2">${trenzSearchPosCustomers().slice(0, 6).map((customer) => `
+        <button data-pos-action="select-customer" data-customer-id="${posEscape(customer.id)}" class="w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-left text-xs hover:bg-slate-800">
+          <span class="font-medium text-slate-200">${posEscape(customer.name)}</span>
+          <span class="ml-2 text-slate-400">${posEscape(customer.phone || customer.id)} · ${Number(customer.points || 0)} pts</span>
+        </button>
+      `).join("")}</div>
+    `),
+
+    "customer-create": () => internalPanel("Customer Create", "Create a customer and link them to the active bill.", `
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalCustomerNameInput" placeholder="Customer name" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <input id="internalCustomerPhoneInput" placeholder="Phone" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <input id="internalCustomerEmailInput" placeholder="Email" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+      </div>
+      <button data-pos-action="customer-create" class="mt-3 rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Create & Link Customer</button>
+    `),
+
+    "hold-bills": () => internalPanel("Hold Bills", "Park the current cart with customer, notes, discounts and payment state.", `
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-4">
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4 md:col-span-3">
+          <p class="text-sm font-medium">${trenzGetPosCart().length} cart line(s)</p>
+          <p class="mt-1 text-xs text-slate-400">Current balance ${posMoney(totals.balance)} for ${posEscape(trenzGetSelectedPosCustomer().name)}.</p>
+        </div>
+        <button data-pos-action="hold-bill" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Hold Current Bill</button>
+      </div>
+    `),
+
+    "resume-bills": () => internalPanel("Resume Bills", "Resume parked orders and return them to the active cart.", `
+      <div class="space-y-3">${trenzGetHeldBills().map((bill) => `
+        <div class="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-xs">
+          <span>${posEscape(bill.id)} · ${posEscape(bill.customerName)} · ${posMoney(bill.amount)}</span>
+          <button data-pos-action="resume-bill" data-hold-id="${posEscape(bill.id)}" class="rounded-lg bg-indigo-500 px-3 py-1.5 font-semibold hover:bg-indigo-400">Resume</button>
+        </div>
+      `).join("") || `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">No held bills available.</p>`}</div>
+    `),
+
+    "invoice-search": () => internalPanel("Invoice Search", "Search invoices for preview, reprint, returns and voids.", `
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalInvoiceSearchInput" placeholder="Invoice, customer or status" class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <button data-pos-action="invoice-search" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Search Invoices</button>
+      </div>
+      <div class="mt-4 space-y-3">${internalInvoiceRows(invoices)}</div>
+    `),
+
+    "payment-history": () => internalPanel("Payment History", "Audit captured cash, UPI, card, gift card, customer credit and refunds.", `
+      <div class="space-y-3">${payments.slice(0, 12).map((payment) => `
+        <div class="flex justify-between rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-xs">
+          <span>${posEscape(payment.method)} · ${posEscape(payment.invoice || "Active bill")} · ${posEscape(payment.status || "Captured")}</span>
+          <span>${posMoney(payment.amount)}</span>
+        </div>
+      `).join("") || `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">No payment history yet.</p>`}</div>
+    `),
+
+    "receipt-history": () => internalPanel("Receipt History", "Review paid invoices and receipt-ready transactions.", `
+      <div class="space-y-3">${internalInvoiceRows(invoices.filter((invoice) => invoice.status !== "Voided"))}</div>
+    `),
+
+    "receipt-reprint": () => internalPanel("Receipt Reprint", "Reprint selected invoice receipt or the last printed receipt.", `
+      ${selectedInvoice ? `<div class="rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm">Selected receipt: <span class="font-semibold">${posEscape(selectedInvoice.id)}</span> · ${posMoney(selectedInvoice.amount)}</div>` : `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">No receipt selected. Select one from Invoice Search.</p>`}
+      <div class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
+        <button data-pos-action="print-selected-receipt" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Print Selected Receipt</button>
+        <button data-pos-action="reprint-last-receipt" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">Reprint Last Receipt</button>
+      </div>
+    `),
+
+    "returns": () => internalPanel("Returns", "Process full or partial returns against selected invoice.", `
+      ${internalInvoiceRows(invoices, true)}
+      <div class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalReturnAmountInput" type="number" min="0" placeholder="Optional partial amount" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <button data-pos-action="process-return" class="rounded-xl bg-amber-500 px-4 py-2.5 text-sm font-semibold text-slate-950 hover:bg-amber-400">Process Return</button>
+        <button data-pos-action="return-no-invoice" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">Return Without Invoice</button>
+      </div>
+    `),
+
+    "refunds": () => internalPanel("Refunds", "Issue refund for selected invoice and record refund history.", `
+      ${selectedInvoice ? `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm">Refund target: ${posEscape(selectedInvoice.id)} · ${posMoney(selectedInvoice.amount)}</p>` : `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">Select invoice before refund.</p>`}
+      <div class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalRefundAmountInput" type="number" min="0" placeholder="Refund amount" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <button data-pos-action="process-refund" class="rounded-xl bg-amber-500 px-4 py-2.5 text-sm font-semibold text-slate-950 hover:bg-amber-400">Process Refund</button>
+        <a href="#payment-history" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-center text-sm hover:bg-slate-800">Refund History</a>
+      </div>
+    `),
+
+    "exchanges": () => internalPanel("Exchanges", "Exchange selected invoice items and restore returned inventory.", `
+      ${selectedInvoice ? `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm">Exchange target: ${posEscape(selectedInvoice.id)} · ${posEscape(selectedInvoice.customer)}</p>` : `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">Select invoice before exchange.</p>`}
+      <button data-pos-action="process-exchange" class="mt-4 rounded-xl bg-amber-500 px-4 py-2.5 text-sm font-semibold text-slate-950 hover:bg-amber-400">Process Exchange</button>
+    `),
+
+    "loyalty": () => internalPanel("Loyalty", "Redeem loyalty points and validate customer balance.", `
+      <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm">
+        Customer: ${posEscape(trenzGetSelectedPosCustomer().name)} · Available points: ${Number(trenzGetSelectedPosCustomer().points || 0).toLocaleString("en-IN")}
+      </div>
+      <div class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalLoyaltyInput" type="number" min="0" placeholder="Points to redeem" class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <button data-pos-action="redeem-loyalty" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Apply Loyalty</button>
+      </div>
+    `),
+
+    "coupons": () => internalPanel("Coupons", "Validate and apply coupon code to active cart.", `
+      <div class="mb-4 text-xs text-slate-400">Available: ${(window.TRENZ_POS_DATA?.coupons || []).map((coupon) => coupon.code).join(", ")}</div>
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+        <input id="internalCouponInput" placeholder="Coupon code" class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm uppercase outline-none focus:border-indigo-400" />
+        <button data-pos-action="apply-coupon" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Apply Coupon</button>
+      </div>
+    `),
+
+    "gift-cards": () => internalPanel("Gift Cards", "Validate gift card balance and use it as payment.", `
+      <div class="mb-4 text-xs text-slate-400">Demo cards: ${(window.TRENZ_POS_DATA?.giftCards || []).map((card) => `${card.code} ${posMoney(card.balance)}`).join(", ")}</div>
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-4">
+        <input id="internalGiftCardInput" placeholder="Gift card code" class="md:col-span-2 rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm uppercase outline-none focus:border-indigo-400" />
+        <input id="internalGiftCardAmountInput" type="number" min="0" placeholder="Payment amount" class="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-400" />
+        <button data-pos-action="apply-gift-card" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">Validate & Pay</button>
+      </div>
+    `),
+
+    "cash-drawer": () => internalPanel("Cash Drawer", "Track opening cash, cash payments, refunds and expected drawer cash.", `
+      ${summaryCards([
+        { label: "Opening Cash", value: posMoney(cash.openingCash), hint: "Shift base", tone: "text-blue-300" },
+        { label: "Cash In", value: posMoney(cash.cashIn), hint: "Cash sales", tone: "text-emerald-300" },
+        { label: "Cash Refunds", value: posMoney(cash.refunds), hint: "Refund outflow", tone: "text-amber-300" },
+        { label: "Expected Cash", value: posMoney(cash.expectedCash), hint: "Drawer count target", tone: "text-fuchsia-300" }
+      ])}
+      <div class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
+        <button data-pos-action="close-shift" class="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm text-red-300 hover:bg-red-500/20">Close Cash Drawer</button>
+        <a href="#shift-summary" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-center text-sm hover:bg-slate-800">Shift Summary</a>
+      </div>
+    `),
+
+    "shift-summary": () => internalPanel("Shift Summary", "Review active shift and recently closed shift summaries.", `
+      ${summaryCards([
+        { label: "Current Shift", value: session.shift.status, hint: session.shift.id || "No active shift", tone: session.shift.status === "Open" ? "text-emerald-300" : "text-slate-400" },
+        { label: "Opening Cash", value: posMoney(session.shift.openingCash || 0), hint: "Recorded at open", tone: "text-blue-300" },
+        { label: "Payment Count", value: String(payments.length), hint: "History rows", tone: "text-fuchsia-300" },
+        { label: "Closed Shifts", value: String(trenzGetShiftHistory().length), hint: "Stored summaries", tone: "text-amber-300" }
+      ])}
+      <div class="mt-4 space-y-3">${trenzGetShiftHistory().slice(0, 6).map((shift) => `
+        <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-xs">
+          <p class="font-medium text-slate-200">${posEscape(shift.id)} · ${posEscape(shift.status)}</p>
+          <p class="mt-1 text-slate-400">Opened ${posDate(shift.openedAt)} · Closed ${posDate(shift.closedAt)} · Expected cash ${posMoney(shift.expectedCash)}</p>
+        </div>
+      `).join("") || `<p class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-400">No closed shifts yet.</p>`}</div>
+    `),
+
+    "day-end-summary": () => internalPanel("Day End Summary", "Aggregate sales, refunds, payments, receipts and cash-drawer totals for day end.", `
+      ${summaryCards([
+        { label: "Gross Sales", value: posMoney(daySales), hint: `${invoices.length} invoice(s)`, tone: "text-emerald-300" },
+        { label: "Refunds", value: posMoney(dayRefunds), hint: `${returns.length} return row(s)`, tone: "text-amber-300" },
+        { label: "Net Sales", value: posMoney(daySales - dayRefunds), hint: "Sales minus refunds", tone: "text-blue-300" },
+        { label: "Expected Cash", value: posMoney(cash.expectedCash), hint: "Cash drawer", tone: "text-fuchsia-300" }
+      ])}
+      <div class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+        <a href="#payment-history" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-center text-sm hover:bg-slate-800">Payment History</a>
+        <a href="#receipt-history" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-center text-sm hover:bg-slate-800">Receipt History</a>
+        <button data-pos-action="close-shift" class="rounded-xl bg-red-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-red-400">Close Day</button>
+      </div>
+    `)
+  };
+
+  container.innerHTML = (screenBodies[screenId] || screenBodies["product-search"])();
+}
+
 function trenzAddPaymentFromUI(method) {
   const amount = document.getElementById("paymentAmountInput")?.value;
   const reference = document.getElementById("paymentReferenceInput")?.value;
@@ -702,7 +1071,142 @@ function trenzProcessReturnFromUI() {
   trenzProcessPosReturn(invoice?.id, mode, amount);
 }
 
+function internalInputValue(id) {
+  return document.getElementById(id)?.value || "";
+}
+
+function trenzHandleInternalPosAction(action, target) {
+  if (!action) return;
+
+  if (action === "open-shift") {
+    trenzOpenShift(internalInputValue("internalOpeningCashInput") || internalInputValue("openingCashInput") || 0);
+  }
+
+  if (action === "close-shift") {
+    trenzCloseShift();
+  }
+
+  if (action === "add-product") {
+    trenzAddToCart(target.dataset.productId);
+  }
+
+  if (action === "product-search") {
+    const query = internalInputValue("internalProductSearchInput");
+    const productSearch = document.getElementById("posSearchInput");
+    if (productSearch) productSearch.value = query;
+    renderProductCards("productCards");
+    renderPosMessage(query ? `Product search applied for "${query}".` : "Product search refreshed.", "success");
+  }
+
+  if (action === "barcode-add") {
+    trenzAddPosItemByCode(internalInputValue("internalBarcodeInput"));
+  }
+
+  if (action === "sku-add") {
+    trenzAddPosItemByCode(internalInputValue("internalSkuInput"));
+  }
+
+  if (action === "customer-search") {
+    const query = internalInputValue("internalCustomerSearchInput");
+    const match = trenzSearchPosCustomers(query)[0];
+    if (match) {
+      trenzSelectPosCustomer(match.id);
+    } else {
+      renderPosMessage("No customer found for that search.", "error");
+    }
+  }
+
+  if (action === "select-customer") {
+    trenzSelectPosCustomer(target.dataset.customerId);
+  }
+
+  if (action === "customer-create") {
+    trenzCreatePosCustomer({
+      name: internalInputValue("internalCustomerNameInput"),
+      phone: internalInputValue("internalCustomerPhoneInput"),
+      email: internalInputValue("internalCustomerEmailInput")
+    });
+  }
+
+  if (action === "hold-bill") {
+    trenzHoldBill();
+  }
+
+  if (action === "resume-bill") {
+    trenzResumeBill(target.dataset.holdId);
+  }
+
+  if (action === "invoice-search") {
+    const query = internalInputValue("internalInvoiceSearchInput");
+    const invoiceSearch = document.getElementById("invoiceSearchInput");
+    if (invoiceSearch) invoiceSearch.value = query;
+    renderInvoices("invoiceTable");
+    renderPosMessage(query ? `Invoice search applied for "${query}".` : "Invoice search refreshed.", "success");
+  }
+
+  if (action === "select-invoice") {
+    trenzSelectPosInvoice(target.dataset.invoiceId);
+  }
+
+  if (action === "print-invoice") {
+    trenzSelectPosInvoice(target.dataset.invoiceId);
+    trenzPrintReceipt();
+  }
+
+  if (action === "print-selected-receipt") {
+    trenzPrintReceipt();
+  }
+
+  if (action === "reprint-last-receipt") {
+    trenzReprintLastReceipt();
+  }
+
+  if (action === "process-return") {
+    const invoice = trenzGetSelectedInvoice();
+    const amount = internalInputValue("internalReturnAmountInput");
+    const mode = amount ? "Partial Return" : "Full Return";
+    trenzProcessPosReturn(invoice?.id, mode, amount);
+  }
+
+  if (action === "return-no-invoice") {
+    trenzProcessPosReturn("", "Return Without Invoice", internalInputValue("internalReturnAmountInput") || 1);
+  }
+
+  if (action === "process-refund") {
+    const invoice = trenzGetSelectedInvoice();
+    const amount = internalInputValue("internalRefundAmountInput");
+    const mode = amount && invoice && Number(amount) < Number(invoice.amount || 0) ? "Partial Return" : "Full Return";
+    trenzProcessPosReturn(invoice?.id, mode, amount);
+  }
+
+  if (action === "process-exchange") {
+    const invoice = trenzGetSelectedInvoice();
+    trenzProcessPosReturn(invoice?.id, "Exchange");
+  }
+
+  if (action === "redeem-loyalty") {
+    trenzRedeemLoyalty(internalInputValue("internalLoyaltyInput"));
+  }
+
+  if (action === "apply-coupon") {
+    trenzApplyCoupon(internalInputValue("internalCouponInput"));
+  }
+
+  if (action === "apply-gift-card") {
+    const code = internalInputValue("internalGiftCardInput");
+    const amount = internalInputValue("internalGiftCardAmountInput");
+    if (trenzSetGiftCard(code) && amount) {
+      trenzAddPosPayment("Gift Card", amount, code);
+    }
+  }
+
+  trenzRenderAllPos();
+}
+
 function trenzRenderAllPos() {
+  renderInternalScreenNav("posScreenDirectory");
+  renderInternalScreenNav("posScreenSidebarNav", true);
+  renderInternalScreen("posScreenWorkspace");
   renderShiftPanel("shiftPanel");
   renderPosStatusCards("posStatusCards");
   renderWorkflowStatus("posWorkflowStatus");
@@ -730,6 +1234,11 @@ function trenzBindPosEvents() {
   document.addEventListener("click", (event) => {
     const target = event.target;
     if (!(target instanceof HTMLElement)) return;
+    const internalAction = target.closest("[data-pos-action]");
+    if (internalAction) {
+      trenzHandleInternalPosAction(internalAction.dataset.posAction, internalAction);
+      return;
+    }
 
     if (target.id === "openShiftBtn") trenzOpenShift(document.getElementById("openingCashInput")?.value || 0);
     if (target.id === "closeShiftBtn") trenzCloseShift();
@@ -772,6 +1281,7 @@ function trenzBindPosEvents() {
   window.addEventListener("trenz-pos-message", (event) => {
     renderPosMessage(event.detail.message, event.detail.type);
   });
+  window.addEventListener("hashchange", trenzRenderAllPos);
 }
 
 function trenzInitPosPage() {

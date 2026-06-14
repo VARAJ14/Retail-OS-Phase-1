@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <nav class="flex-1 px-4 py-5 space-y-1 text-sm">
+      <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
         <a href="#billing" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3">
           <span>POS</span>
           <span class="text-xs">Live</span>
@@ -31,6 +31,10 @@
         <a href="#customer" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Customer Search</a>
         <a href="#returns" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns</a>
         <a href="#reporting" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Reports</a>
+        <div class="pt-4">
+          <p class="px-4 pb-2 text-xs uppercase tracking-wide text-slate-500">POS Screens</p>
+          <div id="posScreenSidebarNav" class="space-y-1"></div>
+        </div>
         <a href="../index.html" class="block rounded-xl text-red-300 hover:bg-red-500/10 px-4 py-3">Logout</a>
       </nav>
 
@@ -88,6 +92,20 @@
 
         <!-- Connected POS Lifecycle -->
         <section id="posWorkflowStatus" class="grid grid-cols-1 md:grid-cols-7 gap-3"></section>
+
+        <!-- Internal POS Screens -->
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-5">
+          <div class="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+            <div>
+              <h3 class="font-semibold">Internal POS Screens</h3>
+              <p class="mt-1 text-sm text-slate-400">Open every retail POS workflow from this route without duplicating the POS implementation.</p>
+            </div>
+            <span class="rounded-full bg-indigo-500/15 px-3 py-1 text-xs text-indigo-200">Hash routes on cashier/pos.html</span>
+          </div>
+          <div id="posScreenDirectory" class="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-6"></div>
+        </section>
+
+        <section id="posScreenWorkspace" class="rounded-3xl border border-slate-800 bg-slate-900 p-5"></section>
 
         <!-- Main POS Layout -->
         <section class="grid grid-cols-1 2xl:grid-cols-5 gap-6">

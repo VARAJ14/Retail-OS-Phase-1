@@ -18,7 +18,29 @@
     },
 
     cashier: {
-      pos: "cashier/pos.html"
+      pos: "cashier/pos.html",
+      openShift: "cashier/pos.html#open-shift",
+      closeShift: "cashier/pos.html#close-shift",
+      productSearch: "cashier/pos.html#product-search",
+      barcodeBilling: "cashier/pos.html#barcode-billing",
+      skuSearch: "cashier/pos.html#sku-search",
+      customerSearch: "cashier/pos.html#customer-search",
+      customerCreate: "cashier/pos.html#customer-create",
+      holdBills: "cashier/pos.html#hold-bills",
+      resumeBills: "cashier/pos.html#resume-bills",
+      invoiceSearch: "cashier/pos.html#invoice-search",
+      paymentHistory: "cashier/pos.html#payment-history",
+      receiptHistory: "cashier/pos.html#receipt-history",
+      receiptReprint: "cashier/pos.html#receipt-reprint",
+      returns: "cashier/pos.html#returns",
+      refunds: "cashier/pos.html#refunds",
+      exchanges: "cashier/pos.html#exchanges",
+      loyalty: "cashier/pos.html#loyalty",
+      coupons: "cashier/pos.html#coupons",
+      giftCards: "cashier/pos.html#gift-cards",
+      cashDrawer: "cashier/pos.html#cash-drawer",
+      shiftSummary: "cashier/pos.html#shift-summary",
+      dayEndSummary: "cashier/pos.html#day-end-summary"
     },
 
     staff: {
@@ -84,7 +106,12 @@
 
     cashier: [
       { label: "POS", route: ROUTES.cashier.pos, badge: "Billing" },
-      { label: "Returns", route: ROUTES.website.returns },
+      { label: "Open Shift", route: ROUTES.cashier.openShift },
+      { label: "Product Search", route: ROUTES.cashier.productSearch },
+      { label: "Invoice Search", route: ROUTES.cashier.invoiceSearch },
+      { label: "Payments", route: ROUTES.cashier.paymentHistory },
+      { label: "Returns", route: ROUTES.cashier.returns },
+      { label: "Day End", route: ROUTES.cashier.dayEndSummary },
       { label: "Logout", route: ROUTES.auth.login }
     ],
 
