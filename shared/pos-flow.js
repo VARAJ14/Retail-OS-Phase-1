@@ -1259,6 +1259,7 @@ function trenzBindPosEvents() {
     if (target.id === "processReturnBtn") trenzProcessReturnFromUI();
     if (target.id === "quickActionsBtn") renderPosMessage("Quick actions: scan barcode, hold bill, reprint last receipt, or close shift.", "info");
     if (target.id === "alertsBtn") renderPosMessage("No blocking POS alerts. Validate low-stock items before billing.", "info");
+    if (target.id === "cashierProfileBtn") renderPosMessage(`Cashier active: ${trenzGetSelectedSalesperson().name}. Shift ${trenzGetPosSession().shift.status}.`, "info");
   });
 
   document.addEventListener("input", (event) => {
