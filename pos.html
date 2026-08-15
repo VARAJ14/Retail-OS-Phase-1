@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RetailOS - POS Billing</title>
+  <title>TRENZ OS RETAIL - POS Billing</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -13,15 +13,16 @@
     <!-- Sidebar -->
     <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
       <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
-        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">R</div>
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
         <div>
-          <h1 class="font-semibold">RetailOS</h1>
-          <p class="text-xs text-slate-400">Enterprise Commerce</p>
+          <h1 class="font-semibold">TRENZ OS</h1>
+          <p class="text-xs text-slate-400">POS Billing</p>
         </div>
       </div>
 
       <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
-        <a href="dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Dashboard</a>
+        <a href="owner/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Owner Dashboard</a>
+        <a href="manager/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Manager Dashboard</a>
         <a href="inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Main Inventory</a>
         <a href="branch-inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Inventory</a>
         <a href="product-create.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Products</a>
@@ -32,14 +33,13 @@
         </a>
 
         <a href="orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
-        <a href="crm.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Customers</a>
-        <a href="crm.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">CRM</a>
-        <a href="campaigns.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Campaigns</a>
-        <a href="returns.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Returns & Refunds</a>
-        <a href="analytics.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Analytics</a>
-        <a href="reports.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Reports</a>
-        <a href="staff.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Staff Management</a>
-        <a href="settings.html" class="block rounded-xl text-slate-500 hover:bg-slate-900 px-4 py-3">Settings</a>
+        <a href="crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM & Customers</a>
+        <a href="campaigns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Campaigns</a>
+        <a href="owner/returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns & Refunds</a>
+        <a href="analytics.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Analytics</a>
+        <a href="reports.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Reports</a>
+        <a href="staff.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Staff Management</a>
+        <a href="settings.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Settings</a>
       </nav>
 
       <div class="p-4 border-t border-slate-800">
@@ -80,10 +80,10 @@
 
           <div class="flex items-center gap-3">
             <select class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
-              <option>Mumbai Flagship</option>
-              <option>Delhi Electronics</option>
-              <option>Bengaluru Beauty</option>
-              <option>Chennai Accessories</option>
+              <option>Select All</option>
+              <option>BEST CHOICE ANNA NAGAR BRANCH</option>
+              <option>PADI BRANCH</option>
+              <option>SPENCER</option>
             </select>
 
             <button class="hidden sm:block rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
