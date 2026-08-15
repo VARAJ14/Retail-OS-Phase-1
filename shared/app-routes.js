@@ -1,7 +1,7 @@
 (function () {
   const ROUTES = {
     auth: {
-      login: "login.html",
+      login: "index.html",
       forgotPassword: "forgot-password.html",
       verifyOtp: "verify-otp.html",
       resetPassword: "reset-password.html"
@@ -9,12 +9,14 @@
 
     owner: {
       dashboard: "owner/dashboard.html",
-      returns: "owner/returns.html"
+      returns: "owner/returns.html",
+      websiteControl: "owner/website-control.html"
     },
 
     manager: {
       dashboard: "manager/dashboard.html",
-      returns: "manager/returns.html"
+      returns: "manager/returns.html",
+      websiteControl: "manager/website-control.html"
     },
 
     cashier: {
@@ -29,6 +31,7 @@
       inventory: "inventory.html",
       branchInventory: "branch-inventory.html",
       products: "product-create.html",
+      pos: "pos.html",
       orders: "orders.html",
       crm: "crm.html",
       campaigns: "campaigns.html",
@@ -36,18 +39,19 @@
       reports: "reports.html",
       staffManagement: "staff.html",
       settings: "settings.html",
+      websiteControl: "website-control.html",
       systemMap: "system-map.html"
     },
 
     website: {
-      home: "website/index.html",
-      products: "website/products.html",
-      detail: "website/product-detail.html",
-      cart: "website/cart.html",
-      checkout: "website/checkout.html",
-      tracking: "website/order-tracking.html",
-      account: "website/account.html",
-      returns: "website/returns.html"
+      home: "website.html/index.html",
+      products: "website.html/products.html",
+      detail: "website.html/product-detail.html",
+      cart: "website.html/cart.html",
+      checkout: "website.html/checkout.html",
+      tracking: "website.html/order-tracking.html",
+      account: "website.html/account.html",
+      returnRequest: "website.html/return-request.html"
     }
   };
 
