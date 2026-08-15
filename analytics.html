@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRENZ OS RETAIL - Analytics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex">
+    <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
+      <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
+        <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
+        <div><h1 class="font-semibold">TRENZ OS</h1><p class="text-xs text-slate-400">Analytics</p></div>
+      </div>
+      <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1 text-sm">
+        <a href="owner/dashboard.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Owner Dashboard</a>
+        <a href="inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Main Inventory</a>
+        <a href="branch-inventory.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Branch Inventory</a>
+        <a href="orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
+        <a href="crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM</a>
+        <a href="owner/returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns</a>
+        <a href="analytics.html" class="flex items-center justify-between rounded-xl bg-indigo-500/15 text-indigo-200 px-4 py-3"><span>Analytics</span><span class="text-xs">Live</span></a>
+        <a href="reports.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Reports</a>
+      </nav>
+    </aside>
+
+    <div class="flex-1 min-w-0">
+      <header class="sticky top-0 z-30 h-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <div class="h-full flex items-center justify-between gap-4 px-5 lg:px-8">
+          <div><h2 class="text-lg font-semibold">Enterprise Analytics</h2><p class="text-xs text-slate-400">Inventory → Orders → CRM → Returns → Reports</p></div>
+          <select class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm"><option>Select All</option><option>Anna Nagar</option><option>Padi</option><option>Spencer</option></select>
+        </div>
+      </header>
+
+      <main class="p-5 lg:p-8 space-y-6">
+        <section class="rounded-3xl border border-slate-800 bg-slate-900 p-6">
+          <h1 class="text-3xl font-semibold">Unified retail intelligence</h1>
+          <p class="mt-2 text-sm text-slate-400">Branch sales, product trends, return analytics, CRM retention and dead stock.</p>
+        </section>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-4">
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Net Sales</p><h3 id="analyticsSales" class="mt-3 text-3xl font-semibold">₹0</h3></div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Orders</p><h3 id="analyticsOrders" class="mt-3 text-3xl font-semibold text-blue-300">0</h3></div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Return Rate</p><h3 id="analyticsReturns" class="mt-3 text-3xl font-semibold text-amber-300">0%</h3></div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Turnover</p><h3 id="analyticsTurnover" class="mt-3 text-3xl font-semibold text-cyan-300">0x</h3></div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Retention</p><h3 id="analyticsRetention" class="mt-3 text-3xl font-semibold text-fuchsia-300">0%</h3></div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 p-5"><p class="text-sm text-slate-400">Dead Stock</p><h3 id="analyticsDeadStock" class="mt-3 text-3xl font-semibold text-red-300">₹0</h3></div>
+        </section>
+
+        <section class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800"><h3 class="font-semibold">Branch performance</h3></div>
+            <table class="w-full text-sm"><thead class="bg-slate-950 text-slate-400"><tr><th class="text-left px-5 py-3">Branch</th><th class="text-left px-5 py-3">Sales</th><th class="text-left px-5 py-3">Orders</th><th class="text-left px-5 py-3">Returns</th><th class="text-left px-5 py-3">Stock</th></tr></thead><tbody id="analyticsBranchRows" class="divide-y divide-slate-800"></tbody></table>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800"><h3 class="font-semibold">Category performance</h3></div>
+            <table class="w-full text-sm"><thead class="bg-slate-950 text-slate-400"><tr><th class="text-left px-5 py-3">Category</th><th class="text-left px-5 py-3">Sales</th><th class="text-left px-5 py-3">Trend</th><th class="text-left px-5 py-3">Returns</th><th class="text-left px-5 py-3">Action</th></tr></thead><tbody id="analyticsCategoryRows" class="divide-y divide-slate-800"></tbody></table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="shared/analytics-data.js"></script>
+  <script src="shared/analytics-flow.js"></script>
+  <script>
+    renderAnalyticsSummary();
+    renderBranchAnalytics("analyticsBranchRows");
+    renderCategoryAnalytics("analyticsCategoryRows");
+  </script>
+</body>
+</html>
