@@ -1,21 +1,38 @@
-const retailNavigation = [
-  { label: "Dashboard", href: "dashboard.html", badge: "Hub" },
-  { label: "Main Inventory", href: "inventory.html", badge: "Master" },
-  { label: "Branch Inventory", href: "branch-inventory.html", badge: "Live" },
-  { label: "Products", href: "product-create.html" },
-  { label: "POS", href: "pos.html", badge: "Sync" },
-  { label: "Orders", href: "orders.html" },
-  { label: "Customers", href: "crm.html" },
-  { label: "CRM", href: "crm.html", badge: "Live" },
-  { label: "Campaigns", href: "campaigns.html" },
-  { label: "Returns & Refunds", href: "returns.html", badge: "Critical" },
-  { label: "Analytics", href: "analytics.html", badge: "Live" },
-  { label: "Reports", href: "reports.html" },
-  { label: "Staff Management", href: "staff.html", badge: "RBAC" },
-  { label: "Settings", href: "settings.html" },
-  { label: "Website Flow", href: "website.html", badge: "Sync" },
-  { label: "System Map", href: "system-map.html" }
-];
+function resolveDashboardHref() {
+  if (typeof getCurrentSession === "function") {
+    const session = getCurrentSession();
+    if (session && session.redirect) return session.redirect;
+  }
+  return "owner/dashboard.html";
+}
+
+function resolveReturnsHref() {
+  if (typeof getCurrentSession === "function") {
+    const session = getCurrentSession();
+    if (session && session.role === "manager") return "manager/returns.html";
+  }
+  return "owner/returns.html";
+}
+
+function getRetailNavigation() {
+  return [
+    { label: "Dashboard", href: resolveDashboardHref(), badge: "Hub" },
+    { label: "Main Inventory", href: "inventory.html", badge: "Master" },
+    { label: "Branch Inventory", href: "branch-inventory.html", badge: "Live" },
+    { label: "Products", href: "product-create.html" },
+    { label: "POS", href: "pos.html", badge: "Sync" },
+    { label: "Orders", href: "orders.html" },
+    { label: "CRM & Customers", href: "crm.html", badge: "Live" },
+    { label: "Campaigns", href: "campaigns.html" },
+    { label: "Returns & Refunds", href: resolveReturnsHref(), badge: "Critical" },
+    { label: "Analytics", href: "analytics.html", badge: "Live" },
+    { label: "Reports", href: "reports.html" },
+    { label: "Staff Management", href: "staff.html", badge: "RBAC" },
+    { label: "Settings", href: "settings.html" },
+    { label: "Website Flow", href: "website.html/index.html", badge: "Sync" },
+    { label: "System Map", href: "system-map.html" }
+  ];
+}
 
 const pageMeta = {
   "dashboard.html": {
@@ -86,7 +103,7 @@ function getCurrentPage() {
 }
 
 function createSidebar(activePage) {
-  const navItems = retailNavigation.map((item) => {
+  const navItems = getRetailNavigation().map((item) => {
     const isActive = item.href === activePage;
     const activeClass = isActive
       ? "bg-indigo-500/15 text-indigo-200"
@@ -108,10 +125,10 @@ function createSidebar(activePage) {
     <aside class="hidden lg:flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950">
       <div class="h-20 flex items-center gap-3 px-6 border-b border-slate-800">
         <div class="h-11 w-11 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">
-          R
+          T
         </div>
         <div>
-          <h1 class="font-semibold">RetailOS</h1>
+          <h1 class="font-semibold">TRENZ OS</h1>
           <p class="text-xs text-slate-400">Enterprise Commerce</p>
         </div>
       </div>
@@ -159,11 +176,10 @@ function createTopbar(activePage) {
 
         <div class="flex items-center gap-3">
           <select class="rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm">
-            <option>All Branches</option>
-            <option>Mumbai Flagship</option>
-            <option>Delhi Electronics</option>
-            <option>Bengaluru Beauty</option>
-            <option>Chennai Accessories</option>
+            <option>Select All</option>
+            <option>BEST CHOICE ANNA NAGAR BRANCH</option>
+            <option>PADI BRANCH</option>
+            <option>SPENCER</option>
           </select>
 
           <button class="hidden sm:block rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-sm" id="quickActionsButton">
@@ -189,7 +205,7 @@ function createTopbar(activePage) {
 }
 
 function createMobileMenu(activePage) {
-  const navItems = retailNavigation.map((item) => {
+  const navItems = getRetailNavigation().map((item) => {
     const isActive = item.href === activePage;
     const activeClass = isActive
       ? "bg-indigo-500/15 text-indigo-200"
@@ -208,9 +224,9 @@ function createMobileMenu(activePage) {
       <aside class="relative h-full w-80 max-w-[85vw] border-r border-slate-800 bg-slate-950 p-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">R</div>
+            <div class="h-10 w-10 rounded-2xl bg-indigo-500 flex items-center justify-center font-black">T</div>
             <div>
-              <p class="font-semibold">RetailOS</p>
+              <p class="font-semibold">TRENZ OS</p>
               <p class="text-xs text-slate-400">Enterprise Commerce</p>
             </div>
           </div>
@@ -256,11 +272,6 @@ function createQuickActionsPanel() {
         <a href="pos.html" class="rounded-2xl border border-slate-800 bg-slate-950 p-4 hover:border-emerald-400">
           Open POS billing
           <p class="mt-1 text-xs text-slate-400">Branch sale to CRM and analytics</p>
-        </a>
-
-        <a href="returns.html" class="rounded-2xl border border-slate-800 bg-slate-950 p-4 hover:border-amber-400">
-          Start return workflow
-          <p class="mt-1 text-xs text-slate-400">Validation, approval and inventory state update</p>
         </a>
 
         <a href="analytics.html" class="rounded-2xl border border-slate-800 bg-slate-950 p-4 hover:border-amber-400">
