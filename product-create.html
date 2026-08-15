@@ -33,9 +33,9 @@
           <span class="text-xs">Create</span>
         </a>
 
-        <a href="cashier/pos.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">POS Billing</a>
+        <a href="pos.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">POS Billing</a>
         <a href="orders.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Orders</a>
-        <a href="website/index.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Website</a>
+        <a href="website.html/index.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Website</a>
         <a href="crm.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">CRM</a>
         <a href="owner/returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns</a>
         <a href="analytics.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Analytics</a>
@@ -114,8 +114,8 @@
               <a href="branch-inventory.html" class="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm hover:bg-slate-800">
                 Branch Allocation
               </a>
-              <button onclick="finalizedProductSave()" class="mt-5 w-full rounded-xl bg-indigo-500 py-3 text-sm font-semibold hover:bg-indigo-400">
-  Save Product & Initialize Inventory
+              <button onclick="finalizedProductSave()" class="rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold hover:bg-indigo-400">
+                Save Product & Initialize Inventory
               </button>
             </div>
           </div>
@@ -404,7 +404,6 @@
               <p class="mt-1 text-sm text-slate-400">Saving product updates all downstream modules.</p>
 
               <div class="mt-5 space-y-3 text-xs">
-                <div class="flex justify-between rounded-2xl
                 <div class="flex justify-between rounded-2xl border border-slate-800 bg-slate-950 p-4">
                   <span class="text-slate-400">Product Master</span>
                   <span class="text-indigo-300">SKU created</span>
@@ -436,7 +435,7 @@
                 </div>
               </div>
 
-              <button onclick="trenzSaveProductFromCreatePage()"
+              <button onclick="finalizedProductSave()" class="mt-5 w-full rounded-xl bg-indigo-500 py-3 text-sm font-semibold hover:bg-indigo-400">
                 Save Product & Initialize Inventory
               </button>
             </section>
@@ -525,9 +524,8 @@
 
   <script src="shared/product-data.js"></script>
   <script src="shared/product-flow.js"></script>
-
   <script src="shared/app-db.js"></script>
-<script src="shared/product-store.js"></script>
+  <script src="shared/product-store.js"></script>
 
   <script>
     refreshProductCategoryUI();
@@ -555,68 +553,35 @@
         updateSkuPreview();
       }
     });
+
+    window.finalizedProductSave = function () {
+      const product = trenzSaveProductFromCreatePage();
+
+      if (typeof renderRecentProducts === "function") {
+        TRENZ_PRODUCT_DATA.recentProducts.unshift({
+          sku: product.sku,
+          name: product.name,
+          category: product.category,
+          stock: product.stock,
+          state: product.state,
+          website: product.websiteVisible ? "Visible" : "Hidden",
+          nextStep: "Allocate to Branch"
+        });
+
+        renderRecentProducts("recentProductsRows");
+      }
+
+      if (typeof renderCreationEvents === "function") {
+        TRENZ_PRODUCT_DATA.creationEvents.unshift({
+          time: "Live",
+          event: "Product saved",
+          detail: `${product.sku} saved to LocalStorage product database.`,
+          module: "Products"
+        });
+
+        renderCreationEvents("creationEvents");
+      }
+    };
   </script>
 </body>
 </html>
-<script src="shared/product-data.js"></script>
-<script src="shared/product-flow.js"></script>
-<script src="shared/app-db.js"></script>
-<script src="shared/product-store.js"></script>
-
-<script>
-  refreshProductCategoryUI();
-  renderRecentProducts("recentProductsRows");
-  renderCreationEvents("creationEvents");
-
-  document.addEventListener("input", function (event) {
-    if (
-      event.target.id === "productCodeInput" ||
-      event.target.id === "segmentInput" ||
-      event.target.id === "colorInput" ||
-      event.target.id === "variantInput"
-    ) {
-      updateSkuPreview();
-    }
-  });
-
-  document.addEventListener("change", function (event) {
-    if (
-      event.target.id === "productCodeInput" ||
-      event.target.id === "segmentInput" ||
-      event.target.id === "colorInput" ||
-      event.target.id === "variantInput"
-    ) {
-      updateSkuPreview();
-    }
-  });
-
-  window.finalizedProductSave = function () {
-    const product = trenzSaveProductFromCreatePage();
-
-    if (typeof renderRecentProducts === "function") {
-      TRENZ_PRODUCT_DATA.recentProducts.unshift({
-        sku: product.sku,
-        name: product.name,
-        category: product.category,
-        stock: product.stock,
-        state: product.state,
-        website: product.websiteVisible ? "Visible" : "Hidden",
-        nextStep: "Allocate to Branch"
-      });
-
-      renderRecentProducts("recentProductsRows");
-    }
-
-    if (typeof renderCreationEvents === "function") {
-      TRENZ_PRODUCT_DATA.creationEvents.unshift({
-        time: "Live",
-        event: "Product saved",
-        detail: `${product.sku} saved to LocalStorage product database.`,
-        module: "Products"
-      });
-
-      renderCreationEvents("creationEvents");
-    }
-  };
-</script>
-
