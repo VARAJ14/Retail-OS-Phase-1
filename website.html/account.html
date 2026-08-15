@@ -64,8 +64,8 @@
           <a href="#addresses" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Addresses</a>
           <a href="#wishlist" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Wishlist</a>
           <a href="#saved" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Saved Products</a>
-          <a href="returns.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns</a>
-          <a href="../login.html" class="block rounded-xl text-red-300 hover:bg-red-500/10 px-4 py-3">Logout</a>
+          <a href="return-request.html" class="block rounded-xl text-slate-300 hover:bg-slate-900 px-4 py-3">Returns</a>
+          <a href="../index.html" class="block rounded-xl text-red-300 hover:bg-red-500/10 px-4 py-3">Logout</a>
         </nav>
       </aside>
 
@@ -201,7 +201,7 @@
           <span class="text-sm font-semibold">${money(order.amount)}</span>
           <span class="rounded-full px-3 py-1 text-xs ${order.status === "Delivered" ? "bg-emerald-500/10 text-emerald-300" : "bg-indigo-500/10 text-indigo-300"}">${order.status}</span>
           <button class="rounded-lg border border-slate-700 px-3 py-1.5 text-xs hover:bg-slate-800">Invoice</button>
-          <a href="returns.html" class="rounded-lg border border-slate-700 px-3 py-1.5 text-xs hover:bg-slate-800">Return</a>
+          <a href="return-request.html" class="rounded-lg border border-slate-700 px-3 py-1.5 text-xs hover:bg-slate-800">Return</a>
         </div>
       </div>
     `).join("");
